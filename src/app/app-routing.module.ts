@@ -2,9 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import {AppMenuComponent} from "./pages/ui-components/menu/menu.component";
+import {AppTooltipsComponent} from "./pages/ui-components/tooltips/tooltips.component";
+import {AppSideLoginComponent} from "./pages/authentication/login/login.component";
 
 const routes: Routes = [
   {
+
     path: '',
     component: FullComponent,
     children: [
@@ -45,6 +49,8 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'forgot-password', component: AppMenuComponent },
+  { path: 'reset-password/:token', component: AppTooltipsComponent },
 ];
 
 @NgModule({

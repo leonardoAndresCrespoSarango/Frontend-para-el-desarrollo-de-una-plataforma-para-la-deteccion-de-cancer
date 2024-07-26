@@ -1,38 +1,17 @@
-<div class="row">
-  <!-- --------------------------------------------------------------------------- -->
-  <!-- Sales Overview -->
-  <!-- --------------------------------------------------------------------------- -->
-  <div class="col-lg-8">
-    <mat-card class="cardWithShadow">
-      <mat-card-content class="p-24">
-        <div class="d-flex w-100">
-          <mat-card-title>Sales Overview</mat-card-title>
-          <div class="m-l-auto">
-            <mat-form-field class="theme-select" appearance="outline">
-              <mat-select value="mar">
-                <mat-option *ngFor="let month of months" [value]="month.value">
-                  {{ month.viewValue }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-        <apx-chart
-          [series]="salesOverviewChart.series"
-          [dataLabels]="salesOverviewChart.dataLabels"
-          [chart]="salesOverviewChart.chart"
-          [legend]="salesOverviewChart.legend"
-          [xaxis]="salesOverviewChart.xaxis"
-          [yaxis]="salesOverviewChart.yaxis"
-          [grid]="salesOverviewChart.grid"
-          [stroke]="salesOverviewChart.stroke"
-          [tooltip]="salesOverviewChart.tooltip"
-          [plotOptions]="salesOverviewChart.plotOptions"
-        ></apx-chart>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <!-- --------------------------------------------------------------------------- -->
-  <!-- end Sales overview -->
-  <!-- --------------------------------------------------------------------------- -->
+<div *ngIf="loggedInUser" class="user-profile-container">
+  <mat-card class="user-card">
+    <mat-card-header>
+      <mat-card-title>Bienvenido, {{ loggedInUser.name }}!</mat-card-title>
+      <mat-card-subtitle>{{ loggedInUser.username }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Esta es tu página de perfil.</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="onLogout()">Cerrar Sesión</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<div *ngIf="!loggedInUser">
+  <p>No hay ningún usuario logueado.</p>
 </div>

@@ -1,99 +1,99 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component } from '@angular/core';
-import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
-import {ThemePalette} from '@angular/material/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-
-export interface ChipColor {
-  name: string;
-  color: ThemePalette;
-}
-
-export interface Fruit {
-  name: string;
-}
-
-export interface Vegetable {
-  name: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { MedicalReportService } from "../../../services/medical-resport-service.service";
+import { ToastrService } from 'ngx-toastr';
+import {AddPatientDialogComponent} from "../../../add-patient-dialog/add-patient-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-chips',
   templateUrl: './chips.component.html',
   styleUrls: ['./chips.component.scss'],
 })
-export class AppChipsComponent {
-  // drag n drop
-  vegetables: Vegetable[] = [
-    { name: 'apple' },
-    { name: 'banana' },
-    { name: 'strawberry' },
-    { name: 'orange' },
-    { name: 'kiwi' },
-    { name: 'cherry' },
-  ];
+export class AppChipsComponent implements OnInit {
+  predictions: any[] = [];
+  patients: any[] = [];
 
-    // 
-    // Stacked
-    // 
-    availableColors: ChipColor[] = [
-      {name: 'Primary', color: 'primary'},
-      {name: 'Accent', color: 'accent'},
-      {name: 'Warn', color: 'warn'},
-    ];
+  constructor(
+    private userService: MedicalReportService,
+    private toastr: ToastrService,
+    private dialog: MatDialog
+  ) {}
 
-
-  drop(event: Event) {
-    if (isDragDrop(event)) {
-      moveItemInArray(this.vegetables, event.previousIndex, event.currentIndex);
-    }
+  ngOnInit(): void {
+    this.fetchPredictions();
+    this.fetchPatients();
   }
 
-  // 
-  //  chips with input
-  // 
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
-
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
-    // Add our fruit
-    if (value) {
-      this.fruits.push({ name: value });
-    }
-
-    // Clear the input value
-    event.chipInput!.clear();
+  fetchPredictions(): void {
+    this.userService.getPredictions().subscribe(
+      (data) => {
+        this.predictions = data;
+      },
+      (error) => {
+        console.error('Error fetching predictions:', error);
+      }
+    );
   }
 
-  remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-    }
+  fetchPatients(): void {
+    this.userService.getPatients().subscribe(
+      (data) => {
+        this.patients = data;
+      },
+      (error) => {
+        console.error('Error fetching patients:', error);
+      }
+    );
   }
 
-  edit(fruit: Fruit, event: MatChipEditedEvent) {
-    const value = event.value.trim();
-
-    // Remove fruit if it no longer has a name
-    if (!value) {
-      this.remove(fruit);
-      return;
-    }
-
-    // Edit existing fruit
-    const index = this.fruits.indexOf(fruit);
-    if (index >= 0) {
-      this.fruits[index].name = value;
-    }
-
-  
+  generateReport(predictionId: number): void {
+    this.userService.downloadReport(predictionId).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `report_${predictionId}.pdf`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      this.toastr.success('Reporte generado exitosamente', 'Éxito');
+    }, error => {
+      console.error('Error generating report:', error);
+      this.toastr.error('Error al generar el reporte', 'Error');
+    });
   }
-}
-function isDragDrop(object: any): object is CdkDragDrop<string[]> {
-  return 'previousIndex' in object;
+
+  diagnoseIA(predictionId: number): void {
+    this.userService.downloadVideo(predictionId).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `diagnosis_${predictionId}.mp4`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      this.toastr.success('Diagnóstico IA generado exitosamente', 'Éxito');
+    }, error => {
+      console.error('Error generating IA diagnosis:', error);
+      this.toastr.error('Error al generar el diagnóstico IA', 'Error');
+    });
+  }
+
+  addPatient(): void {
+    const dialogRef = this.dialog.open(AddPatientDialogComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.addPatient(result).subscribe(
+          (response) => {
+            this.toastr.success('Paciente agregado exitosamente', 'Éxito');
+            this.fetchPatients();  // Actualizar la lista de pacientes después de agregar uno nuevo
+          },
+          (error) => {
+            console.error('Error adding patient:', error);
+            this.toastr.error('Error al agregar el paciente', 'Error');
+          }
+        );
+      }
+    });
+  }
 }

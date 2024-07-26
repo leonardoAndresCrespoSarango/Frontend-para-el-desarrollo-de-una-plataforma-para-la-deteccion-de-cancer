@@ -1,184 +1,74 @@
-<mat-card class="cardWithShadow theme-card">
-  <mat-card-header>
-    <mat-card-title class="m-b-0">Lists</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="b-t-1">
-    <div class="row">
-      <div class="col-lg-6">
-        <!-- --------------------------------------------------- -->
-        <!-- basic -->
-        <!-- --------------------------------------------------- -->
-        <mat-card class="b-1 shadow-none">
-          <mat-card-header>
-            <mat-card-title>Basic</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="b-t-1">
-            <mat-list role="list">
-              <mat-list-item role="listitem">Item 1</mat-list-item>
-              <mat-list-item role="listitem">Item 2</mat-list-item>
-              <mat-list-item role="listitem">Item 3</mat-list-item>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
-      </div>
+<div class="container">
+  <h1>Brain Tumor Prediction</h1>
+  <form [formGroup]="medicalReportForm" (ngSubmit)="onSubmit()" id="predictForm">
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input id="name" formControlName="name" required class="form-control">
+    </div>
 
-      <div class="col-lg-6">
-        <!-- --------------------------------------------------- -->
-        <!-- two line -->
-        <!-- --------------------------------------------------- -->
-        <mat-card class="b-1 shadow-none">
-          <mat-card-header>
-            <mat-card-title>Two Line</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="b-t-1">
-            <mat-list>
-              <mat-list-item>
-                <span matListItemTitle class="f-s-16 f-w-600">Title</span>
-                <span matListItemLine class="mat-body-1">Second line</span>
-              </mat-list-item>
-              <mat-list-item>
-                <span matListItemTitle class="f-s-16 f-w-600">Title</span>
-                <span matListItemLine class="mat-body-1">Second line</span>
-              </mat-list-item>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
-      </div>
+    <div class="form-group">
+      <label for="age">Edad:</label>
+      <input id="age" type="number" formControlName="age" required class="form-control">
+    </div>
 
-      <div class="col-lg-6">
-        <!-- --------------------------------------------------- -->
-        <!-- two line -->
-        <!-- --------------------------------------------------- -->
-        <mat-card class="b-1 shadow-none">
-          <mat-card-header>
-            <mat-card-title>Three Line</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="b-t-1">
-            <mat-list>
-              <mat-list-item>
-                <span matListItemTitle class="f-s-16 f-w-600">Title</span>
-                <span matListItemLine class="mat-body-1">Second line</span>
-                <span matListItemLine class="mat-body-1">Third line</span>
-              </mat-list-item>
-              <mat-list-item>
-                <span matListItemTitle class="f-s-16 f-w-600">Title</span>
-                <span matListItemLine class="mat-body-1"
-                  >Second line. This line will truncate.</span
-                >
-                <span class="mat-body-1">Third line</span>
-              </mat-list-item>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
-      </div>
+    <div class="form-group">
+      <label for="gender">Género:</label>
+      <select id="gender" formControlName="gender" required class="form-control">
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
 
-      <div class="col-lg-6">
-        <!-- --------------------------------------------------- -->
-        <!-- two line -->
-        <!-- --------------------------------------------------- -->
-        <mat-card class="b-1 shadow-none">
-          <mat-card-header>
-            <mat-card-title>Three Line with Text wrapping</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="b-t-1">
-            <mat-list style="max-width: 500px">
-              <mat-list-item lines="3">
-                <span matListItemTitle class="f-s-16 f-w-600">Title</span>
-                <span class="mat-body-1"
-                  >Secondary line that will wrap because the list lines is
-                  explicitly set to 3 lines. Text inside of a `matListItemTitle`
-                  or `matListItemLine` will never wrap.
-                </span>
-              </mat-list-item>
-              <mat-list-item lines="3" class="mat-body-1">
-                <span matListItemTitle class="f-s-16 f-w-600">Title</span>
-                <span class="mat-body-1"
-                  >Secondary line that will wrap because the list lines is
-                  explicitly set to 3 lines. Text inside of a `matListItemTitle`
-                  or `matListItemLine` will never wrap.
-                </span>
-              </mat-list-item>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
-      </div>
+    <div class="form-group">
+      <label for="patientId">Cedula del Paciente:</label>
+      <input id="patientId" formControlName="patientId" required class="form-control">
+    </div>
 
-      <div class="col-lg-6">
-        <!-- --------------------------------------------------- -->
-        <!-- List with Selection -->
-        <!-- --------------------------------------------------- -->
-        <mat-card class="b-1 shadow-none">
-          <mat-card-header>
-            <mat-card-title>List with Selection</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="b-t-1">
-            <mat-selection-list #shoes>
-              <mat-list-option *ngFor="let shoe of typesOfShoes">
-                {{ shoe }}
-              </mat-list-option>
-            </mat-selection-list>
+    <div class="form-group">
+      <label for="diagnosis">Prediagnóstico:</label>
+      <textarea id="diagnosis" formControlName="diagnosis" required class="form-control" rows="4"></textarea>
+    </div>
 
-            <p class="mat-subtitle-2 f-w-600 p-16 bg-light-primary rounded">
-              Options selected: {{ shoes.selectedOptions.selected.length }}
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div>
+    <button type="submit" class="btn btn-primary">Predecir</button>
+  </form>
 
-      <div class="col-lg-6">
-        <!-- --------------------------------------------------- -->
-        <!-- List with single Selection -->
-        <!-- --------------------------------------------------- -->
-        <mat-card class="b-1 shadow-none">
-          <mat-card-header>
-            <mat-card-title>List with single Selection</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="b-t-1">
-            <mat-selection-list #shoes2 [multiple]="false">
-              <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
-                {{ shoe }}
-              </mat-list-option>
-            </mat-selection-list>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <div class="form-group">
+      <input type="file" id="fileInput" name="files" multiple class="form-control-file" (change)="onFileChange($event)">
+      <label for="fileInput" class="btn btn-secondary">Seleccionar Archivos</label>
+    </div>
+    <button type="button" (click)="uploadFiles()" class="btn btn-primary">Cargar archivos</button>
+  </form>
 
-            <p class="mat-subtitle-2 f-w-600 p-16 bg-light-primary rounded">
-              Option selected:
-              {{
-                shoes2.selectedOptions.hasValue()
-                  ? shoes2.selectedOptions.selected[0].value
-                  : "None"
-              }}
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-
-      <div class="col-12">
-        <!-- --------------------------------------------------- -->
-        <!-- List with sections -->
-        <!-- --------------------------------------------------- -->
-        <mat-card class="b-1 shadow-none">
-          <mat-card-header>
-            <mat-card-title>List with sections</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="b-t-1">
-            <mat-list>
-              <div mat-subheader class="mat-body-2 m-b-16 f-w-600">Folders</div>
-              <mat-list-item *ngFor="let folder of folders">
-                <mat-icon matListItemIcon>folder</mat-icon>
-                <div matListItemTitle class="mat-body-2 f-w-600">{{ folder.name }}</div>
-                <div matListItemLine class="f-s-14 mat-body-1">{{ folder.updated | date }}</div>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-              <div mat-subheader class="mat-body-2 m-y-16 f-w-600">Notes</div>
-              <mat-list-item *ngFor="let note of notes">
-                <mat-icon matListItemIcon>note</mat-icon>
-                <div matListItemTitle class="mat-body-2 f-w-600">{{ note.name }}</div>
-                <div matListItemLine class="f-s-14 mat-body-1">{{ note.updated | date }}</div>
-              </mat-list-item>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
+  <!-- Contenedor para el video resultado de la predicción -->
+  <div *ngIf="videoUrl" class="video-container">
+    <h2>Resultado de la Predicción</h2>
+    <video width="600" controls>
+      <source [src]="videoUrl" type="video/mp4">
+      Tu navegador no soporta el elemento de video.
+    </video>
+    <div class="class-legend">
+      <h3>Clases</h3>
+      <div class="class-item" *ngFor="let class of classes">
+        <div class="color-box" [ngStyle]="{'background-color': class.color}"></div>
+        <span>{{ class.name }}</span>
       </div>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+
+  <!-- Contenedor separado para el video generado a partir de la subida de archivos -->
+  <div *ngIf="uploadVideoUrl" class="separate-video-container">
+    <h2>Video Generado</h2>
+    <video #uploadVideo width="800" controls loop>
+      <source [src]="uploadVideoUrl" type="video/mp4">
+      Tu navegador no soporta el elemento de video.
+    </video>
+    <div class="controls">
+      <button class="speed-btn" (click)="changeSpeed(uploadVideo, 0.5)">0.5x</button>
+      <button class="speed-btn" (click)="changeSpeed(uploadVideo, 1)">1x</button>
+      <button class="speed-btn" (click)="changeSpeed(uploadVideo, 1.5)">1.5x</button>
+      <button class="speed-btn" (click)="changeSpeed(uploadVideo, 2)">2x</button>
+    </div>
+  </div>
+</div>

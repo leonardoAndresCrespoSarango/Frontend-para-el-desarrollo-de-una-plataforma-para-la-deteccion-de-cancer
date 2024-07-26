@@ -1,7 +1,100 @@
-.example-box.cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+.no-predictions {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: #555;
 }
 
-.example-chip .cdk-drop-list-dragging {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+h2 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 2em;
+  color: #333;
+}
+
+.styled-table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  font-size: 1.1em;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+  background-color: #007bff;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #66afe9;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.styled-table th {
+  font-size: 1.2em;
+}
+
+.styled-table td {
+  font-size: 1em;
+}
+
+.btn-action {
+  background-color: #009879;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.btn-action:hover {
+  background-color: #ffffff;
+  color: #009879;
+  border: 2px solid #009879;
+}
+
+//paciente:
+.btn-add-patient {
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 0;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.btn-add-patient:hover {
+  background-color: #ffffff;
+  color: #28a745;
+  border: 2px solid #28a745;
 }

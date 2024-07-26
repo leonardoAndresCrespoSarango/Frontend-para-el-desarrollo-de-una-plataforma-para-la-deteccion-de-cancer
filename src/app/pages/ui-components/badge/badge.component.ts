@@ -1,20 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import {MedicalReportService} from "../../../services/medical-resport-service.service";
+import {UserService} from "../../../services/user-service.service";
 
 @Component({
   selector: 'app-badge',
   templateUrl: './badge.component.html'
 })
 export class AppBadgeComponent implements OnInit {
+  users: any[] = [];
 
-  constructor() { }
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-  }
-
-  hidden = false;
-
-  toggleBadgeVisibility() {
-    this.hidden = !this.hidden;
+    this.userService.getUsers().subscribe(
+      (data) => {
+        this.users = data;
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
   }
 
 }

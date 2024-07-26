@@ -6,15 +6,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// icons
+// Icons
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
-//Import all material modules
+// Import all material modules
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-//Import Layouts
+// Import Layouts
 import { FullComponent } from './layouts/full/full.component';
 import { BlankComponent } from './layouts/blank/blank.component';
 
@@ -23,6 +23,9 @@ import { SidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { HeaderComponent } from './layouts/full/header/header.component';
 import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
+import { ToastrModule } from 'ngx-toastr';
+import { LoaderComponent } from './loader/loader.component';
+import { AddPatientDialogComponent } from './add-patient-dialog/add-patient-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.co
     HeaderComponent,
     BrandingComponent,
     AppNavItemComponent,
+    AddPatientDialogComponent,// <-- Asegúrate de declarar el componente aquí
   ],
   imports: [
     BrowserModule,
@@ -43,8 +47,14 @@ import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.co
     ReactiveFormsModule,
     MaterialModule,
     TablerIconsModule.pick(TablerIcons),
+    ToastrModule.forRoot({
+      timeOut: 2000, // Duración de la notificación en milisegundos
+      positionClass: 'toast-top-right', // Posición de la notificación
+      preventDuplicates: true, // Evita notificaciones duplicadas
+    }),
+    LoaderComponent,
   ],
   exports: [TablerIconsModule],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
