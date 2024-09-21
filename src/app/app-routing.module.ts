@@ -5,6 +5,7 @@ import { FullComponent } from './layouts/full/full.component';
 import {AppMenuComponent} from "./pages/ui-components/menu/menu.component";
 import {AppTooltipsComponent} from "./pages/ui-components/tooltips/tooltips.component";
 import {AppSideLoginComponent} from "./pages/authentication/login/login.component";
+import {DiagnosticIaComponent} from "./diagnostic-ia/diagnostic-ia.component";
 
 const routes: Routes = [
   {
@@ -51,6 +52,8 @@ const routes: Routes = [
   },
   { path: 'forgot-password', component: AppMenuComponent },
   { path: 'reset-password/:token', component: AppTooltipsComponent },
+
+
 ];
 
 @NgModule({

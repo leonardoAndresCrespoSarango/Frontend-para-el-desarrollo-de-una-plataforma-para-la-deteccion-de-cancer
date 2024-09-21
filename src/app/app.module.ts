@@ -26,6 +26,8 @@ import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.co
 import { ToastrModule } from 'ngx-toastr';
 import { LoaderComponent } from './loader/loader.component';
 import { AddPatientDialogComponent } from './add-patient-dialog/add-patient-dialog.component';
+import {AddDiagnosticDialogComponent} from "./add-diagnostic-dialog/add-diagnostic-dialog.component";
+import {SafePipe} from "./safe.pipe";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { AddPatientDialogComponent } from './add-patient-dialog/add-patient-dial
     HeaderComponent,
     BrandingComponent,
     AppNavItemComponent,
-    AddPatientDialogComponent,// <-- Asegúrate de declarar el componente aquí
+    AddPatientDialogComponent,
+    AddDiagnosticDialogComponent,
+    SafePipe// <-- Asegúrate de declarar el componente aquí
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,7 @@ import { AddPatientDialogComponent } from './add-patient-dialog/add-patient-dial
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+
     TablerIconsModule.pick(TablerIcons),
     ToastrModule.forRoot({
       timeOut: 2000, // Duración de la notificación en milisegundos
@@ -54,7 +59,7 @@ import { AddPatientDialogComponent } from './add-patient-dialog/add-patient-dial
     }),
     LoaderComponent,
   ],
-  exports: [TablerIconsModule],
+    exports: [TablerIconsModule, SafePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

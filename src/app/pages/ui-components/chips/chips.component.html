@@ -11,18 +11,22 @@
   <table class="styled-table">
     <thead>
     <tr>
-      <th>Patient ID</th>
-      <th>Patient Name</th>
-      <th>Patient Age</th>
-      <th>Patient Gender</th>
+      <th>Cédula del Paciente</th>
+      <th>Número de Historia Clínica</th>
+      <th>Diagnóstico Imagenólogo</th>
+      <th>Diagnóstico IA</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let patient of patients">
       <td>{{ patient.patient_id }}</td>
-      <td>{{ patient.patient_name }}</td>
-      <td>{{ patient.patient_age }}</td>
-      <td>{{ patient.patient_gender }}</td>
+      <td>{{ patient.numero_historia_clinica }}</td>
+      <td>
+        <button mat-button (click)="addDiagnostic(patient)">Diagnóstico</button>
+      </td>
+      <td>
+        <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)">Generar Diagnóstico IA</button>
+      </td>
     </tr>
     </tbody>
   </table>

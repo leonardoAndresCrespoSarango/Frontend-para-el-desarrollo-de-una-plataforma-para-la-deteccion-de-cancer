@@ -1,22 +1,22 @@
 <div *ngIf="users.length === 0" class="no-users">
-  <p>No users found.</p>
+  <p>No Hay Usuarios.</p>
 </div>
 
 <div *ngIf="users.length > 0">
-  <h2>Registered Users</h2>
+  <h2>Usuarios Registrados</h2>
   <table class="styled-table">
     <thead>
     <tr>
       <th>ID</th>
-      <th>Username</th>
-      <th>Name</th>
+      <th>Correo</th>
+      <th>Nombre</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let user of users">
       <td>{{ user.id }}</td>
       <td>{{ user.username }}</td>
-      <td>{{ user.name }}</td>
+      <td>{{ user.nombre }}</td>
     </tr>
     </tbody>
   </table>

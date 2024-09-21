@@ -16,10 +16,8 @@ export class AddPatientDialogComponent {
     private dialogRef: MatDialogRef<AddPatientDialogComponent>
   ) {
     this.addPatientForm = this.fb.group({
-      name: ['', Validators.required],
-      age: ['', Validators.required],
-      gender: ['', Validators.required],
-      patientId: ['', Validators.required]
+      patientId: ['', Validators.required],
+      numeroHistoriaClinica: ['', Validators.required]
     });
   }
 

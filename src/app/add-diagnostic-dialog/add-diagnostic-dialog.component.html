@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Agregar Diagnóstico</h2>
+<mat-dialog-content>
+  <form [formGroup]="addDiagnosticForm" class="form-container">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="description" required></textarea>
+    </mat-form-field>
+
+
+    <div class="file-upload-container">
+      <input type="file" id="fileInput" name="files" multiple class="form-control-file" (change)="onFileChange($event)">
+      <label for="fileInput" class="btn btn-secondary">Seleccionar Archivos</label>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onGeneratePDF()" [disabled]="!addDiagnosticForm.valid">Generar PDF</button>
+  <button mat-button (click)="onSave()" [disabled]="!pdfUrl">Guardar</button>
+
+  <button mat-button (click)="uploadFiles()" class="btn btn-primary">Cargar archivos</button>
+</mat-dialog-actions>
+<div *ngIf="pdfUrl">
+  <h3>Diagnóstico PDF</h3>
+  <iframe [src]="pdfUrl | safe" width="100%" height="500px"></iframe>
+  <a (click)="onViewPdf()" style="cursor: pointer;">Ver PDF</a>
+</div>

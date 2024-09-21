@@ -12,25 +12,25 @@
 
 
           <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="m-t-30">
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Name</mat-label>
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Nombre</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input matInput formControlName="name" />
             </mat-form-field>
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Email Address</mat-label>
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Correo Electronico</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input matInput type="email" formControlName="email" />
             </mat-form-field>
             <!-- password -->
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Password</mat-label>
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Contraseña</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input matInput type="password" formControlName="password" />
             </mat-form-field>
 
-            <button mat-flat-button color="primary" class="w-100">Sign Up</button>
+            <button mat-flat-button color="primary" class="w-100">Registrarse</button>
           </form>
-          <span class="d-block f-w-500 text-center m-t-24">Already have an Account?
+          <span class="d-block f-w-500 text-center m-t-24">Ya tienes una cuenta?
             <a [routerLink]="['/authentication/login']" class="text-decoration-none text-primary f-w-500 f-s-14">
-              Sign In</a>
+              Inicia Aqui!</a>
           </span>
         </mat-card-content>
       </mat-card>

@@ -10,33 +10,33 @@ export const navItems: NavItem[] = [
     route: '/dashboard',
   },
   {
-    navCap: 'Componentes',
+    navCap: 'Herramientas',
   },
   {
-    displayName: 'Doctores',
+    displayName: 'Médicos',
     iconName: 'rosette',
     route: '/ui-components/badge',
   },
   {
-    displayName: 'Pacientes',
+    displayName: 'Registro Pacientes',
     iconName: 'poker-chip',
     route: '/ui-components/chips',
   },
   {
-    displayName: 'Reporte',
+    displayName: 'Visualización IA',
     iconName: 'list',
     route: '/ui-components/lists',
   },
   {
-    navCap: 'Auth',
+    navCap: 'Autenticación',
   },
   {
-    displayName: 'Login',
+    displayName: 'Inicio de Sesión',
     iconName: 'lock',
     route: '/authentication/login',
   },
   {
-    displayName: 'Register',
+    displayName: 'Registrarse',
     iconName: 'user-plus',
     route: '/authentication/register',
   },

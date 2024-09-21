@@ -242,3 +242,33 @@ video {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+//css del formulario de retroalimentacio
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-row mat-form-field {
+  flex: 1 1 200px;
+  min-width: 200px;
+}
+
+.form-button {
+  margin-top: 16px;
+  text-align: center;
+  width: 100%;
+}

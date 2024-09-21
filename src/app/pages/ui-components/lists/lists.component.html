@@ -1,74 +1,131 @@
-<div class="container">
-  <h1>Brain Tumor Prediction</h1>
-  <form [formGroup]="medicalReportForm" (ngSubmit)="onSubmit()" id="predictForm">
-    <div class="form-group">
-      <label for="name">Nombre:</label>
-      <input id="name" formControlName="name" required class="form-control">
-    </div>
+<h1>Predicción de IA</h1>
 
-    <div class="form-group">
-      <label for="age">Edad:</label>
-      <input id="age" type="number" formControlName="age" required class="form-control">
-    </div>
+<h2>Seleccionar Gráfica</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Gráfica</mat-label>
+  <mat-select [(value)]="selectedGraph">
+    <mat-option *ngFor="let graph of graphOptions" [value]="graph.value">
+      {{ graph.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<!-- Selectable graphs -->
+<div *ngIf="selectedGraph === 'graph1' && htmlUrl1">
+  <h2>Diagnóstico IA - Visualización Cerebral 3D</h2>
+  <iframe [src]="htmlUrl1" width="107%" height="950px"></iframe>
+</div>
 
-    <div class="form-group">
-      <label for="gender">Género:</label>
-      <select id="gender" formControlName="gender" required class="form-control">
-        <option value="Masculino">Masculino</option>
-        <option value="Femenino">Femenino</option>
-        <option value="Otro">Otro</option>
-      </select>
-    </div>
+<div *ngIf="selectedGraph === 'graph3' && htmlUrl3">
+  <h2>Diagnóstico IA - Visualización Interactiva de Rebanadas</h2>
+  <iframe [src]="htmlUrl3" width="107%" height="950px"></iframe>
+</div>
 
-    <div class="form-group">
-      <label for="patientId">Cedula del Paciente:</label>
-      <input id="patientId" formControlName="patientId" required class="form-control">
-    </div>
+<div *ngIf="selectedGraph === 'graph4' && htmlUrl4">
+  <h2>Diagnóstico IA - Clasificación de Rebanadas</h2>
+  <iframe [src]="htmlUrl4" width="107%" height="950px"></iframe>
+</div>
 
-    <div class="form-group">
-      <label for="diagnosis">Prediagnóstico:</label>
-      <textarea id="diagnosis" formControlName="diagnosis" required class="form-control" rows="4"></textarea>
-    </div>
+<div *ngIf="selectedGraph === 'graph6' && htmlUrl6">
+  <h2>Diagnóstico IA - Visualización Interactiva de Modalidades</h2>
+  <iframe [src]="htmlUrl6" width="107%" height="950px"></iframe>
+</div>
 
-    <button type="submit" class="btn btn-primary">Predecir</button>
-  </form>
+<!-- Always visible static graphs -->
+<div class="graph-container" id="graph2">
+  <h2>Diagnóstico IA - Diámetros de Clases</h2>
+  <iframe [src]="htmlUrl2" width="100%" height="600px"></iframe>
+  <div class="graph-description">Figura 1: Diámetros de Clases predichos por la IA</div>
+</div>
 
-  <form id="uploadForm" enctype="multipart/form-data">
-    <div class="form-group">
-      <input type="file" id="fileInput" name="files" multiple class="form-control-file" (change)="onFileChange($event)">
-      <label for="fileInput" class="btn btn-secondary">Seleccionar Archivos</label>
-    </div>
-    <button type="button" (click)="uploadFiles()" class="btn btn-primary">Cargar archivos</button>
-  </form>
+<div class="graph-container" id="graph5">
+  <h2>Diagnóstico IA - Presencia de Clases por Rebanada</h2>
+  <iframe [src]="htmlUrl5" width="100%" height="600px"></iframe>
+  <div class="graph-description">Figura 2: Presencia de Clases por Rebanada según la IA</div>
+</div>
 
-  <!-- Contenedor para el video resultado de la predicción -->
-  <div *ngIf="videoUrl" class="video-container">
-    <h2>Resultado de la Predicción</h2>
-    <video width="600" controls>
-      <source [src]="videoUrl" type="video/mp4">
-      Tu navegador no soporta el elemento de video.
-    </video>
-    <div class="class-legend">
-      <h3>Clases</h3>
-      <div class="class-item" *ngFor="let class of classes">
-        <div class="color-box" [ngStyle]="{'background-color': class.color}"></div>
-        <span>{{ class.name }}</span>
-      </div>
-    </div>
+<!-- Text and Feedback Form Section -->
+<div class="form-container">
+  <h2>Referente a la Gráfica de Diámetros de Clases</h2>
+  <div>
+    <h2>Reporte de Segmentación Predicha</h2>
+    <pre>{{ reportText2 }}</pre>
   </div>
 
-  <!-- Contenedor separado para el video generado a partir de la subida de archivos -->
-  <div *ngIf="uploadVideoUrl" class="separate-video-container">
-    <h2>Video Generado</h2>
-    <video #uploadVideo width="800" controls loop>
-      <source [src]="uploadVideoUrl" type="video/mp4">
-      Tu navegador no soporta el elemento de video.
-    </video>
-    <div class="controls">
-      <button class="speed-btn" (click)="changeSpeed(uploadVideo, 0.5)">0.5x</button>
-      <button class="speed-btn" (click)="changeSpeed(uploadVideo, 1)">1x</button>
-      <button class="speed-btn" (click)="changeSpeed(uploadVideo, 1.5)">1.5x</button>
-      <button class="speed-btn" (click)="changeSpeed(uploadVideo, 2)">2x</button>
+  <h2>Referente a la Gráfica de Presencia de Clases por Rebanada</h2>
+  <div>
+    <h2>Reporte de Clases Presentes por Rebanada</h2>
+    <pre>{{ reportText5 }}</pre>
+  </div>
+
+  <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
+    <h2>Formulario de Retroalimentación</h2>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>¿La IA predijo correctamente las áreas segmentadas?</mat-label>
+        <mat-select formControlName="iaAccuracy">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+          <mat-option value="parcialmente">Parcialmente</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>¿La IA fue útil para su diagnóstico?</mat-label>
+        <mat-select formControlName="iaUsefulness">
+          <mat-option value="muy_util">Muy útil</mat-option>
+          <mat-option value="util">Útil</mat-option>
+          <mat-option value="poco_util">Poco útil</mat-option>
+          <mat-option value="inutil">Inútil</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>¿La IA identificó correctamente las regiones?</mat-label>
+        <mat-select formControlName="iaRegions">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+          <mat-option value="parcialmente">Parcialmente</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Comparación con otros métodos de diagnóstico</mat-label>
+        <textarea matInput formControlName="iaComparison"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>¿Cuán confiable es el diagnóstico de la IA?</mat-label>
+        <mat-select formControlName="iaReliability">
+          <mat-option value="muy_confiable">Muy confiable</mat-option>
+          <mat-option value="confiable">Confiable</mat-option>
+          <mat-option value="poco_confiable">Poco confiable</mat-option>
+          <mat-option value="inconfiable">Inconfiable</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Comentarios adicionales</mat-label>
+        <textarea matInput formControlName="additionalComments"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Descripción de las modalidades (T1c, T2w, FLAIR)</mat-label>
+        <textarea matInput formControlName="modalitiesDescription"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="form-button">
+      <button mat-raised-button color="primary" (click)="sendReport()">Enviar Reporte</button>
+    </div>
+  </form>
+
+  <div class="form-button">
+
+    <button mat-raised-button color="primary" (click)="downloadPDF()">Descargar Reporte PDF</button>
   </div>
 </div>

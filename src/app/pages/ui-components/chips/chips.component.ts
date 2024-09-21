@@ -3,6 +3,9 @@ import { MedicalReportService } from "../../../services/medical-resport-service.
 import { ToastrService } from 'ngx-toastr';
 import {AddPatientDialogComponent} from "../../../add-patient-dialog/add-patient-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {AddDiagnosticDialogComponent} from "../../../add-diagnostic-dialog/add-diagnostic-dialog.component";
+import {Router} from "@angular/router";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-chips',
@@ -16,7 +19,10 @@ export class AppChipsComponent implements OnInit {
   constructor(
     private userService: MedicalReportService,
     private toastr: ToastrService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private medicalReportService: MedicalReportService,
+    private router: Router,
+    private medService: MedicalReportService // Asegúrate de inyectar UserService aquí
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +42,7 @@ export class AppChipsComponent implements OnInit {
   }
 
   fetchPatients(): void {
-    this.userService.getPatients().subscribe(
+    this.medService.getPatients().subscribe(
       (data) => {
         this.patients = data;
       },
@@ -46,35 +52,7 @@ export class AppChipsComponent implements OnInit {
     );
   }
 
-  generateReport(predictionId: number): void {
-    this.userService.downloadReport(predictionId).subscribe(blob => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `report_${predictionId}.pdf`;
-      a.click();
-      window.URL.revokeObjectURL(url);
-      this.toastr.success('Reporte generado exitosamente', 'Éxito');
-    }, error => {
-      console.error('Error generating report:', error);
-      this.toastr.error('Error al generar el reporte', 'Error');
-    });
-  }
 
-  diagnoseIA(predictionId: number): void {
-    this.userService.downloadVideo(predictionId).subscribe(blob => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `diagnosis_${predictionId}.mp4`;
-      a.click();
-      window.URL.revokeObjectURL(url);
-      this.toastr.success('Diagnóstico IA generado exitosamente', 'Éxito');
-    }, error => {
-      console.error('Error generating IA diagnosis:', error);
-      this.toastr.error('Error al generar el diagnóstico IA', 'Error');
-    });
-  }
 
   addPatient(): void {
     const dialogRef = this.dialog.open(AddPatientDialogComponent, {
@@ -83,7 +61,7 @@ export class AppChipsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.userService.addPatient(result).subscribe(
+        this.medService.addPatient(result).subscribe(
           (response) => {
             this.toastr.success('Paciente agregado exitosamente', 'Éxito');
             this.fetchPatients();  // Actualizar la lista de pacientes después de agregar uno nuevo
@@ -96,4 +74,48 @@ export class AppChipsComponent implements OnInit {
       }
     });
   }
+
+  addDiagnostic(patient: any): void {
+    const dialogRef = this.dialog.open(AddDiagnosticDialogComponent, {
+      data: {
+        patient_id: patient.patient_id,
+        patient_name: patient.patient_name,
+        patient_age: patient.patient_age,
+        patient_gender: patient.patient_gender
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.medService.addDiagnostic(result).subscribe(
+          () => {
+            console.log('Diagnostic added successfully');
+          },
+          (error) => {
+            console.error('Error adding diagnostic:', error);
+          }
+        );
+      }
+    });
+  }
+
+  onGenerateIA(patientId: string): void {
+    this.userService.predictIA(patientId).subscribe((response: any) => {
+      this.router.navigate(['ui-components/lists', {
+        patient_id: patientId,
+        html_url1: response.html_url1,
+        html_url2: response.html_url2,
+        html_url3: response.html_url3,
+        html_url4: response.html_url4,
+        html_url5: response.html_url5,
+        html_url6: response.html_url6,
+        report_text2: response.report_text2,
+        report_text5: response.report_text5
+      }]);
+    }, error => {
+      console.error('Error during prediction:', error);
+      this.toastr.error('Error during prediction', 'Error');
+    });
+  }
+
 }
