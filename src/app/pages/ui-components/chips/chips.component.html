@@ -13,8 +13,7 @@
     <tr>
       <th>Cédula del Paciente</th>
       <th>Número de Historia Clínica</th>
-      <th>Diagnóstico Imagenólogo</th>
-      <th>Diagnóstico IA</th>
+      <th>Fase</th>
     </tr>
     </thead>
     <tbody>
@@ -22,10 +21,16 @@
       <td>{{ patient.patient_id }}</td>
       <td>{{ patient.numero_historia_clinica }}</td>
       <td>
-        <button mat-button (click)="addDiagnostic(patient)">Diagnóstico</button>
-      </td>
-      <td>
-        <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)">Generar Diagnóstico IA</button>
+        <div style="display: flex; align-items: center;">
+          <div style="text-align: center; margin-right: 10px;">
+            <button mat-button (click)="addDiagnostic(patient)">Diagnóstico Médico</button>
+            <small style="display: block; font-size: 10px;">{{ patient.diagnosticStatus || 'No generado' }}</small>
+          </div>
+          <div style="text-align: center;">
+            <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)">Generar Diagnóstico IA</button>
+            <small style="display: block; font-size: 10px;">{{ patient.iaStatus || 'No generado' }}</small>
+          </div>
+        </div>
       </td>
     </tr>
     </tbody>
