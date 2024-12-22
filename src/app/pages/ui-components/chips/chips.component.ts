@@ -82,7 +82,11 @@ export class AppChipsComponent implements OnInit {
         patient_name: patient.patient_name,
         patient_age: patient.patient_age,
         patient_gender: patient.patient_gender
-      }
+      },
+      panelClass: 'custom-dialog-container', // Clase personalizada para el diálogo
+      width: '90vw', // 90% del ancho de la ventana
+      height: '90vh', // 90% del alto de la ventana
+
     });
 
     dialogRef.afterClosed().subscribe(result => {

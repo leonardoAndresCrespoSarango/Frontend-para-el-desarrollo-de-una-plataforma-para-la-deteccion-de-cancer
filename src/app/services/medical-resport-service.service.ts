@@ -132,4 +132,11 @@ export class MedicalReportService {
     });
   }
 
+  //leoanrdo
+  predict6(patientId: string): Observable<any> {
+    this.loaderService.show();
+    return this.http.post<any>(`${this.apiUrl}/generate-graph6`, { patient_id: patientId }, { withCredentials: true }).pipe(
+      finalize(() => this.loaderService.hide())
+    );
+  }
 }
