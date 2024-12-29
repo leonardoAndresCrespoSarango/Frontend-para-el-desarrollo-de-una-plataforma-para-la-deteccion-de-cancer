@@ -139,4 +139,11 @@ export class MedicalReportService {
       finalize(() => this.loaderService.hide())
     );
   }
+  getPatientsWithDiagnostics(): Observable<any[]> {
+    this.loaderService.show();
+    return this.http.get<any[]>(`${this.apiUrl}/patients-with-diagnostics`,{ withCredentials: true }).pipe(
+      finalize(() => this.loaderService.hide())
+    );
+  }
+
 }

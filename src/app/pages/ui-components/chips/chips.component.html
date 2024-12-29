@@ -23,8 +23,16 @@
       <td>
         <div style="display: flex; align-items: center;">
           <div style="text-align: center; margin-right: 10px;">
-            <button mat-button (click)="addDiagnostic(patient)">Diagnóstico Médico</button>
-            <small style="display: block; font-size: 10px;">{{ patient.diagnosticStatus || 'No generado' }}</small>
+            <button mat-button [disabled]="patient.diagnosticStatus === 'Generado'" (click)="addDiagnostic(patient)">Diagnóstico Médico</button>
+            <small
+              [ngClass]="{
+          'status-generated': patient.diagnosticStatus === 'Generado',
+          'status-not-generated': patient.diagnosticStatus === 'No generado'
+        }"
+              style="display: block; font-size: 10px;"
+            >
+              {{ patient.diagnosticStatus }}
+            </small>
           </div>
           <div style="text-align: center;">
             <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)">Generar Diagnóstico IA</button>

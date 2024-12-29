@@ -42,15 +42,19 @@ export class AppChipsComponent implements OnInit {
   }
 
   fetchPatients(): void {
-    this.medService.getPatients().subscribe(
+    this.medService.getPatientsWithDiagnostics().subscribe(
       (data) => {
-        this.patients = data;
+        this.patients = data.map(patient => ({
+          ...patient,
+          diagnosticStatus: patient.is_generated ? 'Generado' : 'No generado'
+        }));
       },
       (error) => {
-        console.error('Error fetching patients:', error);
+        console.error('Error fetching patients with diagnostics:', error);
       }
     );
   }
+
 
 
 
