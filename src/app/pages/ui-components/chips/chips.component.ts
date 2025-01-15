@@ -80,32 +80,15 @@ export class AppChipsComponent implements OnInit {
   }
 
   addDiagnostic(patient: any): void {
-    const dialogRef = this.dialog.open(AddDiagnosticDialogComponent, {
-      data: {
+    this.router.navigate(['/diagnostico'], {
+      queryParams: {
         patient_id: patient.patient_id,
-        patient_name: patient.patient_name,
-        patient_age: patient.patient_age,
-        patient_gender: patient.patient_gender
       },
-      panelClass: 'custom-dialog-container', // Clase personalizada para el diálogo
-      width: '90vw', // 90% del ancho de la ventana
-      height: '90vh', // 90% del alto de la ventana
-
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.medService.addDiagnostic(result).subscribe(
-          () => {
-            console.log('Diagnostic added successfully');
-          },
-          (error) => {
-            console.error('Error adding diagnostic:', error);
-          }
-        );
-      }
     });
   }
+
+
+
 
   onGenerateIA(patientId: string): void {
     this.userService.predictIA(patientId).subscribe((response: any) => {

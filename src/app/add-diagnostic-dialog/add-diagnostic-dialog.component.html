@@ -1,35 +1,33 @@
 <h2 mat-dialog-title>Agregar Diagnóstico</h2>
-<mat-dialog-content>
-  <form [formGroup]="addDiagnosticForm" class="form-container">
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Título</mat-label>
-      <input matInput formControlName="title" required>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Descripción</mat-label>
-      <textarea matInput formControlName="description" required></textarea>
-    </mat-form-field>
-
-
+<div class="split-container">
+  <!-- Contenedor izquierdo -->
+  <div class="left-container">
     <div class="file-upload-container">
       <input type="file" id="fileInput" name="files" multiple class="form-control-file" (change)="onFileChange($event)">
       <label for="fileInput" class="btn btn-secondary">Seleccionar Archivos</label>
     </div>
     <div *ngIf="htmlUrl6" class="graph-container">
-      <iframe [src]="htmlUrl6" width="250%" height="800px" frameborder="0"></iframe>
+      <iframe [src]="htmlUrl6" class="graph-frame"></iframe>
     </div>
+  </div>
 
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancelar</button>
-  <button mat-button (click)="saveDiagnostic()" [disabled]="!addDiagnosticForm.valid">Guardar Diagnostico</button>
+  <!-- Contenedor derecho -->
+  <div class="right-container">
+    <form [formGroup]="addDiagnosticForm" class="form-container">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Título</mat-label>
+        <input matInput formControlName="title" placeholder="Ingrese el título del diagnóstico" required>
+      </mat-form-field>
 
-  <button mat-button (click)="uploadFiles()" class="btn btn-primary">Cargar archivos al Modelo IA</button>
-</mat-dialog-actions>
-<div *ngIf="pdfUrl">
-  <h3>Diagnóstico PDF</h3>
-  <iframe [src]="pdfUrl | safe" width="100%" height="500px"></iframe>
-  <a (click)="onViewPdf()" style="cursor: pointer;">Ver PDF</a>
+      <mat-form-field appearance="outline" class="description-field">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="description" rows="5" placeholder="Ingrese la descripción detallada" required></textarea>
+      </mat-form-field>
+
+      <mat-dialog-actions>
+        <button mat-raised-button color="primary" (click)="saveDiagnostic()" [disabled]="!addDiagnosticForm.valid">Guardar Diagnóstico</button>
+        <button mat-raised-button color="accent" (click)="uploadFiles()">Cargar archivos al Modelo IA</button>
+      </mat-dialog-actions>
+    </form>
+  </div>
 </div>

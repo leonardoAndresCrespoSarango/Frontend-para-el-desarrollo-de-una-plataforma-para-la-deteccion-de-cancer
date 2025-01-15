@@ -22,7 +22,9 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true, // Permite importar módulos CommonJS como ES6
+    "esModuleInterop": true // Mejora la compatibilidad entre CommonJS y ES6
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,6 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {MedicalReportService} from "../services/medical-resport-service.service";
 import {HttpClient} from "@angular/common/http";
 import {ToastrService} from "ngx-toastr";
@@ -18,25 +17,36 @@ export class AddDiagnosticDialogComponent implements OnInit{
   htmlUrl6: SafeResourceUrl | null = null;
 
 
+
   constructor(
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private http: HttpClient,
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
-    private dialogRef: MatDialogRef<AddDiagnosticDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private medicalReportService: MedicalReportService
   ) {
     this.addDiagnosticForm = this.fb.group({
-      patient_id: [data.patient_id, Validators.required],
+      patient_id: ['', Validators.required],
       title: ['', Validators.required],
       description: ['', Validators.required]
     });
   }
   ngOnInit(): void {
-
+    this.route.queryParams.subscribe((params) => {
+      console.log('Parámetros recibidos:', params); // Verificar si el patient_id está presente
+      const patientId = params['patient_id'];
+      if (patientId) {
+        this.addDiagnosticForm.patchValue({ patient_id: patientId });
+      } else {
+        console.error('No se recibió un patient_id en los parámetros.');
+        this.toastr.error('El ID del paciente no está disponible.', 'Error');
+      }
+    });
   }
+
+
+
 
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -87,17 +97,11 @@ export class AddDiagnosticDialogComponent implements OnInit{
   }
 
 
-  onCancel(): void {
-    this.dialogRef.close();
-  }
 
 
 
-  onSave(): void {
-    if (this.addDiagnosticForm.valid) {
-      this.dialogRef.close(this.addDiagnosticForm.value);
-    }
-  }
+
+
 
   onViewPdf(): void {
     if (this.pdfUrl) {
@@ -139,7 +143,6 @@ export class AddDiagnosticDialogComponent implements OnInit{
       this.medicalReportService.addDiagnostic(diagnosticData).subscribe(
         () => {
           this.toastr.success('Diagnóstico creado exitosamente', 'Éxito');
-          this.dialogRef.close();
         },
         (error) => {
           console.error('Error creando el diagnóstico:', error);
@@ -150,5 +153,6 @@ export class AddDiagnosticDialogComponent implements OnInit{
       this.toastr.warning('Por favor, complete todos los campos', 'Advertencia');
     }
   }
+
 
 }
