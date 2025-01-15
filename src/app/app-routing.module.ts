@@ -6,7 +6,8 @@ import {AppMenuComponent} from "./pages/ui-components/menu/menu.component";
 import {AppTooltipsComponent} from "./pages/ui-components/tooltips/tooltips.component";
 import {AppSideLoginComponent} from "./pages/authentication/login/login.component";
 import {DiagnosticIaComponent} from "./diagnostic-ia/diagnostic-ia.component";
-
+import {AddDiagnosticDialogComponent} from "./add-diagnostic-dialog/add-diagnostic-dialog.component";
+import {RefuerzoComponent} from "./pages/refuerzo/refuerzo.component"
 const routes: Routes = [
   {
 
@@ -23,12 +24,16 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),
       },
+      { path: 'diagnostico', component: AddDiagnosticDialogComponent },
       {
         path: 'ui-components',
         loadChildren: () =>
           import('./pages/ui-components/ui-components.module').then(
             (m) => m.UicomponentsModule
           ),
+      },
+      {
+        path: 'refuerzo', component: RefuerzoComponent
       },
       {
         path: 'extra',
