@@ -24,7 +24,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),
       },
-      { path: 'diagnostico', component: AddDiagnosticDialogComponent },
+
       {
         path: 'ui-components',
         loadChildren: () =>
@@ -57,6 +57,7 @@ const routes: Routes = [
   },
   { path: 'forgot-password', component: AppMenuComponent },
   { path: 'reset-password/:token', component: AppTooltipsComponent },
+  { path: 'diagnostico', component: AddDiagnosticDialogComponent },
 
 
 ];
