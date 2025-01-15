@@ -28,6 +28,8 @@ import { LoaderComponent } from './loader/loader.component';
 import { AddPatientDialogComponent } from './add-patient-dialog/add-patient-dialog.component';
 import {AddDiagnosticDialogComponent} from "./add-diagnostic-dialog/add-diagnostic-dialog.component";
 import {SafePipe} from "./safe.pipe";
+import { CommonModule } from '@angular/common';
+import {RefuerzoComponent} from "./pages/refuerzo/refuerzo.component"; // Importa CommonModule
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import {SafePipe} from "./safe.pipe";
     AddPatientDialogComponent,
     AddDiagnosticDialogComponent,
     SafePipe// <-- Asegúrate de declarar el componente aquí
+
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,9 @@ import {SafePipe} from "./safe.pipe";
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    CommonModule,
+
+
 
     TablerIconsModule.pick(TablerIcons),
     ToastrModule.forRoot({

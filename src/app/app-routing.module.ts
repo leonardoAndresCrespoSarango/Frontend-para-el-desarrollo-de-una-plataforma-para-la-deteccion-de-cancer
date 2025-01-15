@@ -6,8 +6,6 @@ import {AppMenuComponent} from "./pages/ui-components/menu/menu.component";
 import {AppTooltipsComponent} from "./pages/ui-components/tooltips/tooltips.component";
 import {AppSideLoginComponent} from "./pages/authentication/login/login.component";
 import {DiagnosticIaComponent} from "./diagnostic-ia/diagnostic-ia.component";
-import {addDiagnosticChain} from "@angular/compiler-cli/src/ngtsc/diagnostics";
-import {AddDiagnosticDialogComponent} from "./add-diagnostic-dialog/add-diagnostic-dialog.component";
 
 const routes: Routes = [
   {
@@ -54,7 +52,6 @@ const routes: Routes = [
   },
   { path: 'forgot-password', component: AppMenuComponent },
   { path: 'reset-password/:token', component: AppTooltipsComponent },
-  { path: 'diagnostico', component: AddDiagnosticDialogComponent },
 
 
 ];

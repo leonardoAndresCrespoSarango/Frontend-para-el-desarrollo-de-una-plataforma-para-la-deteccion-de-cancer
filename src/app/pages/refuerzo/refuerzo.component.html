@@ -1,0 +1,73 @@
+  <h1 class="titulo">Retroalimentación</h1>
+  <!-- Introducción al formulario -->
+  <p class="introduccion">Este formulario ha sido diseñado para recopilar su retroalimentación sobre el desempeño de la Inteligencia Artificial (IA) en la predicción y segmentación de regiones tumorales. Su opinión es muy valiosa para mejorar la precisión y utilidad de la aplicación en futuras versiones.</p>
+  <p class="introduccion">Por favor, tómese un momento para responder las siguientes preguntas sobre su experiencia con la aplicación. Sus respuestas nos ayudarán a optimizar el rendimiento del sistema y asegurar que sea útil para diagnósticos médicos.</p>
+
+  <div class="container">
+    <form (ngSubmit)="enviarFormulario()">
+
+      <!-- Sección Pregunta 1: ¿La IA predijo correctamente las regiones tumorales? -->
+      <h3>1. ¿La IA predijo correctamente las regiones tumorales? *</h3>
+      <div *ngFor="let nivel of calificarApp">
+        <label>
+          <input type="radio" [(ngModel)]="calificacionSeleccionada" name="calificacion" [value]="nivel" /> {{nivel}}
+        </label>
+      </div>
+
+      <!-- Pregunta 2: ¿Fue útil la IA para su diagnóstico? -->
+      <h3>2. ¿Fue útil la IA para su diagnóstico? *</h3>
+      <div *ngFor="let nivel of utilidadNiveles">
+        <label>
+          <input type="radio" [(ngModel)]="utilidadSeleccionada" name="utilidad" [value]="nivel" /> {{nivel}}
+        </label>
+      </div>
+
+      <!-- Sección Pregunta 3: ¿Qué nivel de precisión observó en las segmentaciones? -->
+      <h3>3. ¿Qué nivel de precisión observó en las segmentaciones? *</h3>
+      <div *ngFor="let nivel of nivelesPrecision">
+        <label>
+          <input type="radio" [(ngModel)]="precisionSeleccionada" name="precision" [value]="nivel" /> {{nivel}}
+        </label>
+      </div>
+
+
+      <!-- Pregunta 4: Comparación con otros métodos -->
+      <h3>4. ¿Cómo compara el rendimiento de la IA con otros métodos de diagnóstico que ha utilizado? *</h3>
+
+      <div *ngFor="let nivel of comparacionNiveles">
+        <label>
+          <input type="radio" [(ngModel)]="comparacionSeleccionada" name="comparacion" [value]="nivel" /> {{nivel}}
+        </label>
+      </div>
+
+      <!-- Pregunta 5: Confiabilidad del diagnóstico -->
+      <h3>5. ¿Qué tan confiable considera el diagnóstico realizado por la IA? *</h3>
+
+      <div *ngFor="let nivel of confiabilidadNiveles">
+        <label>
+          <input type="radio" [(ngModel)]="confiabilidadSeleccionada" name="confiabilidad" [value]="nivel" /> {{nivel}}
+        </label>
+      </div>
+
+
+
+      <!-- Sección de Checks -->
+      <h3>6. ¿Qué aspectos cumple la aplicación?</h3>
+      <div *ngFor="let aspecto of aspectosCumplidos">
+        <label>
+          <input type="checkbox" [(ngModel)]="aspecto.seleccionado" name="{{aspecto.nombre}}" />
+          {{aspecto.nombre}}
+        </label>
+      </div>
+
+
+
+      <!-- Campo de Comentarios -->
+      <h3>7. Comentarios adicionales</h3>
+      <textarea [(ngModel)]="comentarios" name="comentarios" rows="5" placeholder="Escriba sus comentarios aquí..." class="comentarios"></textarea>
+
+      <!-- Botón Enviar -->
+      <button type="submit" class="btn-enviar">Enviar Retroalimentación</button>
+    </form>
+  </div>
+
