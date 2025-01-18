@@ -15,7 +15,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 export class AppChipsComponent implements OnInit {
   predictions: any[] = [];
   patients: any[] = [];
-
+  filteredPatients: any[] = [];
+  searchTerm: string = '';
   constructor(
     private userService: MedicalReportService,
     private toastr: ToastrService,
@@ -48,12 +49,14 @@ export class AppChipsComponent implements OnInit {
           ...patient,
           diagnosticStatus: patient.is_generated ? 'Generado' : 'No generado'
         }));
+        this.filteredPatients = [...this.patients]; // Inicializar lista filtrada
       },
       (error) => {
         console.error('Error fetching patients with diagnostics:', error);
       }
     );
   }
+
 
 
 
@@ -107,6 +110,13 @@ export class AppChipsComponent implements OnInit {
       console.error('Error during prediction:', error);
       this.toastr.error('Error during prediction', 'Error');
     });
+  }
+  applyFilter(): void {
+    const term = this.searchTerm.toLowerCase();
+    this.filteredPatients = this.patients.filter(patient =>
+      patient.patient_id.toLowerCase().includes(term) ||
+      patient.numero_historia_clinica.toLowerCase().includes(term)
+    );
   }
 
 }

@@ -96,19 +96,6 @@ export class AddDiagnosticDialogComponent implements OnInit{
 
   }
 
-
-
-
-
-
-
-
-  onViewPdf(): void {
-    if (this.pdfUrl) {
-      window.open(this.pdfUrl, '_blank');
-    }
-  }
-
   uploadFiles() {
 
     if (this.selectedFiles) {
@@ -153,6 +140,60 @@ export class AddDiagnosticDialogComponent implements OnInit{
       this.toastr.warning('Por favor, complete todos los campos', 'Advertencia');
     }
   }
+  /*saveDiagnosticWithFiles(): void {
+    if (this.addDiagnosticForm.valid) {
+      const diagnosticData = this.addDiagnosticForm.value;
+
+      // Guardar diagnóstico
+      this.medicalReportService.addDiagnostic(diagnosticData).subscribe(
+        () => {
+          this.toastr.success('Diagnóstico creado exitosamente', 'Éxito');
+
+          // Subir archivos si existen
+          if (this.selectedFiles) {
+            const formData = new FormData();
+            formData.append('patient_id', diagnosticData.patient_id);
+
+            for (let i = 0; i < this.selectedFiles.length; i++) {
+              formData.append('files', this.selectedFiles[i]);
+            }
+
+            this.medicalReportService.uploadFiles(formData).subscribe(
+              (response) => {
+                console.log('Archivos subidos exitosamente:', response);
+                this.toastr.success('Archivos subidos exitosamente', 'Éxito');
+
+                // Generar la gráfica 6 después de subir los archivos
+                this.medicalReportService.predict6(diagnosticData.patient_id).subscribe(
+                  (graphResponse) => {
+                    if (graphResponse.html_url6) {
+                      this.htmlUrl6 = this.sanitizer.bypassSecurityTrustResourceUrl(graphResponse.html_url6);
+                      this.toastr.success('Gráfica generada exitosamente', 'Éxito');
+                    }
+                  },
+                  (error) => {
+                    console.error('Error generando la gráfica:', error);
+                    this.toastr.error('Error generando la gráfica', 'Error');
+                  }
+                );
+              },
+              (error) => {
+                console.error('Error subiendo archivos:', error);
+                this.toastr.error('Error subiendo archivos', 'Error');
+              }
+            );
+          }
+        },
+        (error) => {
+          console.error('Error creando el diagnóstico:', error);
+          this.toastr.error('Error creando el diagnóstico', 'Error');
+        }
+      );
+    } else {
+      this.toastr.warning('Por favor, complete todos los campos', 'Advertencia');
+    }
+  }*/
+
 
 
 }
