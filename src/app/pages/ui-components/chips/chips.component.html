@@ -1,6 +1,19 @@
 <div>
   <button mat-button (click)="addPatient()">Agregar Paciente</button>
 </div>
+<mat-form-field appearance="outline" style="width: 100%; margin-bottom: 20px;">
+  <mat-label>Buscar paciente</mat-label>
+  <input
+    matInput
+    placeholder="Ingresa un término de búsqueda"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="applyFilter()"
+  />
+  <mat-icon matSuffix color="accent">search</mat-icon>
+  <mat-icon matSuffix (click)="searchTerm = ''; applyFilter()">clear</mat-icon>
+
+</mat-form-field>
+
 
 <div *ngIf="patients.length === 0" class="no-patients">
   <p>No se encontraron pacientes.</p>
@@ -17,7 +30,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let patient of patients">
+    <tr *ngFor="let patient of filteredPatients">
       <td>{{ patient.patient_id }}</td>
       <td>{{ patient.numero_historia_clinica }}</td>
       <td>
