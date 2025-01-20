@@ -13,6 +13,19 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   styleUrls: ['./chips.component.scss'],
 })
 export class AppChipsComponent implements OnInit {
+  getStatusLabel(status: string): string {
+    switch (status) {
+      case 'ok':
+        return 'Estable';
+      case 'pending':
+        return 'Pendiente';
+      case 'critical':
+        return 'Crítico';
+      default:
+        return 'Crítico';
+    }
+  }
+
   predictions: any[] = [];
   patients: any[] = [];
   filteredPatients: any[] = [];
@@ -56,6 +69,33 @@ export class AppChipsComponent implements OnInit {
       }
     );
   }
+  /*fetchPatients(): void {
+  this.medService.getPatientsWithDiagnostics().subscribe(
+    (data) => {
+      this.patients = data.map(patient => ({
+        ...patient,
+        diagnosticStatus: patient.is_generated ? 'Generado' : 'No generado',
+        status: this.calculateStatus(patient) // Calcula el estado del semáforo
+      }));
+      this.filteredPatients = [...this.patients]; // Inicializar lista filtrada
+    },
+    (error) => {
+      console.error('Error fetching patients with diagnostics:', error);
+    }
+  );
+}
+
+calculateStatus(patient: any): string {
+  // Lógica para determinar el estado (modifica según tus necesidades)
+  if (patient.is_generated && patient.someCriticalMetric > 80) {
+    return 'critical';
+  } else if (patient.is_generated && patient.someWarningMetric > 50) {
+    return 'pending';
+  } else {
+    return 'ok';
+  }
+}
+*/
 
 
 
