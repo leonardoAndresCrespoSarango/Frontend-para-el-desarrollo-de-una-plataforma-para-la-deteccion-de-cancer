@@ -8,6 +8,7 @@ import {AppSideLoginComponent} from "./pages/authentication/login/login.componen
 import {DiagnosticIaComponent} from "./diagnostic-ia/diagnostic-ia.component";
 import {AddDiagnosticDialogComponent} from "./add-diagnostic-dialog/add-diagnostic-dialog.component";
 import {RefuerzoComponent} from "./pages/refuerzo/refuerzo.component"
+import {SurveyDialogComponent} from "./pages/survey-dialog/survey-dialog.component";
 const routes: Routes = [
   {
 
@@ -42,6 +43,8 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'survey/:patient_id', component: SurveyDialogComponent },  // Ruta que recibe el patientId
+
   {
     path: '',
     component: BlankComponent,

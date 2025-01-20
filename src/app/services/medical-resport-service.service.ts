@@ -139,11 +139,30 @@ export class MedicalReportService {
       finalize(() => this.loaderService.hide())
     );
   }
+  ////////////////
+  submitFeedbackE(patientId: string, ayudoIa: boolean, comentariosAdicionales: string): Observable<any> {
+    this.loaderService.show();
+
+    const feedbackData = {
+      ayudo_ia: ayudoIa,
+      comentarios_adicionales: comentariosAdicionales
+    };
+
+    return this.http.post<any>(`${this.apiUrl}/submit-feedbackE/${patientId}`, feedbackData, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      withCredentials: true
+    }).pipe(
+      finalize(() => this.loaderService.hide())
+    );
+  }
+  //////////////////
+
   getPatientsWithDiagnostics(): Observable<any[]> {
     this.loaderService.show();
     return this.http.get<any[]>(`${this.apiUrl}/patients-with-diagnostics`,{ withCredentials: true }).pipe(
       finalize(() => this.loaderService.hide())
     );
   }
+
 
 }

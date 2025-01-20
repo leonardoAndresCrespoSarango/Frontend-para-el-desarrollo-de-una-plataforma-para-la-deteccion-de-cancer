@@ -27,6 +27,7 @@
       <th>Cédula del Paciente</th>
       <th>Número de Historia Clínica</th>
       <th>Fase</th>
+      <th>Encuesta</th>
     </tr>
     </thead>
     <tbody>
@@ -52,6 +53,11 @@
             <small style="display: block; font-size: 10px;">{{ patient.iaStatus || 'No generado' }}</small>
           </div>
         </div>
+      </td>
+      <td>
+        <button class="btnSurvey" (click)="openSurveyDialog(patient)">
+          <img src="assets/images/logos/encuesta1.png" alt="Encuesta" class="button-icon"/>
+        </button>
       </td>
     </tr>
     </tbody>

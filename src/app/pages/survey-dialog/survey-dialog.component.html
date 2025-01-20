@@ -1,0 +1,24 @@
+<!-- Sección Pregunta 1 -->
+<h3>1. ¿La IA predijo correctamente las regiones tumorales? *</h3>
+<div *ngFor="let nivel of calificarApp" class="radio-group">
+  <label>
+    <input type="radio" [(ngModel)]="calificacionSeleccionada" name="calificacion" [value]="nivel" />
+    {{ nivel }}
+  </label>
+</div>
+
+<!-- Sección Comentarios -->
+<h3>2. Comentarios adicionales</h3>
+<textarea
+  [(ngModel)]="comentarios"
+  name="comentarios"
+  rows="5"
+  placeholder="Escriba sus comentarios aquí..."
+  class="comentarios"
+></textarea>
+
+<!-- Botones de acción -->
+<div class="button-group">
+  <button mat-button color="warn" (click)="onCancel()">Cancelar</button>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="!calificacionSeleccionada">Enviar</button>
+</div>

@@ -1,0 +1,47 @@
+:host {
+  display: block;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+
+h3 {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.radio-group {
+  margin: 10px 0;
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+
+    input {
+      margin-right: 8px;
+    }
+  }
+}
+
+textarea.comentarios {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    min-width: 100px;
+  }
+}

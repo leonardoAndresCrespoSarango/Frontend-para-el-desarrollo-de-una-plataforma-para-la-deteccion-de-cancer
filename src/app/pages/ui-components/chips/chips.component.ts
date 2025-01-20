@@ -6,6 +6,11 @@ import {MatDialog} from "@angular/material/dialog";
 import {AddDiagnosticDialogComponent} from "../../../add-diagnostic-dialog/add-diagnostic-dialog.component";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {SurveyDialogComponent} from "../../survey-dialog/survey-dialog.component";
+
+
+
+
 
 @Component({
   selector: 'app-chips',
@@ -119,4 +124,18 @@ export class AppChipsComponent implements OnInit {
     );
   }
 
+  openSurveyDialog(patient: any): void {
+    const dialogRef = this.dialog.open(SurveyDialogComponent, {
+      width: '400px',
+      data: { patientId: patient.patient_id } // Pasamos solo el patientId
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.success) {
+        //this.toastr.success('Encuesta enviada exitosamente', 'Éxito');
+      } else {
+        //this.toastr.info('Encuesta cancelada', 'Info');
+      }
+    });
+  }
 }

@@ -109,6 +109,34 @@ h2 {
   font-weight: bold;
 }
 
+.btnSurvey {
+  border: 2px solid transparent; /* Borde transparente por defecto */
+  background: transparent; /* Fondo transparente */
+  color: inherit; /* Hereda el color del texto */
+  font-size: 1rem; /* Ajusta el tamaño de la fuente */
+  padding: 8px 16px; /* Relleno opcional */
+  cursor: pointer; /* Cambia el cursor al estilo de clic */
+  outline: none; /* Elimina el contorno predeterminado */
+  border-radius: 12px; /* Bordes redondeados por defecto */
+  transition: all 0.3s ease; /* Transición suave */
+  display: flex; /* Asegura que el contenido se alinee bien */
+  justify-content: center; /* Centra el contenido dentro del botón */
+  align-items: center; /* Centra el contenido verticalmente */
+}
+
+.btnSurvey img.button-icon {
+  width: 24px; /* Ajusta el tamaño de la imagen */
+  height: 24px; /* Ajusta la altura de la imagen */
+  object-fit: contain; /* Asegura que la imagen se ajuste sin deformarse */
+}
+
+.btnSurvey:hover {
+  background: rgba(0, 0, 0, 0.1); /* Efecto de fondo suave al pasar el cursor */
+  color: #000; /* Cambia el color del texto */
+  border-color: #000; /* Cambia el color del borde al hacer hover */
+}
+
+
 
 
 

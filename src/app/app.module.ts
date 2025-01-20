@@ -29,6 +29,8 @@ import { AddPatientDialogComponent } from './add-patient-dialog/add-patient-dial
 import {AddDiagnosticDialogComponent} from "./add-diagnostic-dialog/add-diagnostic-dialog.component";
 import {SafePipe} from "./safe.pipe";
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+
 import {RefuerzoComponent} from "./pages/refuerzo/refuerzo.component"; // Importa CommonModule
 
 @NgModule({
@@ -54,6 +56,8 @@ import {RefuerzoComponent} from "./pages/refuerzo/refuerzo.component"; // Import
     ReactiveFormsModule,
     MaterialModule,
     CommonModule,
+    MatIconModule,
+
 
 
 
