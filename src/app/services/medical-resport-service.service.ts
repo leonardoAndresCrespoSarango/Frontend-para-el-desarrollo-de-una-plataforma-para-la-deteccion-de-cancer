@@ -159,10 +159,23 @@ export class MedicalReportService {
 
   getPatientsWithDiagnostics(): Observable<any[]> {
     this.loaderService.show();
-    return this.http.get<any[]>(`${this.apiUrl}/patients-with-diagnostics`,{ withCredentials: true }).pipe(
+    return this.http.get<any[]>(`${this.apiUrl}/patients-with-diagnostics`, { withCredentials: true }).pipe(
       finalize(() => this.loaderService.hide())
     );
   }
+
+  getPatientSurveyStatus(patientId: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/survey-status/${patientId}`, { withCredentials: true });
+  }
+
+  updateSurveyStatus(patientId: string, status: boolean): Observable<any> {
+    const data = { survey_completed: status };
+    return this.http.put(`http://localhost:5000/patients/${patientId}/survey-status`, data, {
+      withCredentials: true // Asegúrate de incluir las cookies de sesión
+    });
+  }
+
+
 
 
 }

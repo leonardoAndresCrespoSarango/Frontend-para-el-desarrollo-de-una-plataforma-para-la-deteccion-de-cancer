@@ -1,6 +1,7 @@
 <div>
   <button mat-button (click)="addPatient()">Agregar Paciente</button>
 </div>
+
 <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 20px;">
   <mat-label>Buscar paciente</mat-label>
   <input
@@ -11,9 +12,7 @@
   />
   <mat-icon matSuffix color="accent">search</mat-icon>
   <mat-icon matSuffix (click)="searchTerm = ''; applyFilter()">clear</mat-icon>
-
 </mat-form-field>
-
 
 <div *ngIf="patients.length === 0" class="no-patients">
   <p>No se encontraron pacientes.</p>
@@ -40,9 +39,9 @@
             <button mat-button [disabled]="patient.diagnosticStatus === 'Generado'" (click)="addDiagnostic(patient)">Diagnóstico Médico</button>
             <small
               [ngClass]="{
-          'status-generated': patient.diagnosticStatus === 'Generado',
-          'status-not-generated': patient.diagnosticStatus === 'No generado'
-        }"
+                  'status-generated': patient.diagnosticStatus === 'Generado',
+                  'status-not-generated': patient.diagnosticStatus === 'No generado'
+                }"
               style="display: block; font-size: 10px;"
             >
               {{ patient.diagnosticStatus }}
@@ -55,9 +54,13 @@
         </div>
       </td>
       <td>
-        <button class="btnSurvey" (click)="openSurveyDialog(patient)">
+        <button mat-button class="btnSurvey" (click)="openSurveyDialog(patient)" [disabled]="patient.survey_completed">
           <img src="assets/images/logos/encuesta1.png" alt="Encuesta" class="button-icon"/>
         </button>
+        <!-- Mostrar mensaje cuando el botón esté deshabilitado -->
+        <small *ngIf="patient.survey_completed" class="survey-completed-message">
+          Encuesta realizada
+        </small>
       </td>
     </tr>
     </tbody>

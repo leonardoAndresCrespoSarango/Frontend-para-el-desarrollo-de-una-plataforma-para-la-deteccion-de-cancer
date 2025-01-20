@@ -48,19 +48,21 @@ export class AppChipsComponent implements OnInit {
   }
 
   fetchPatients(): void {
-    this.medService.getPatientsWithDiagnostics().subscribe(
-      (data) => {
-        this.patients = data.map(patient => ({
+    this.medService.getPatients().subscribe(
+      (patients: any[]) => {
+        this.patients = patients.map(patient => ({
           ...patient,
-          diagnosticStatus: patient.is_generated ? 'Generado' : 'No generado'
+          survey_completed: !!patient.survey_completed // Asegúrate de que survey_completed sea booleano
         }));
-        this.filteredPatients = [...this.patients]; // Inicializar lista filtrada
+        this.filteredPatients = [...this.patients]; // Actualizar la lista filtrada
       },
       (error) => {
-        console.error('Error fetching patients with diagnostics:', error);
+        console.error('Error fetching patients:', error);
+        this.toastr.error('Error al cargar los pacientes', 'Error');
       }
     );
   }
+
 
 
 
@@ -127,15 +129,35 @@ export class AppChipsComponent implements OnInit {
   openSurveyDialog(patient: any): void {
     const dialogRef = this.dialog.open(SurveyDialogComponent, {
       width: '400px',
-      data: { patientId: patient.patient_id } // Pasamos solo el patientId
+      data: { patientId: patient.patient_id }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result?.success) {
-        //this.toastr.success('Encuesta enviada exitosamente', 'Éxito');
+        patient.survey_completed = true;  // Marca la encuesta como completada
+
+        // Bloquear el botón de la encuesta para este paciente
+        const index = this.patients.findIndex(p => p.patient_id === patient.patient_id);
+        if (index !== -1) {
+          this.patients[index].survey_completed = true; // Marca el estado de encuesta como completado
+          this.filteredPatients = [...this.patients];  // Actualiza la lista filtrada
+        }
+
+        this.medService.updateSurveyStatus(patient.patient_id, true).subscribe(
+          (response) => {
+            this.toastr.success('Encuesta completada exitosamente', 'Éxito');
+            // Aquí puedes realizar cualquier otra acción si es necesario.
+          },
+          (error) => {
+            console.error('Error updating survey status:', error);
+            this.toastr.error('Error al actualizar estado de encuesta', 'Error');
+          }
+        );
       } else {
-        //this.toastr.info('Encuesta cancelada', 'Info');
+        // Acción si la encuesta no se completó
+        // this.toastr.info('Encuesta cancelada', 'Info');
       }
     });
   }
+
 }
