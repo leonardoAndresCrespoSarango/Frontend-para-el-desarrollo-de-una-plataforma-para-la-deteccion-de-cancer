@@ -26,6 +26,7 @@
       <th>Cédula del Paciente</th>
       <th>Número de Historia Clínica</th>
       <th>Fase</th>
+      <th>Titulo</th>
       <th>Encuesta</th>
     </tr>
     </thead>
@@ -50,6 +51,21 @@
           <div style="text-align: center;">
             <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)">Generar Diagnóstico IA</button>
             <small style="display: block; font-size: 10px;">{{ patient.iaStatus || 'No generado' }}</small>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div style="display: flex; align-items: center;">
+          <div class="traffic-light-container">
+            <div class="traffic-light">
+              <!-- Clase activa según el estado o rojo por defecto -->
+              <div class="light green" [class.active]="patient.status === 'ok'"></div>
+              <div class="light yellow" [class.active]="patient.status === 'pending'"></div>
+              <div class="light red" [class.active]="!patient.status || patient.status === 'critical'"></div>
+            </div>
+          </div>
+          <div style="margin-left: 15px;">
+            <strong>{{ getStatusLabel(patient.status || 'critical') }}</strong>
           </div>
         </div>
       </td>

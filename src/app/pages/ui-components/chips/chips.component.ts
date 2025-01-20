@@ -65,6 +65,8 @@ export class AppChipsComponent implements OnInit {
       (patients: any[]) => {
         this.patients = patients.map(patient => ({
           ...patient,
+          diagnosticStatus: patient.is_generated ? 'Generado' : 'No generado',
+          status: this.calculateStatus(patient), // Calcula el estado del semáforo
           survey_completed: !!patient.survey_completed // Asegúrate de que survey_completed sea booleano
         }));
         this.filteredPatients = [...this.patients]; // Actualizar la lista filtrada
@@ -75,6 +77,7 @@ export class AppChipsComponent implements OnInit {
       }
     );
   }
+
   /*fetchPatients(): void {
   this.medService.getPatientsWithDiagnostics().subscribe(
     (data) => {
@@ -90,6 +93,7 @@ export class AppChipsComponent implements OnInit {
     }
   );
 }
+*/
 
 calculateStatus(patient: any): string {
   // Lógica para determinar el estado (modifica según tus necesidades)
@@ -101,7 +105,7 @@ calculateStatus(patient: any): string {
     return 'ok';
   }
 }
-*/
+
 
 
 
