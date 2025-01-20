@@ -145,6 +145,51 @@ h2 {
 
 
 
+.traffic-light-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.traffic-light {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 90px;
+  border-radius: 15px;
+  background: linear-gradient(to bottom, #333, #555);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  position: relative;
+}
+
+.light {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 5px auto;
+  background-color: #555;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.light.active {
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8), 0 0 25px 10px currentColor;
+}
+
+.light.green.active {
+  background-color: #4caf50;
+}
+
+.light.yellow.active {
+  background-color: #ffeb3b;
+}
+
+.light.red.active {
+  background-color: #f44336;
+}
 
 
 
