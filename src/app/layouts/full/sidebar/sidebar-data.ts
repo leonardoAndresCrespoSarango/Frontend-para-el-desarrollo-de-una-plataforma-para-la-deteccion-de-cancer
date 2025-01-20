@@ -26,6 +26,7 @@ export const navItems: NavItem[] = [
     displayName: 'Visualización IA',
     iconName: 'list',
     route: '/ui-components/lists',
+    disabled:true,
   },
   {
     navCap: 'Autenticación',

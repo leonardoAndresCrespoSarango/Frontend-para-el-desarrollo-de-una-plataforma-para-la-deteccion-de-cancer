@@ -1,4 +1,3 @@
-<h2 mat-dialog-title>Agregar Diagnóstico Médico</h2>
 <div class="split-container">
   <!-- Contenedor izquierdo -->
   <div class="left-container">
@@ -12,8 +11,16 @@
   </div>
 
   <!-- Contenedor derecho -->
-  <div class="right-container">
-    <form [formGroup]="addDiagnosticForm" class="form-container">
+  <div class="right-container" [class.collapsed]="isCollapsed">
+    <button class="toggle-button" (click)="toggleDashboard()">
+      <svg *ngIf="isCollapsed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M8 5l8 7-8 7z" /> <!-- Flecha hacia la derecha -->
+      </svg>
+      <svg *ngIf="!isCollapsed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M16 5l-8 7 8 7z" /> <!-- Flecha hacia la izquierda -->
+      </svg>
+    </button>
+    <form *ngIf="!isCollapsed" [formGroup]="addDiagnosticForm" class="form-container">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Estado de Paciente</mat-label>
         <mat-select formControlName="title" placeholder="Seleccione el diagnóstico" required>
@@ -21,13 +28,10 @@
           <mat-option value="No tiene cáncer">No tiene cáncer</mat-option>
         </mat-select>
       </mat-form-field>
-
-
       <mat-form-field appearance="outline" class="description-field">
         <mat-label>Descripción</mat-label>
         <textarea matInput formControlName="description" rows="5" placeholder="Ingrese la descripción detallada" required></textarea>
       </mat-form-field>
-
       <mat-dialog-actions>
         <button
           mat-raised-button
@@ -37,7 +41,6 @@
           Guardar Diagnóstico
         </button>
       </mat-dialog-actions>
-
     </form>
   </div>
 </div>

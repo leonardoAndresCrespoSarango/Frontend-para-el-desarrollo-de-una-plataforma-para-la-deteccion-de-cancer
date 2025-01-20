@@ -15,6 +15,7 @@ export class AddDiagnosticDialogComponent implements OnInit{
   pdfUrl: string | null = null;
   selectedFiles: FileList | null = null;
   htmlUrl6: SafeResourceUrl | null = null;
+  isCollapsed: boolean = false; // Estado inicial
 
 
 
@@ -193,6 +194,9 @@ export class AddDiagnosticDialogComponent implements OnInit{
       this.toastr.warning('Por favor, complete todos los campos', 'Advertencia');
     }
   }*/
+  toggleDashboard(): void {
+    this.isCollapsed = !this.isCollapsed;
+  }
 
 
 

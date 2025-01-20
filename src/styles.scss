@@ -298,6 +298,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow-y: auto; /* Permite desplazamiento si el contenido excede la altura */
+  transition: flex 0.3s ease; /* Suaviza el cambio de tamaño */
 }
 
 .file-upload-container {
@@ -317,16 +318,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Contenedor derecho */
+/* Contenedor derecho (dashboard) */
 .right-container {
-  flex: 1; /* Ocupa menos espacio que el contenedor izquierdo */
-  background-color: #ffffff; /* Color de fondo */
+  flex: 1; /* Ocupa espacio normal inicialmente */
+  background-color: #ffffff;
   padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: flex 0.3s ease, max-width 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 /* Estilos del formulario */
@@ -351,3 +355,74 @@ mat-dialog-actions {
   margin-top: 16px;
 }
 
+
+
+.right-container.collapsed .form-container {
+  display: none; /* Oculta el formulario en estado contraído */
+}
+.right-container.collapsed {
+  flex: 0; /* Se contrae completamente */
+  max-width: 40px; /* Mantiene un pequeño ancho visible para el botón */
+  padding: 0; /* Elimina el relleno para evitar desbordamientos */
+}
+
+.toggle-button {
+  position: fixed; /* Botón flotante fijo */
+  top: 50%; /* Centrado verticalmente */
+  right: 10px; /* Siempre visible en el borde derecho */
+  transform: translateY(-50%); /* Ajuste para centrar verticalmente */
+  width: 40px; /* Tamaño del botón */
+  height: 40px;
+  background: linear-gradient(145deg, #007bff, #0056b3); /* Fondo con degradado */
+  border: none;
+  border-radius: 50%; /* Botón circular */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease; /* Animaciones suaves */
+  z-index: 1000; /* Por encima de otros elementos */
+}
+
+.toggle-button:hover {
+  background: linear-gradient(145deg, #0056b3, #003f7f); /* Cambia el degradado al pasar el cursor */
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.3); /* Incrementa la sombra al pasar el cursor */
+}
+
+.toggle-button:active {
+  transform: translateY(-50%) scale(0.95); /* Efecto de clic */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); /* Sombra más pequeña al hacer clic */
+}
+
+.toggle-button svg {
+  fill: #ffffff; /* Color del ícono */
+  width: 20px;
+  height: 20px;
+}
+
+/* Ajuste del contenedor izquierdo */
+.left-container {
+  flex: 4;
+  transition: flex 0.3s ease;
+}
+
+.right-container.collapsed + .left-container {
+  flex: 4.7; /* Aumenta el ancho del contenedor izquierdo */
+}
+
+
+/* Estilo para elementos deshabilitados */
+.disabled {
+  color: gray; /* Cambia el color para indicar que está deshabilitado */
+  pointer-events: none; /* Desactiva la interacción del mouse */
+  cursor: not-allowed; /* Cambia el cursor a "no permitido" */
+  opacity: 0.6; /* Reduce la opacidad para una apariencia desactivada */
+}
+
+/* Asegúrate de que los elementos normales conserven su funcionalidad */
+.sidebar-list app-nav-item {
+  color: black;
+  cursor: pointer;
+  pointer-events: auto; /* Mantén la interacción para elementos habilitados */
+}
