@@ -70,14 +70,30 @@
         </div>
       </td>
       <td>
-        <button mat-button class="btnSurvey" (click)="openSurveyDialog(patient)" [disabled]="patient.survey_completed">
-          <img src="assets/images/logos/encuesta1.png" alt="Encuesta" class="button-icon"/>
+        <button
+          mat-button
+          class="btnSurvey"
+          (click)="openSurveyDialog(patient)"
+          [disabled]="patient.survey_completed"
+          style="display: flex; justify-content: center; align-items: center; padding: 0;">
+          <img class="imgbtn" src="assets/images/logos/encuesta1.png" alt="Encuesta" />
         </button>
-        <!-- Mostrar mensaje cuando el botón esté deshabilitado -->
-        <small *ngIf="patient.survey_completed" class="survey-completed-message">
-          Encuesta realizada
+
+        <!-- Mostrar mensaje según el estado de la encuesta -->
+        <small
+          *ngIf="!patient.survey_completed"
+          class="survey-completedF-message"
+          style="display: block; font-size: 10px;">
+          Pendiente
+        </small>
+        <small
+          *ngIf="patient.survey_completed"
+          class="survey-completedT-message"
+          style=" display: block; font-size: 10px;">
+          Realizada
         </small>
       </td>
+
     </tr>
     </tbody>
   </table>

@@ -122,12 +122,14 @@ h2 {
   display: flex; /* Asegura que el contenido se alinee bien */
   justify-content: center; /* Centra el contenido dentro del botón */
   align-items: center; /* Centra el contenido verticalmente */
+
 }
 
 .btnSurvey img.button-icon {
   width: 24px; /* Ajusta el tamaño de la imagen */
   height: 24px; /* Ajusta la altura de la imagen */
   object-fit: contain; /* Asegura que la imagen se ajuste sin deformarse */
+  text-align: center;
 }
 
 .btnSurvey:hover {
@@ -135,13 +137,27 @@ h2 {
   color: #000; /* Cambia el color del texto */
   border-color: #000; /* Cambia el color del borde al hacer hover */
 }
+.imgbtn {
+  max-width: 30px;
+  max-height: 30px;
+  margin-left: 37%;
+}
 
-.survey-completed-message {
+.survey-completedT-message {
   display: block;
   font-size: 12px;
   color: green;  /* Cambia el color si lo prefieres */
   margin-top: 5px;
+  text-align: center;
 }
+.survey-completedF-message {
+  display: block;
+  font-size: 12px;
+  color: red;  /* Cambia el color si lo prefieres */
+  margin-top: 5px;
+  text-align: center;
+}
+
 
 
 
