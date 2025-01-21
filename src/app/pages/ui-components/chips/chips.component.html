@@ -25,8 +25,8 @@
     <tr>
       <th>Cédula del Paciente</th>
       <th>Número de Historia Clínica</th>
-      <th>Fase</th>
-      <th>Titulo</th>
+      <th>Diagnostico</th>
+      <th>Concordancia</th>
       <th>Encuesta</th>
     </tr>
     </thead>
@@ -49,7 +49,7 @@
             </small>
           </div>
           <div style="text-align: center;">
-            <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)">Generar Diagnóstico IA</button>
+            <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)">Prediagnóstico IA</button>
             <small style="display: block; font-size: 10px;">{{ patient.iaStatus || 'No generado' }}</small>
           </div>
         </div>
@@ -58,17 +58,22 @@
         <div style="display: flex; align-items: center;">
           <div class="traffic-light-container">
             <div class="traffic-light">
-              <!-- Clase activa según el estado o rojo por defecto -->
-              <div class="light green" [class.active]="patient.status === 'ok'"></div>
-              <div class="light yellow" [class.active]="patient.status === 'pending'"></div>
-              <div class="light red" [class.active]="!patient.status || patient.status === 'critical'"></div>
+              <!-- Colores del semáforo -->
+              <div class="light red" [class.active]="!patient.is_generated"></div>
+              <div class="light yellow" [class.active]="patient.is_generated && !patient.has_cancer"></div>
+              <div class="light green" [class.active]="patient.is_generated && patient.has_cancer"></div>
             </div>
           </div>
           <div style="margin-left: 15px;">
-            <strong>{{ getStatusLabel(patient.status || 'critical') }}</strong>
+            <strong>
+              <!-- Descripciones según el estado -->
+              {{ getStatusDescription(patient) }}
+            </strong>
           </div>
         </div>
       </td>
+
+
       <td>
         <button mat-button class="btnSurvey" (click)="openSurveyDialog(patient)" [disabled]="patient.survey_completed">
           <img src="assets/images/logos/encuesta1.png" alt="Encuesta" class="button-icon"/>

@@ -66,10 +66,10 @@ export class AppChipsComponent implements OnInit {
         this.patients = patients.map(patient => ({
           ...patient,
           diagnosticStatus: patient.is_generated ? 'Generado' : 'No generado',
-          status: this.calculateStatus(patient), // Calcula el estado del semáforo
-          survey_completed: !!patient.survey_completed // Asegúrate de que survey_completed sea booleano
+          has_cancer: patient.has_cancer,
+          survey_completed: !!patient.survey_completed
         }));
-        this.filteredPatients = [...this.patients]; // Actualizar la lista filtrada
+        this.filteredPatients = [...this.patients]; // Actualiza la lista filtrada
       },
       (error) => {
         console.error('Error fetching patients:', error);
@@ -77,6 +77,10 @@ export class AppChipsComponent implements OnInit {
       }
     );
   }
+
+
+
+
 
   /*fetchPatients(): void {
   this.medService.getPatientsWithDiagnostics().subscribe(
@@ -95,16 +99,19 @@ export class AppChipsComponent implements OnInit {
 }
 */
 
-calculateStatus(patient: any): string {
-  // Lógica para determinar el estado (modifica según tus necesidades)
-  if (patient.is_generated && patient.someCriticalMetric > 80) {
-    return 'critical';
-  } else if (patient.is_generated && patient.someWarningMetric > 50) {
-    return 'pending';
-  } else {
-    return 'ok';
+  getStatusDescription(patient: any): string {
+    if (!patient.is_generated) {
+      return 'Pendiente'; // Rojo
+    }
+    if (patient.is_generated && !patient.has_cancer) {
+      return 'Por realizar'; // Amarillo
+    }
+    if (patient.is_generated && patient.has_cancer) {
+      return 'Confirmado'; // Verde
+    }
+    return 'Estado desconocido'; // Manejo de errores
   }
-}
+
 
 
 

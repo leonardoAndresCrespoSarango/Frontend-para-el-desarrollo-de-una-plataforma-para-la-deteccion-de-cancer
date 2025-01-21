@@ -4,7 +4,7 @@ import {MedicalReportService} from "../services/medical-resport-service.service"
 import {HttpClient} from "@angular/common/http";
 import {ToastrService} from "ngx-toastr";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-diagnostic-dialog',
@@ -25,7 +25,8 @@ export class AddDiagnosticDialogComponent implements OnInit{
     private http: HttpClient,
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
-    private medicalReportService: MedicalReportService
+    private medicalReportService: MedicalReportService,
+    private router: Router
   ) {
     this.addDiagnosticForm = this.fb.group({
       patient_id: ['', Validators.required],
@@ -197,6 +198,10 @@ export class AddDiagnosticDialogComponent implements OnInit{
   toggleDashboard(): void {
     this.isCollapsed = !this.isCollapsed;
   }
+  navigateToChips(): void {
+    this.router.navigate(['ui-components/chips']);
+  }
+
 
 
 

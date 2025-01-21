@@ -22,25 +22,33 @@
     </button>
     <form *ngIf="!isCollapsed" [formGroup]="addDiagnosticForm" class="form-container">
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Estado de Paciente</mat-label>
-        <mat-select formControlName="has_cancer" placeholder="Seleccione el estado" required>
+        <mat-label>Diagnostico Presuntivo</mat-label>
+        <mat-select formControlName="has_cancer" placeholder="Seleccione el Diagnostico Presuntivo" required>
           <mat-option [value]="true">Tiene cáncer</mat-option>
           <mat-option [value]="false">No tiene cáncer</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline" class="description-field">
-        <mat-label>Descripción</mat-label>
-        <textarea matInput formControlName="description" rows="5" placeholder="Ingrese la descripción detallada" required></textarea>
+        <mat-label>Observación</mat-label>
+        <textarea matInput formControlName="description" rows="5" placeholder="Ingrese la Observación detallada" required></textarea>
       </mat-form-field>
       <mat-dialog-actions>
         <button
           mat-raised-button
           color="primary"
           (click)="saveDiagnostic()"
-          [disabled]="!addDiagnosticForm.valid">
-          Guardar Diagnóstico
+          [disabled]="!addDiagnosticForm.valid"
+          style="margin-right: 10px;">
+          Guardar Reporte
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="navigateToChips()">
+          Regresar
         </button>
       </mat-dialog-actions>
+
     </form>
   </div>
 </div>
