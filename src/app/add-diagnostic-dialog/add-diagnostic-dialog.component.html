@@ -23,9 +23,9 @@
     <form *ngIf="!isCollapsed" [formGroup]="addDiagnosticForm" class="form-container">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Estado de Paciente</mat-label>
-        <mat-select formControlName="title" placeholder="Seleccione el diagnóstico" required>
-          <mat-option value="Tiene cáncer">Tiene cáncer</mat-option>
-          <mat-option value="No tiene cáncer">No tiene cáncer</mat-option>
+        <mat-select formControlName="has_cancer" placeholder="Seleccione el estado" required>
+          <mat-option [value]="true">Tiene cáncer</mat-option>
+          <mat-option [value]="false">No tiene cáncer</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline" class="description-field">

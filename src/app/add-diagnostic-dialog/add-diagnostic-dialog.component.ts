@@ -29,7 +29,7 @@ export class AddDiagnosticDialogComponent implements OnInit{
   ) {
     this.addDiagnosticForm = this.fb.group({
       patient_id: ['', Validators.required],
-      title: ['', Validators.required],
+      has_cancer: [null, Validators.required], // Cambiado de title a has_cancer
       description: ['', Validators.required]
     });
   }
