@@ -5,20 +5,24 @@
   color: #555;
 }
 
-h2 {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 2em;
-  color: #333;
-}
-
 .styled-table {
-  width: 90%;
+  width: 100%;
   margin: 20px auto;
-  border-collapse: collapse;
-  font-size: 1.1em;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
   font-family: 'Arial', sans-serif;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.tituloRP {
+  font-size: 28px;
+  font-weight: 400;
+  color: #444;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom:10px;
 }
 
 .styled-table thead tr {
@@ -183,6 +187,7 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 10;
 }
 
 .light-red,
@@ -196,6 +201,7 @@ h2 {
   background: repeating-linear-gradient(#333, #443 5px);
   transition: all 0.3s ease;
   box-shadow: none;
+  z-index: 11;
 }
 
 .light-red.active {
@@ -214,7 +220,7 @@ h2 {
 }
 
 .protector {
-  width: 100%;
+  width: 150%;
   position: absolute;
   top: 5px;
   left: 50%;
@@ -223,7 +229,7 @@ h2 {
   border-left: solid 5px transparent;
   border-top: solid 15px #191919;
   border-radius: 2px;
-  z-index: -1;
+  z-index: 1;
 }
 
 .protector:nth-child(2) {
