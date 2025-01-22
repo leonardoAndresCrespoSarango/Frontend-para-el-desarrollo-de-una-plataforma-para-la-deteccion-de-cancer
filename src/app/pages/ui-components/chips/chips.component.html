@@ -56,23 +56,29 @@
         </div>
       </td>
       <td>
-        <div style="display: flex; align-items: center;">
-          <div class="traffic-light-container">
-            <div class="traffic-light">
-              <!-- Colores del semáforo -->
-              <div class="light red" [class.active]="!patient.is_generated"></div>
-              <div class="light yellow" [class.active]="patient.is_generated && !patient.has_cancer"></div>
-              <div class="light green" [class.active]="patient.is_generated && patient.has_cancer"></div>
-            </div>
+        <div class="traffic-light small">
+          <div class="protector"></div>
+          <div class="protector"></div>
+          <div class="protector"></div>
+          <div
+            class="light-red"
+            [ngClass]="{ 'active': !patient.is_generated }">
           </div>
-          <div style="margin-left: 15px;">
-            <strong>
-              <!-- Descripciones según el estado -->
-              {{ getStatusDescription(patient) }}
-            </strong>
+          <div
+            class="light-yellow"
+            [ngClass]="{ 'active': patient.is_generated && !patient.has_cancer }">
+          </div>
+          <div
+            class="light-green"
+            [ngClass]="{ 'active': patient.is_generated && patient.has_cancer }">
           </div>
         </div>
+        <div class="traffic-description">
+          <strong>{{ getStatusDescription(patient) }}</strong>
+        </div>
       </td>
+
+
 
 
       <td>
