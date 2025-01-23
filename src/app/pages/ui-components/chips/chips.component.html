@@ -1,9 +1,8 @@
-<h2 class="tituloRP" xmlns="http://www.w3.org/1999/html">Registro de Pacientes</h2>
 <div>
-  <button mat-button (click)="addPatient()"> + Agregar Paciente </button>
+  <button mat-button (click)="addPatient()">Agregar Paciente</button>
 </div>
 
-<mat-form-field appearance="outline" style="width: 100%; margin-bottom: 20px; margin-top: 2.5%">
+<mat-form-field appearance="outline" style="width: 100%; margin-bottom: 20px;">
   <mat-label>Buscar paciente</mat-label>
   <input
     matInput
@@ -20,7 +19,7 @@
 </div>
 
 <div *ngIf="patients.length > 0">
-
+  <h2>Pacientes</h2>
   <table class="styled-table">
     <thead>
     <tr>
@@ -105,7 +104,6 @@
           Realizada
         </small>
       </td>
-
     </tr>
     </tbody>
   </table>

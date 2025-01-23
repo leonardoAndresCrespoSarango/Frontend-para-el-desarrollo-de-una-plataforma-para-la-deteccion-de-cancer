@@ -31,8 +31,8 @@ export class AppListsComponent implements OnInit {
 
   graphOptions = [
     { value: 'graph1', viewValue: 'Visualización Cerebral 3D' },
-    { value: 'graph3', viewValue: 'Visualización Interactiva de Rebanadas' },
-    { value: 'graph4', viewValue: 'Clasificación de Rebanadas' },
+    //{ value: 'graph3', viewValue: 'Visualización Interactiva de Rebanadas' },
+    //{ value: 'graph4', viewValue: 'Clasificación de Rebanadas' },
     { value: 'graph6', viewValue: 'Visualización Interactiva de Modalidades' }
   ];
 
@@ -64,9 +64,9 @@ export class AppListsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const htmlUrl1 = params.get('html_url1');
       const htmlUrl2 = params.get('html_url2');
-      const htmlUrl3 = params.get('html_url3');
-      const htmlUrl4 = params.get('html_url4');
-      const htmlUrl5 = params.get('html_url5');
+      //const htmlUrl3 = params.get('html_url3');
+      //const htmlUrl4 = params.get('html_url4');
+      //const htmlUrl5 = params.get('html_url5');
       const htmlUrl6 = params.get('html_url6');
       this.reportText2 = params.get('report_text2');
       this.reportText5 = params.get('report_text5');
@@ -76,7 +76,7 @@ export class AppListsComponent implements OnInit {
       if (htmlUrl2) {
         this.htmlUrl2 = this.sanitizer.bypassSecurityTrustResourceUrl(htmlUrl2);
       }
-      if (htmlUrl3) {
+      /*if (htmlUrl3) {
         this.htmlUrl3 = this.sanitizer.bypassSecurityTrustResourceUrl(htmlUrl3);
       }
       if (htmlUrl4) {
@@ -84,7 +84,7 @@ export class AppListsComponent implements OnInit {
       }
       if (htmlUrl5) {
         this.htmlUrl5 = this.sanitizer.bypassSecurityTrustResourceUrl(htmlUrl5);
-      }
+      }*/
       if (htmlUrl6) {
         this.htmlUrl6 = this.sanitizer.bypassSecurityTrustResourceUrl(htmlUrl6);
       }

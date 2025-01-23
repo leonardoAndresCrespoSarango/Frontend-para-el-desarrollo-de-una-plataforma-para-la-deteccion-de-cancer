@@ -22,12 +22,12 @@ export const navItems: NavItem[] = [
     iconName: 'poker-chip',
     route: '/ui-components/chips',
   },
-  {
+  /*{
     displayName: 'Visualización IA',
     iconName: 'list',
     route: '/ui-components/lists',
     disabled:true,
-  },
+  },*/
   {
     navCap: 'Autenticación',
   },
