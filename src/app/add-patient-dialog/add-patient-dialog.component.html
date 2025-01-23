@@ -4,7 +4,14 @@
     <mat-form-field appearance="fill">
       <mat-label>Cédula del Paciente</mat-label>
       <input matInput formControlName="patientId" required>
+      <mat-error *ngIf="addPatientForm.get('patientId')?.hasError('required')">
+        La cédula es obligatoria.
+      </mat-error>
+      <mat-error *ngIf="addPatientForm.get('patientId')?.hasError('pattern')">
+        La cédula debe tener 10 dígitos numéricos.
+      </mat-error>
     </mat-form-field>
+
 
     <mat-form-field appearance="fill">
       <mat-label>Número de Historia Clínica</mat-label>

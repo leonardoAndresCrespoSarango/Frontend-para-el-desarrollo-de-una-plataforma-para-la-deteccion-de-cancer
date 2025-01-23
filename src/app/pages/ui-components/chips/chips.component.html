@@ -25,7 +25,8 @@
     <tr>
       <th>Cédula del Paciente</th>
       <th>Número de Historia Clínica</th>
-      <th>Diagnostico</th>
+      <th style="text-align: center">Médico</th>
+      <th style="text-align: center">IA</th>
       <th>Concordancia</th>
       <th>Encuesta</th>
     </tr>
@@ -48,10 +49,24 @@
               {{ patient.diagnosticStatus }}
             </small>
           </div>
+          <!-- Botón para visualizar reporte -->
           <div style="text-align: center;">
-            <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)">Prediagnóstico IA</button>
-            <small style="display: block; font-size: 10px;">{{ patient.iaStatus || 'No generado' }}</small>
+            <img
+              src="assets/images/logos/lookPDF.png"
+              alt="Ver Reporte"
+              class="report-icon"
+              [ngClass]="{ 'disabled': !patient.report_path }"
+              (click)="viewReport(patient.report_path)"
+              [title]="!patient.report_path ? 'Reporte no disponible' : 'Ver Reporte PDF'"
+            />
           </div>
+
+        </div>
+      </td>
+      <td>
+        <div style="text-align: center;">
+          <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)">Prediagnóstico IA</button>
+          <small style="display: block; font-size: 10px;">{{ patient.iaStatus || 'No generado' }}</small>
         </div>
       </td>
       <td>

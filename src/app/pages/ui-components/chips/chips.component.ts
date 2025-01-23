@@ -210,5 +210,17 @@ export class AppChipsComponent implements OnInit {
       }
     });
   }
+  viewReport(reportPath: string): void {
+    if (!reportPath) {
+      this.toastr.error('El reporte no está disponible.', 'Error');
+      return;
+    }
+
+    const baseUrl = 'http://localhost:5000'; // Ruta base donde están los reportes
+    const reportUrl = `${baseUrl}/${reportPath}`;
+    window.open(reportUrl, '_blank'); // Abre el reporte en una nueva pestaña
+  }
+
+
 
 }
