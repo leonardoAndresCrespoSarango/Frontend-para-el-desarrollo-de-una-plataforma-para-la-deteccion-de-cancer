@@ -247,3 +247,33 @@
   font-size: 12px; /* Tamaño reducido */
   color: #000; /* Texto en negro */
 }
+
+/*boton para ver el reporte en pdf*/
+.report-icon {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+  animation: pulse 1s infinite alternate;
+
+  &:hover {
+    transform: scale(1.2); /* Aumenta el tamaño */
+    box-shadow: 0 8px 15px rgb(17, 121, 223); /* Sombra tipo alerta */
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    filter: grayscale(100%);
+    animation: none; /* Desactiva animación si está deshabilitado */
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
