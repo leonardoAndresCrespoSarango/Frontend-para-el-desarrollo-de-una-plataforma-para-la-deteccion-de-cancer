@@ -185,31 +185,49 @@ export class AppChipsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result?.success) {
-        patient.survey_completed = true;  // Marca la encuesta como completada
+        // Si la encuesta ya está completada, actualizamos la encuesta.
+        if (patient.survey_completed) {
+          this.updateSurvey(patient);
+        } else {
+          // Si la encuesta no está completada, la marcamos como completada
+          patient.survey_completed = true;  // Marca la encuesta como completada
 
-        // Bloquear el botón de la encuesta para este paciente
-        const index = this.patients.findIndex(p => p.patient_id === patient.patient_id);
-        if (index !== -1) {
-          this.patients[index].survey_completed = true; // Marca el estado de encuesta como completado
-          this.filteredPatients = [...this.patients];  // Actualiza la lista filtrada
-        }
-
-        this.medService.updateSurveyStatus(patient.patient_id, true).subscribe(
-          (response) => {
-            this.toastr.success('Encuesta completada exitosamente', 'Éxito');
-            // Aquí puedes realizar cualquier otra acción si es necesario.
-          },
-          (error) => {
-            console.error('Error updating survey status:', error);
-            this.toastr.error('Error al actualizar estado de encuesta', 'Error');
+          // Actualiza la lista de pacientes
+          const index = this.patients.findIndex(p => p.patient_id === patient.patient_id);
+          if (index !== -1) {
+            this.patients[index].survey_completed = true; // Marca el estado de encuesta como completado
+            this.filteredPatients = [...this.patients];  // Actualiza la lista filtrada
           }
-        );
+
+          // Actualizar estado en el backend
+          this.medService.updateSurveyStatus(patient.patient_id, true).subscribe(
+            (response) => {
+              this.toastr.success('Encuesta completada exitosamente', 'Éxito');
+            },
+            (error) => {
+              console.error('Error updating survey status:', error);
+              this.toastr.error('Error al actualizar estado de encuesta', 'Error');
+            }
+          );
+        }
       } else {
-        // Acción si la encuesta no se completó
-        // this.toastr.info('Encuesta cancelada', 'Info');
+        this.toastr.info('Encuesta cancelada', 'Info');
       }
     });
   }
+
+  updateSurvey(patient: any): void {
+    this.medService.updateSurveyStatus(patient.patient_id, true).subscribe(
+      (response) => {
+        this.toastr.success('Encuesta actualizada exitosamente', 'Éxito');
+      },
+      (error) => {
+        console.error('Error updating survey:', error);
+        this.toastr.error('Error al actualizar la encuesta', 'Error');
+      }
+    );
+  }
+
   viewReport(reportPath: string): void {
     if (!reportPath) {
       this.toastr.error('El reporte no está disponible.', 'Error');

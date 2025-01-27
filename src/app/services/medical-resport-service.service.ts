@@ -146,6 +146,7 @@ export class MedicalReportService {
     const feedbackData = {
       ayudo_ia: ayudoIa,
       comentarios_adicionales: comentariosAdicionales
+
     };
 
     return this.http.post<any>(`${this.apiUrl}/submit-feedbackE/${patientId}`, feedbackData, {
@@ -170,8 +171,13 @@ export class MedicalReportService {
 
   updateSurveyStatus(patientId: string, status: boolean): Observable<any> {
     const data = { survey_completed: status };
-    return this.http.put(`http://localhost:5000/patients/${patientId}/survey-status`, data, {
+    return this.http.put(`${this.apiUrl}/patients/${patientId}/survey-status`, data, {
       withCredentials: true // Asegúrate de incluir las cookies de sesión
+    });
+  }
+  updateSurvey(patientId: string, status: boolean): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/updateSurvey/${patientId}`, { status }, {
+      withCredentials: true
     });
   }
 
