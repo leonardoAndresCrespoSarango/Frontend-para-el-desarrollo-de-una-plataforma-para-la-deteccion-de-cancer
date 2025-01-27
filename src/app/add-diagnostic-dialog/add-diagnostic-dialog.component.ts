@@ -15,8 +15,10 @@ export class AddDiagnosticDialogComponent implements OnInit{
   pdfUrl: string | null = null;
   selectedFiles: FileList | null = null;
   htmlUrl6: SafeResourceUrl | null = null;
+  htmlUrl3D: SafeResourceUrl | null = null;
   isCollapsed: boolean = false; // Estado inicial
-
+  isGraph6Loaded: boolean = false;
+  isGraph3DLoaded: boolean = false;
 
 
   constructor(
@@ -50,55 +52,11 @@ export class AddDiagnosticDialogComponent implements OnInit{
 
 
 
-  onFileChange(event: Event) {
+  onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files) {
       this.selectedFiles = input.files;
     }
-    if (this.selectedFiles) {
-      const formData = new FormData();
-      const patientIdControl = this.addDiagnosticForm.get('patient_id');
-
-      if (patientIdControl && patientIdControl.value) {
-        formData.append('patient_id', patientIdControl.value);
-      } else {
-        console.error('Patient ID is missing');
-        this.toastr.error('Patient ID is missing', 'Error');
-        return;
-      }
-
-      for (let i = 0; i < this.selectedFiles.length; i++) {
-        formData.append('files', this.selectedFiles[i]);
-      }
-
-      this.medicalReportService.uploadFiles(formData).subscribe(response => {
-        console.log('Files uploaded successfully:', response);
-        this.toastr.success('Files uploaded successfully', 'Success');
-
-        // Llamada para generar la gráfica 6
-        const patientId = patientIdControl.value;
-        this.medicalReportService.predict6(patientId).subscribe(
-          (graphResponse) => {
-            if (graphResponse.html_url6) {
-              this.htmlUrl6 = this.sanitizer.bypassSecurityTrustResourceUrl(graphResponse.html_url6);
-              this.toastr.success('Graph 6 generated successfully', 'Success');
-            }
-          },
-          (error) => {
-            console.error('Error generating Graph 6:', error);
-            this.toastr.error('Error generating Graph 6', 'Error');
-          }
-        );
-      }, error => {
-        console.error('Error uploading files:', error);
-        this.toastr.error('Error uploading files', 'Error');
-      });
-    }
-
-
-  }
-
-  uploadFiles() {
 
     if (this.selectedFiles) {
       const formData = new FormData();
@@ -107,8 +65,7 @@ export class AddDiagnosticDialogComponent implements OnInit{
       if (patientIdControl && patientIdControl.value) {
         formData.append('patient_id', patientIdControl.value);
       } else {
-        console.error('Patient ID is missing');
-        this.toastr.error('Patient ID is missing', 'Error');
+        this.toastr.error('El ID del paciente es obligatorio', 'Error');
         return;
       }
 
@@ -116,15 +73,51 @@ export class AddDiagnosticDialogComponent implements OnInit{
         formData.append('files', this.selectedFiles[i]);
       }
 
-      this.medicalReportService.uploadFiles(formData).subscribe(response => {
-        console.log('Files uploaded successfully:', response);
-        this.toastr.success('Files uploaded successfully', 'Success');
-      }, error => {
-        console.error('Error uploading files:', error);
-        this.toastr.error('Error uploading files', 'Error');
-      });
+      this.medicalReportService.uploadFiles(formData).subscribe(
+        (response) => {
+          this.toastr.success('Archivos subidos correctamente', 'Éxito');
+          this.loadGraphs(patientIdControl.value);
+        },
+        (error) => {
+          this.toastr.error('Error subiendo los archivos', 'Error');
+        }
+      );
     }
   }
+
+  loadGraphs(patientId: string): void {
+    this.isGraph6Loaded = false;
+    this.isGraph3DLoaded = false;
+
+    // Generar gráfica 6
+    this.medicalReportService.predict6(patientId).subscribe(
+      (graphResponse) => {
+        if (graphResponse.html_url6) {
+          this.htmlUrl6 = this.sanitizer.bypassSecurityTrustResourceUrl(graphResponse.html_url6);
+          this.isGraph6Loaded = true;
+          this.toastr.success('Gráfica 6 generada exitosamente', 'Éxito');
+        }
+      },
+      (error) => {
+        this.toastr.error('Error generando la gráfica 6', 'Error');
+      }
+    );
+
+    // Generar gráfica 3D
+    this.medicalReportService.predict3D(patientId).subscribe(
+      (graphResponse) => {
+        if (graphResponse.htmlUrl3D) {
+          this.htmlUrl3D = this.sanitizer.bypassSecurityTrustResourceUrl(graphResponse.htmlUrl3D);
+          this.isGraph3DLoaded = true;
+          this.toastr.success('Gráfica 3D generada exitosamente', 'Éxito');
+        }
+      },
+      (error) => {
+        this.toastr.error('Error generando la gráfica 3D', 'Error');
+      }
+    );
+  }
+
   saveDiagnostic(): void {
     if (this.addDiagnosticForm.valid) {
       const diagnosticData = this.addDiagnosticForm.value;
@@ -134,7 +127,6 @@ export class AddDiagnosticDialogComponent implements OnInit{
           this.toastr.success('Diagnóstico creado exitosamente', 'Éxito');
         },
         (error) => {
-          console.error('Error creando el diagnóstico:', error);
           this.toastr.error('Error creando el diagnóstico', 'Error');
         }
       );
@@ -142,6 +134,7 @@ export class AddDiagnosticDialogComponent implements OnInit{
       this.toastr.warning('Por favor, complete todos los campos', 'Advertencia');
     }
   }
+
   /*saveDiagnosticWithFiles(): void {
     if (this.addDiagnosticForm.valid) {
       const diagnosticData = this.addDiagnosticForm.value;

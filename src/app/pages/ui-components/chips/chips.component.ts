@@ -236,8 +236,15 @@ export class AppChipsComponent implements OnInit {
     }
 
     const baseUrl = 'http://localhost:5000'; // Ruta base donde están los reportes
-    const reportUrl = `${baseUrl}/${reportPath}`;
+    const reportUrl = `${baseUrl}/${reportPath}.pdf`;
     window.open(reportUrl, '_blank'); // Abre el reporte en una nueva pestaña
+  }
+  addSegmentacion(patient: any): void {
+    this.router.navigate(['/comparison'], {
+      queryParams: {
+        patient_id: patient.patient_id,
+      },
+    });
   }
 
 
