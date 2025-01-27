@@ -39,7 +39,8 @@
       <td>
         <div style="display: flex; align-items: center;">
           <div style="text-align: center; margin-right: 10px;">
-            <button mat-button [disabled]="patient.diagnosticStatus === 'Generado'" (click)="addDiagnostic(patient)">Diagnóstico Médico</button>
+            <!--[disabled]="patient.diagnosticStatus === 'Generado'"-->
+            <button mat-button (click)="addDiagnostic(patient)">Diagnóstico Médico</button>
             <small
               [ngClass]="{
                   'status-generated': patient.diagnosticStatus === 'Generado',

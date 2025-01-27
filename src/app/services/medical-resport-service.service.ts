@@ -139,6 +139,12 @@ export class MedicalReportService {
       finalize(() => this.loaderService.hide())
     );
   }
+  predict3D(patientId: string): Observable<any> {
+    this.loaderService.show();
+    return this.http.post<any>(`${this.apiUrl}/generate-graphDiagnostic`, { patient_id: patientId }, { withCredentials: true }).pipe(
+      finalize(() => this.loaderService.hide())
+    );
+  }
   ////////////////
   submitFeedbackE(patientId: string, ayudoIa: boolean, comentariosAdicionales: string): Observable<any> {
     this.loaderService.show();
