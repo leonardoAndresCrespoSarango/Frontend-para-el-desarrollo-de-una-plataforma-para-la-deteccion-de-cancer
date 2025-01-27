@@ -1,0 +1,7 @@
+<div class="file-upload-container">
+  <input type="file" id="fileInput" name="files" multiple class="form-control-file" (change)="onFileChange($event)">
+  <label for="fileInput" class="btn btn-secondary">Seleccionar Archivos</label>
+</div>
+<div *ngIf="htmlUrlS" class="graph-container">
+  <iframe [src]="htmlUrlS" class="graph-frame"></iframe>
+</div>

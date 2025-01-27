@@ -9,6 +9,7 @@ import {DiagnosticIaComponent} from "./diagnostic-ia/diagnostic-ia.component";
 import {AddDiagnosticDialogComponent} from "./add-diagnostic-dialog/add-diagnostic-dialog.component";
 import {RefuerzoComponent} from "./pages/refuerzo/refuerzo.component"
 import {SurveyDialogComponent} from "./pages/survey-dialog/survey-dialog.component";
+import {ComparisonComponent} from "./comparison/comparison.component";
 const routes: Routes = [
   {
 
@@ -61,6 +62,7 @@ const routes: Routes = [
   { path: 'forgot-password', component: AppMenuComponent },
   { path: 'reset-password/:token', component: AppTooltipsComponent },
   { path: 'diagnostico', component: AddDiagnosticDialogComponent },
+  { path: 'comparison', component: ComparisonComponent },
 
 
 ];

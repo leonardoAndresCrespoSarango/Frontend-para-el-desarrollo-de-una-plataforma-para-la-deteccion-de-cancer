@@ -145,6 +145,19 @@ export class MedicalReportService {
       finalize(() => this.loaderService.hide())
     );
   }
+  predictSeg(patientId: string): Observable<any> {
+    this.loaderService.show();
+    return this.http.post<any>(`${this.apiUrl}/generate-graphSegmentation`, { patient_id: patientId }, { withCredentials: true }).pipe(
+      finalize(() => this.loaderService.hide())
+    );
+  }
+
+  uploadFilesSegmentacion(formData: FormData): Observable<any> {
+    this.loaderService.show();
+    return this.http.post(`${this.apiUrl}/upload-segmentation`, formData, { withCredentials: true }).pipe(
+      finalize(() => this.loaderService.hide())
+    );
+  }
   ////////////////
   submitFeedbackE(patientId: string, ayudoIa: boolean, comentariosAdicionales: string): Observable<any> {
     this.loaderService.show();
