@@ -1,7 +1,12 @@
-<div class="file-upload-container">
-  <input type="file" id="fileInput" name="files" multiple class="form-control-file" (change)="onFileChange($event)">
-  <label for="fileInput" class="btn btn-secondary">Seleccionar Archivos</label>
-</div>
-<div *ngIf="htmlUrlS" class="graph-container">
-  <iframe [src]="htmlUrlS" class="graph-frame"></iframe>
+<div class="comparison-container">
+  <div class="file-upload-section">
+    <div class="file-input-wrapper">
+      <input type="file" id="uploadFiles" name="files" multiple class="file-input" (change)="onFileChange($event)">
+      <label for="uploadFiles" class="upload-label">Subir Archivos</label>
+    </div>
+  </div>
+
+  <div class="graph-display-section" *ngIf="htmlUrlS">
+    <iframe [src]="htmlUrlS" class="graph-viewer" sandbox="allow-same-origin allow-scripts"></iframe>
+  </div>
 </div>
