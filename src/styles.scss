@@ -136,7 +136,7 @@ h2 {
 }
 
 .user-card {
-  width: 400px;
+  width: 200px;
   padding: 20px;
 }
 
@@ -252,6 +252,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   align-items: center;
   gap: 16px;
   margin-top: 16px;
+
 }
 
 .form-row {
@@ -426,3 +427,8 @@ mat-dialog-actions {
   cursor: pointer;
   pointer-events: auto; /* Mantén la interacción para elementos habilitados */
 }
+/*.cdk-overlay-pane {
+  width: 600px !important;
+  height: 600px !important;
+}
+*/

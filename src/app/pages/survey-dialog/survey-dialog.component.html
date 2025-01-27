@@ -7,8 +7,17 @@
   </label>
 </div>
 
+<!-- Sección Pregunta 2 (Nuevo campo) -->
+<h3>2. ¿La IA ayudó para mejorar su diagnostico? *</h3>
+<div *ngFor="let nivel of mejoroIaOpciones" class="radio-group">
+  <label>
+    <input type="radio" [(ngModel)]="mejoroIaSeleccionada" name="mejoroIa" [value]="nivel" />
+    {{ nivel }}
+  </label>
+</div>
+
 <!-- Sección Comentarios -->
-<h3>2. Comentarios adicionales</h3>
+<h3>3. Comentarios adicionales</h3>
 <textarea
   [(ngModel)]="comentarios"
   name="comentarios"
@@ -20,5 +29,5 @@
 <!-- Botones de acción -->
 <div class="button-group">
   <button mat-button color="warn" (click)="onCancel()">Cancelar</button>
-  <button mat-button color="primary" (click)="onSubmit()" [disabled]="!calificacionSeleccionada">Enviar</button>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="!calificacionSeleccionada || !mejoroIaSeleccionada">Enviar</button>
 </div>

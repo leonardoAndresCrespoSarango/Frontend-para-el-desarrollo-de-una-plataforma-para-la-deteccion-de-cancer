@@ -140,11 +140,12 @@ export class MedicalReportService {
     );
   }
   ////////////////
-  submitFeedbackE(patientId: string, ayudoIa: boolean, comentariosAdicionales: string): Observable<any> {
+  submitFeedbackE(patientId: string, ayudoIa: boolean, mejoroIa: boolean, comentariosAdicionales: string): Observable<any> {
     this.loaderService.show();
 
     const feedbackData = {
       ayudo_ia: ayudoIa,
+      mejoro_ia: mejoroIa, // Agregar el nuevo campo aquí
       comentarios_adicionales: comentariosAdicionales
 
     };

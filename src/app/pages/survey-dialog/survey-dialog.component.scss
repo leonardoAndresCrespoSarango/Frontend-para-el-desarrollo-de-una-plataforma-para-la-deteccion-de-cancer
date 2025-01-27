@@ -1,28 +1,33 @@
+
 :host {
   display: block;
   padding: 16px;
   font-family: Arial, sans-serif;
+  width: 100%;
 }
 
 h3 {
-  margin-top: 20px;
+  display: inline-block; /* Asegura que el título se quede en una línea */
+  margin-right: 10px; /* Añade un margen entre el título y las opciones */
   font-size: 1.2rem;
   color: #333;
+  margin-top: 20px;
 }
 
 .radio-group {
+  display: flex; /* Utiliza flexbox para que las opciones de radio estén en una línea */
+  align-items: center; /* Alinea las opciones de radio verticalmente */
+  flex-wrap: nowrap; /* Evita que las opciones de radio se envuelvan a la siguiente línea */
   margin: 10px 0;
+}
 
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 1rem;
-    cursor: pointer;
+.radio-group label {
+  display: inline-flex; /* Muestra las opciones de radio en línea */
+  margin-right: 15px; /* Añade espacio entre las opciones */
+}
 
-    input {
-      margin-right: 8px;
-    }
-  }
+.radio-group label input {
+  margin-right: 8px;
 }
 
 textarea.comentarios {
@@ -46,7 +51,6 @@ textarea.comentarios {
   }
 }
 
-
 .pregunta {
   font-weight: bold;
   margin-bottom: 10px;
@@ -61,4 +65,6 @@ textarea.comentarios {
   justify-content: space-between;
   margin-top: 20px;
 }
+
+
 

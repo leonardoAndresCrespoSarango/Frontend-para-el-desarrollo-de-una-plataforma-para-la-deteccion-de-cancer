@@ -179,8 +179,9 @@ export class AppChipsComponent implements OnInit {
 
   openSurveyDialog(patient: any): void {
     const dialogRef = this.dialog.open(SurveyDialogComponent, {
-      width: '400px',
+      width: '600px',
       data: { patientId: patient.patient_id }
+
     });
 
     dialogRef.afterClosed().subscribe(result => {

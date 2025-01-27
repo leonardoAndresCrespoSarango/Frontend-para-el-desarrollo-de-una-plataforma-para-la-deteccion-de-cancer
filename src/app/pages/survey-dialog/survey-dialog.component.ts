@@ -29,6 +29,8 @@ export class SurveyDialogComponent {
   // Opciones de la encuesta
   calificarApp = ['Si', 'No'];
   calificacionSeleccionada = '';
+  mejoroIaOpciones = ['Si', 'No'];
+  mejoroIaSeleccionada = ''; // Nuevo campo para "mejoro_ia"
   comentarios = '';
 
   // ID dinámico del paciente
@@ -49,12 +51,13 @@ export class SurveyDialogComponent {
 
   onSubmit(): void {
     // Verifica que los campos necesarios estén llenos
-    if (this.patientId && this.calificacionSeleccionada) {
+    if (this.patientId && this.calificacionSeleccionada && this.mejoroIaSeleccionada !== undefined) {
       const ayudoIa = this.calificacionSeleccionada === 'Si';
       const comentariosAdicionales = this.comentarios;
+      const mejoroIa = this.mejoroIaSeleccionada === 'Si';  // Convierte a booleano
 
       // Envía los datos al backend
-      this.medicalReportService.submitFeedbackE(this.patientId, ayudoIa, comentariosAdicionales)
+      this.medicalReportService.submitFeedbackE(this.patientId, ayudoIa,mejoroIa, comentariosAdicionales)
         .subscribe(
           response => {
             // Maneja una respuesta exitosa
@@ -71,4 +74,5 @@ export class SurveyDialogComponent {
       this.toastr.warning('Por favor, complete todos los campos', 'Advertencia');
     }
   }
+
 }
