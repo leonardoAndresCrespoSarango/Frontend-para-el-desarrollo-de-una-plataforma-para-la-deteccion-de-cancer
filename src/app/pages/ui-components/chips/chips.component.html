@@ -23,13 +23,13 @@
   <table class="styled-table">
     <thead>
     <tr>
-      <th>Cédula del Paciente</th>
-      <th>Número de Historia Clínica</th>
-      <th style="text-align: center">Médico</th>
-      <th style="text-align: center">IA</th>
-      <th>Concordancia</th>
-      <th>Comparación</th>
-      <th>Encuesta</th>
+      <th style="text-align: center">Cédula del Paciente</th>
+      <th style="text-align: center">Nro. Historia Clínica</th>
+      <th style="text-align: center">Diagnóstico del Médico</th>
+      <th style="text-align: center">Evaluación IA</th>
+      <th style="text-align: center">Coincidencia Médico-IA</th>
+      <th style="text-align: center">Comparación de Regiones Tumorales</th>
+      <th style="text-align: center">Encuesta</th>
     </tr>
     </thead>
     <tbody>
@@ -40,7 +40,7 @@
         <div style="display: flex; align-items: center;">
           <div style="text-align: center; margin-right: 10px;">
             <!--[disabled]="patient.diagnosticStatus === 'Generado'"-->
-            <button mat-button (click)="addDiagnostic(patient)">Diagnóstico Médico</button>
+            <button mat-button (click)="addDiagnostic(patient)">Generar Diagnóstico</button>
             <small
               [ngClass]="{
                   'status-generated': patient.diagnosticStatus === 'Generado',
@@ -67,7 +67,8 @@
       </td>
       <td>
         <div style="text-align: center;">
-          <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)">Prediagnóstico IA</button>
+          <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)" matTooltip="Ejecute el análisis automático de la IA para obtener un prediagnóstico basado en las imágenes médicas del paciente."
+                  matTooltipPosition="above">Prediagnóstico IA</button>
           <small style="display: block; font-size: 10px;">{{ patient.iaStatus || 'No generado' }}</small>
         </div>
       </td>
@@ -76,26 +77,46 @@
           <div class="protector"></div>
           <div class="protector"></div>
           <div class="protector"></div>
+
+          <!-- Luz roja con tooltip -->
           <div
             class="light-red"
+            matTooltip="falta evaluación del médico o de la IA."
+            matTooltipPosition="above"
             [ngClass]="{ 'active': !patient.is_generated }">
           </div>
+
+          <!-- Luz amarilla con tooltip -->
           <div
             class="light-yellow"
-            [ngClass]="{ 'active': patient.is_generated && !patient.has_cancer }">
+            matTooltip="Hay discrepancia entre el médico y la IA."
+            matTooltipPosition="above"
+            [ngClass]="{ 'active': patient.is_generated && (patient.cancer_status === 'no se detecta cancer' || patient.cancer_status === 'diagnostico incierto') }">
           </div>
+
+          <!-- Luz verde con tooltip -->
           <div
             class="light-green"
-            [ngClass]="{ 'active': patient.is_generated && patient.has_cancer }">
+            matTooltip="La IA y el médico coinciden."
+            matTooltipPosition="above"
+            [ngClass]="{ 'active': patient.is_generated && patient.cancer_status === 'cancer detectado' }">
           </div>
         </div>
         <div class="traffic-description">
           <strong>{{ getStatusDescription(patient) }}</strong>
         </div>
       </td>
+
       <td>
         <div style="text-align: center;">
-          <button mat-button class="btn-diagnostico-ia" (click)="addSegmentacion(patient)">Segmentacion</button>
+          <button
+            mat-button
+            class="btn-diagnostico-ia"
+            (click)="addSegmentacion(patient)"
+            matTooltip="Visualiza la segmentación manual y la predicción de la IA para comparar las regiones tumorales."
+            matTooltipPosition="above">
+            Cargar y Comparar Segmentación Tumoral
+          </button>
         </div>
       </td>
 

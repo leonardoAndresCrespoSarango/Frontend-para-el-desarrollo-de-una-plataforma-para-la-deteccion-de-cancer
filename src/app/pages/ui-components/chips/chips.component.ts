@@ -66,10 +66,11 @@ export class AppChipsComponent implements OnInit {
         this.patients = patients.map(patient => ({
           ...patient,
           diagnosticStatus: patient.is_generated ? 'Generado' : 'No generado',
-          has_cancer: patient.has_cancer,
+          cancer_status: patient.cancer_status,
           survey_completed: !!patient.survey_completed
         }));
         this.filteredPatients = [...this.patients]; // Actualiza la lista filtrada
+        console.log(this.filteredPatients)
       },
       (error) => {
         console.error('Error fetching patients:', error);
@@ -77,48 +78,18 @@ export class AppChipsComponent implements OnInit {
       }
     );
   }
-
-
-
-
-
-  /*fetchPatients(): void {
-  this.medService.getPatientsWithDiagnostics().subscribe(
-    (data) => {
-      this.patients = data.map(patient => ({
-        ...patient,
-        diagnosticStatus: patient.is_generated ? 'Generado' : 'No generado',
-        status: this.calculateStatus(patient) // Calcula el estado del semáforo
-      }));
-      this.filteredPatients = [...this.patients]; // Inicializar lista filtrada
-    },
-    (error) => {
-      console.error('Error fetching patients with diagnostics:', error);
-    }
-  );
-}
-*/
-
   getStatusDescription(patient: any): string {
     if (!patient.is_generated) {
-      return 'Pendiente'; // Rojo
+      return 'Pendiente de evaluación'; // Rojo
     }
-    if (patient.is_generated && !patient.has_cancer) {
-      return 'Por realizar'; // Amarillo
+    if (patient.is_generated && patient.cancer_status === 'no se detecta cancer' || patient.cancer_status === 'diagnostico incierto') {
+      return 'Resultados discrepantes'; // Amarillo
     }
-    if (patient.is_generated && patient.has_cancer) {
-      return 'Confirmado'; // Verde
+    if (patient.is_generated && patient.cancer_status === 'cancer detectado') {
+      return 'Diagnósticos coinciden'; // Verde
     }
     return 'Estado desconocido'; // Manejo de errores
   }
-
-
-
-
-
-
-
-
   addPatient(): void {
     const dialogRef = this.dialog.open(AddPatientDialogComponent, {
       width: '400px',
