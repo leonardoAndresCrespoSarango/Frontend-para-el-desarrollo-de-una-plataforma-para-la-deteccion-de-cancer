@@ -42,6 +42,7 @@ export class ComparisonComponent implements OnInit{
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private medicalReportService: MedicalReportService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -106,6 +107,9 @@ export class ComparisonComponent implements OnInit{
     );
 
 
+  }
+  navigateToChips(): void {
+    this.router.navigate(['ui-components/chips']);
   }
 
 }
