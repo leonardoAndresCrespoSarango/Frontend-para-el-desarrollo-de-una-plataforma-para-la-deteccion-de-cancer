@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Confirmar Eliminación</h1>
+<div mat-dialog-content>
+  <p class="pregunta">¿Estás seguro de que deseas eliminar este paciente?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="btnCancelar"  (click)="onCancel()">Cancelar</button>
+  <button mat-button class="btnConfirmar"  color="warn" (click)="onConfirm()">Eliminar</button>
+</div>

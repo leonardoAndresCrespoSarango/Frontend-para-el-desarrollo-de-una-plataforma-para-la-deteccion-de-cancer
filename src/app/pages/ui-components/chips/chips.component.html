@@ -30,6 +30,7 @@
       <th>Concordancia</th>
       <th>Comparación</th>
       <th>Encuesta</th>
+      <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -125,6 +126,12 @@
           Realizada
         </small>
       </td>
+      <td>
+        <button mat-icon-button color="warn" (click)="deletePatient(patient.patient_id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+
     </tr>
     </tbody>
   </table>

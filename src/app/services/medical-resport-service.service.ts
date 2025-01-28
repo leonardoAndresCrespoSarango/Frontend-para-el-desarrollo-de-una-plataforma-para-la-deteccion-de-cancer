@@ -80,6 +80,14 @@ export class MedicalReportService {
       finalize(() => this.loaderService.hide())
     );
   }
+  //PRUEBA DEL DELETE PACIENTE
+  deletePatient(patientId: string): Observable<any> {
+    this.loaderService.show();
+    return this.http.delete<any>(`${this.apiUrl}/delete-patient/${patientId}`, { withCredentials: true }).pipe(
+      finalize(() => this.loaderService.hide())
+    );
+  }
+  //FIN DELETE
 
   addDiagnostic(diagnosticData: any): Observable<any> {
     this.loaderService.show();
@@ -159,7 +167,7 @@ export class MedicalReportService {
     );
   }
   ////////////////
-  submitFeedbackE(patientId: string, ayudoIa: boolean, mejoroIa: boolean, comentariosAdicionales: string): Observable<any> {
+  submitFeedbackE(patientId: string, ayudoIa: string, mejoroIa: boolean, comentariosAdicionales: string): Observable<any> {
     this.loaderService.show();
 
     const feedbackData = {

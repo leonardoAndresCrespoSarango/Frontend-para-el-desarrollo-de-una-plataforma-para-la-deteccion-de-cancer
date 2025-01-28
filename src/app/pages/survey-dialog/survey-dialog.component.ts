@@ -27,7 +27,14 @@ import { ToastrService } from 'ngx-toastr'; // Importa ToastrService
 })
 export class SurveyDialogComponent {
   // Opciones de la encuesta
-  calificarApp = ['Si', 'No'];
+  calificarApp = [
+    'Completamente de acuerdo',
+    'De acuerdo',
+    'Neutral',
+    'En desacuerdo',
+    'Completamente en desacuerdo',
+    'Desconozco'
+  ];
   calificacionSeleccionada = '';
   mejoroIaOpciones = ['Si', 'No'];
   mejoroIaSeleccionada = ''; // Nuevo campo para "mejoro_ia"
@@ -52,7 +59,7 @@ export class SurveyDialogComponent {
   onSubmit(): void {
     // Verifica que los campos necesarios estén llenos
     if (this.patientId && this.calificacionSeleccionada && this.mejoroIaSeleccionada !== undefined) {
-      const ayudoIa = this.calificacionSeleccionada === 'Si';
+      const ayudoIa = this.calificacionSeleccionada;
       const comentariosAdicionales = this.comentarios;
       const mejoroIa = this.mejoroIaSeleccionada === 'Si';  // Convierte a booleano
 

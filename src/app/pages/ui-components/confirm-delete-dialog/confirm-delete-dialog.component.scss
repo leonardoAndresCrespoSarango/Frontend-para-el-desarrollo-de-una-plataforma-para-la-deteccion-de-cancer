@@ -1,0 +1,69 @@
+/* Estilo para el diálogo de confirmación */
+h1 {
+  text-align: center;
+  color: #f44336;  /* Rojo para resaltar el título */
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.pregunta{
+  text-align: center;
+}
+
+mat-dialog-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+button {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e91e63;  /* Color de fondo al pasar el ratón */
+    color: white;
+  }
+}
+
+button.mat-button {
+  background-color: #f1f1f1;
+  color: #333;
+  border: 1px solid #ddd;
+
+  &:hover {
+    background-color: #f1f1f1;
+    color: #000;
+  }
+}
+
+button.mat-button[color='warn'] {
+  background-color: #f44336;
+  color: white;
+  border: 1px solid #d32f2f;
+
+  &:hover {
+    background-color: #d32f2f;
+  }
+}
+
+.btnCancelar{
+  margin-left: 20%;
+}
+
+.btnConfirmar{
+  margin-left: 5%;
+
+}

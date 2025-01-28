@@ -7,10 +7,7 @@ import {AddDiagnosticDialogComponent} from "../../../add-diagnostic-dialog/add-d
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {SurveyDialogComponent} from "../../survey-dialog/survey-dialog.component";
-
-
-
-
+import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
 
 @Component({
   selector: 'app-chips',
@@ -77,27 +74,6 @@ export class AppChipsComponent implements OnInit {
       }
     );
   }
-
-
-
-
-
-  /*fetchPatients(): void {
-  this.medService.getPatientsWithDiagnostics().subscribe(
-    (data) => {
-      this.patients = data.map(patient => ({
-        ...patient,
-        diagnosticStatus: patient.is_generated ? 'Generado' : 'No generado',
-        status: this.calculateStatus(patient) // Calcula el estado del semáforo
-      }));
-      this.filteredPatients = [...this.patients]; // Inicializar lista filtrada
-    },
-    (error) => {
-      console.error('Error fetching patients with diagnostics:', error);
-    }
-  );
-}
-*/
 
   getStatusDescription(patient: any): string {
     if (!patient.is_generated) {
@@ -180,6 +156,7 @@ export class AppChipsComponent implements OnInit {
   openSurveyDialog(patient: any): void {
     const dialogRef = this.dialog.open(SurveyDialogComponent, {
       width: '600px',
+      height: '710px',
       data: { patientId: patient.patient_id }
 
     });
@@ -244,6 +221,31 @@ export class AppChipsComponent implements OnInit {
       queryParams: {
         patient_id: patient.patient_id,
       },
+    });
+  }
+
+
+// DELETE PATIENT:
+  deletePatient(patientId: string): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '400px',
+      height: '170px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // El usuario ha confirmado la eliminación
+        this.medService.deletePatient(patientId).subscribe(
+          (response) => {
+            this.toastr.success('Paciente eliminado exitosamente', 'Éxito');
+            this.fetchPatients(); // Actualiza la lista de pacientes tras la eliminación
+          },
+          (error) => {
+            console.error('Error eliminando paciente:', error);
+            this.toastr.error('Error al eliminar el paciente', 'Error');
+          }
+        );
+      }
     });
   }
 
