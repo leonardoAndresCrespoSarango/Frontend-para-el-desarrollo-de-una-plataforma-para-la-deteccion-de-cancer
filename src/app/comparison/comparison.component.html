@@ -3,7 +3,8 @@
   <div class="file-upload-section">
     <div class="file-input-wrapper">
       <input type="file" id="uploadFiles" name="files" multiple class="file-input" (change)="onFileChange($event)">
-      <label for="uploadFiles" class="upload-label">Subir Archivos</label>
+      <label for="uploadFiles" class="upload-label" matTooltip="Suba el archivo de segmentación manual del paciente para compararlo con la predicción de la IA."
+             matTooltipPosition="above">Cargar Segmentación Manual</label>
       <button class="action-button" (click)="navigateToChips()">Regresar</button>
     </div>
   </div>

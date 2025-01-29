@@ -7,7 +7,10 @@ import {AddDiagnosticDialogComponent} from "../../../add-diagnostic-dialog/add-d
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {SurveyDialogComponent} from "../../survey-dialog/survey-dialog.component";
-import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
+
+
+
+
 
 @Component({
   selector: 'app-chips',
@@ -63,10 +66,11 @@ export class AppChipsComponent implements OnInit {
         this.patients = patients.map(patient => ({
           ...patient,
           diagnosticStatus: patient.is_generated ? 'Generado' : 'No generado',
-          has_cancer: patient.has_cancer,
+          cancer_status: patient.cancer_status,
           survey_completed: !!patient.survey_completed
         }));
         this.filteredPatients = [...this.patients]; // Actualiza la lista filtrada
+        console.log(this.filteredPatients)
       },
       (error) => {
         console.error('Error fetching patients:', error);
@@ -74,27 +78,18 @@ export class AppChipsComponent implements OnInit {
       }
     );
   }
-
   getStatusDescription(patient: any): string {
     if (!patient.is_generated) {
-      return 'Pendiente'; // Rojo
+      return 'Pendiente de evaluación'; // Rojo
     }
-    if (patient.is_generated && !patient.has_cancer) {
-      return 'Por realizar'; // Amarillo
+    if (patient.is_generated && patient.cancer_status === 'no se detecta cancer' || patient.cancer_status === 'diagnostico incierto') {
+      return 'Resultados discrepantes'; // Amarillo
     }
-    if (patient.is_generated && patient.has_cancer) {
-      return 'Confirmado'; // Verde
+    if (patient.is_generated && patient.cancer_status === 'cancer detectado') {
+      return 'Diagnósticos coinciden'; // Verde
     }
     return 'Estado desconocido'; // Manejo de errores
   }
-
-
-
-
-
-
-
-
   addPatient(): void {
     const dialogRef = this.dialog.open(AddPatientDialogComponent, {
       width: '400px',
@@ -156,7 +151,6 @@ export class AppChipsComponent implements OnInit {
   openSurveyDialog(patient: any): void {
     const dialogRef = this.dialog.open(SurveyDialogComponent, {
       width: '600px',
-      height: '710px',
       data: { patientId: patient.patient_id }
 
     });
@@ -221,31 +215,6 @@ export class AppChipsComponent implements OnInit {
       queryParams: {
         patient_id: patient.patient_id,
       },
-    });
-  }
-
-
-// DELETE PATIENT:
-  deletePatient(patientId: string): void {
-    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
-      width: '400px',
-      height: '170px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // El usuario ha confirmado la eliminación
-        this.medService.deletePatient(patientId).subscribe(
-          (response) => {
-            this.toastr.success('Paciente eliminado exitosamente', 'Éxito');
-            this.fetchPatients(); // Actualiza la lista de pacientes tras la eliminación
-          },
-          (error) => {
-            console.error('Error eliminando paciente:', error);
-            this.toastr.error('Error al eliminar el paciente', 'Error');
-          }
-        );
-      }
     });
   }
 

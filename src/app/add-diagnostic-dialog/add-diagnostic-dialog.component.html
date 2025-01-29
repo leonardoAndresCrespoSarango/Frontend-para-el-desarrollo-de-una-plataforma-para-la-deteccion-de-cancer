@@ -2,16 +2,41 @@
   <!-- Contenedor izquierdo -->
   <div class="left-container">
     <div class="file-upload-container">
-      <input type="file" id="fileInput" name="files" multiple class="form-control-file" (change)="onFileChange($event)">
-      <label for="fileInput" class="btn btn-secondary">Seleccionar Archivos</label>
-    </div>
-    <div *ngIf="htmlUrl6" class="graph-container">
-      <iframe [src]="htmlUrl6" class="graph-frame"></iframe>
-    </div>
-    <div *ngIf="htmlUrl3D" class="graph3d-container">
-      <iframe [src]="htmlUrl3D" class="graph3d-frame"></iframe>
+      <input
+        type="file"
+        id="fileInput"
+        name="files"
+        multiple
+        class="form-control-file"
+        (change)="onFileChange($event)"
+      />
+      <label for="fileInput" class="btn btn-secondary" matTooltip="Suba las modalidades T1C, T2F y T2W requeridas para el análisis de imágenes médicas."
+             matTooltipPosition="above">Subir Modalidades T1C, T2F y T2W</label>
     </div>
 
+    <h2>Selecciona una Gráfica</h2>
+    <div style="display: flex; margin-top: 20px;">
+      <mat-form-field appearance="fill" style="max-width: 300px; width: 100%;">
+        <mat-label>Gráfica</mat-label>
+        <mat-select [(value)]="selectedGraph">
+          <mat-option *ngFor="let graph of graphOptions" [value]="graph.value">
+            {{ graph.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <!-- Gráficas dinámicas basadas en la selección -->
+    <div *ngIf="selectedGraph === 'graph6' && htmlUrl6" class="graph-container">
+      <h2>Visualización Interactiva de Modalidades</h2>
+      <iframe [src]="htmlUrl6" class="graph-frame"></iframe>
+    </div>
+
+    <div *ngIf="selectedGraph === 'graph3D' && htmlUrl3D" class="graph3d-container">
+      <h2>Visualización Cerebral 3D</h2>
+      <iframe [src]="htmlUrl3D" class="graph3d-frame"></iframe>
+    </div>
   </div>
 
   <!-- Contenedor derecho -->
@@ -26,10 +51,11 @@
     </button>
     <form *ngIf="!isCollapsed" [formGroup]="addDiagnosticForm" class="form-container">
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Diagnostico Presuntivo</mat-label>
-        <mat-select formControlName="has_cancer" placeholder="Seleccione el Diagnostico Presuntivo" required>
-          <mat-option [value]="true">Tiene cáncer</mat-option>
-          <mat-option [value]="false">No tiene cáncer</mat-option>
+        <mat-label>Diagnóstico Presuntivo</mat-label>
+        <mat-select formControlName="cancer_status" placeholder="Seleccione el Diagnóstico Presuntivo" required>
+          <mat-option value="cancer detectado">Cáncer detectado</mat-option>
+          <mat-option value="no se detecta cancer">No se detecta cáncer</mat-option>
+          <mat-option value="diagnostico incierto">Diagnóstico indeterminado</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline" class="description-field">
@@ -52,7 +78,6 @@
           Regresar
         </button>
       </mat-dialog-actions>
-
     </form>
   </div>
 </div>
