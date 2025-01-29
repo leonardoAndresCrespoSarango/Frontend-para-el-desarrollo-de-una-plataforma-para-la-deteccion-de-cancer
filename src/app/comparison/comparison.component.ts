@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MedicalReportService} from "../services/medical-resport-service.service";
 import {ToastrService} from "ngx-toastr";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {DomSanitizer, SafeHtml, SafeResourceUrl} from "@angular/platform-browser";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {NgIf} from "@angular/common";
@@ -37,8 +37,11 @@ export class ComparisonComponent implements OnInit{
   selectedFiles: FileList | null = null;
   htmlUrlS: SafeResourceUrl | null = null;
   isGraphSLoaded: boolean = false;
-
-
+  // Variables para almacenar métricas e informe médico
+  diceCoefficient: number | null = null;
+  meanIoU: number | null = null;
+  hausdorffDistance: number | null = null;
+  medicalReport: SafeHtml | null = null;
   constructor(
     private toastr: ToastrService,
     private route: ActivatedRoute,
@@ -94,21 +97,36 @@ export class ComparisonComponent implements OnInit{
     this.medicalReportService.predictSeg(patientId).subscribe(
       (graphResponse) => {
         console.log('Respuesta de la API:', graphResponse);
+
         if (graphResponse.htmlUrlS) {
           this.htmlUrlS = this.sanitizer.bypassSecurityTrustResourceUrl(graphResponse.htmlUrlS);
           this.isGraphSLoaded = true;
-          this.toastr.success('Gráfica Segmentacion generada exitosamente', 'Éxito');
+          this.toastr.success('Gráfica de segmentación generada exitosamente', 'Éxito');
         } else {
           this.toastr.warning('No se recibió la URL de la gráfica.', 'Advertencia');
+        }
+
+        // Guardar métricas en las variables del componente
+        if (graphResponse.metrics) {
+          this.diceCoefficient = graphResponse.metrics["Dice Coefficient"];
+          this.meanIoU = graphResponse.metrics["Mean IoU"];
+          this.hausdorffDistance = graphResponse.metrics["Hausdorff Distance"];
+        }
+
+        // Guardar el informe médico
+        if (graphResponse.medical_report) {
+          this.medicalReport = this.sanitizer.bypassSecurityTrustHtml(
+            graphResponse.medical_report
+              .replace(/\n/g, '<br>') // Convertir saltos de línea a <br>
+              .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Convertir **texto** en <strong>texto</strong>
+          );
         }
       },
       (error) => {
         console.error('Error cargando la gráfica:', error);
-        this.toastr.error('Error generando la gráfica Segmentacion', 'Error');
+        this.toastr.error('Error generando la gráfica de segmentación', 'Error');
       }
     );
-
-
   }
   navigateToChips(): void {
     this.router.navigate(['ui-components/chips']);

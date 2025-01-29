@@ -1,5 +1,4 @@
 <div class="comparison-container">
-
   <div class="file-upload-section">
     <div class="file-input-wrapper">
       <input type="file" id="uploadFiles" name="files" multiple class="file-input" (change)="onFileChange($event)">
@@ -12,7 +11,25 @@
   <!-- Separador estilizado -->
   <hr class="section-divider" />
 
+  <!-- Mostrar la gráfica si está disponible -->
   <div class="graph-display-section" *ngIf="htmlUrlS">
     <iframe [src]="htmlUrlS" class="graph-viewer" sandbox="allow-same-origin allow-scripts"></iframe>
   </div>
+
+  <!-- Separador estilizado -->
+  <hr class="section-divider" />
+
+  <!-- Sección de métricas e informe -->
+  <div class="metrics-section">
+    <h3>Métricas de Evaluación</h3>
+    <ul>
+      <li><strong>Dice Coefficient:</strong> {{ diceCoefficient?.toFixed(4) }}</li>
+      <li><strong>Mean IoU:</strong> {{ meanIoU?.toFixed(4) }}</li>
+      <li><strong>Hausdorff Distance:</strong> {{ hausdorffDistance?.toFixed(4) }}</li>
+    </ul>
+
+    <h3>Informe Médico</h3>
+    <p *ngIf="medicalReport" [innerHTML]="medicalReport"></p>
+  </div>
+
 </div>
