@@ -7,6 +7,7 @@ import {AddDiagnosticDialogComponent} from "../../../add-diagnostic-dialog/add-d
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {SurveyDialogComponent} from "../../survey-dialog/survey-dialog.component";
+import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
 
 
 
@@ -215,6 +216,29 @@ export class AppChipsComponent implements OnInit {
       queryParams: {
         patient_id: patient.patient_id,
       },
+    });
+  }
+  // DELETE PATIENT:
+  deletePatient(patientId: string): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '400px',
+      height: '170px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // El usuario ha confirmado la eliminación
+        this.medService.deletePatient(patientId).subscribe(
+          (response) => {
+            this.toastr.success('Paciente eliminado exitosamente', 'Éxito');
+            this.fetchPatients(); // Actualiza la lista de pacientes tras la eliminación
+          },
+          (error) => {
+            console.error('Error eliminando paciente:', error);
+            this.toastr.error('Error al eliminar el paciente', 'Error');
+          }
+        );
+      }
     });
   }
 

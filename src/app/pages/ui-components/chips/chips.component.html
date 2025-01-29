@@ -30,6 +30,8 @@
       <th style="text-align: center">Coincidencia Médico-IA</th>
       <th style="text-align: center">Comparación de Regiones Tumorales</th>
       <th style="text-align: center">Encuesta</th>
+      <th>Delete</th>
+
     </tr>
     </thead>
     <tbody>
@@ -146,6 +148,13 @@
           Realizada
         </small>
       </td>
+      <td>
+        <button mat-icon-button color="warn" (click)="deletePatient(patient.patient_id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+
+
     </tr>
     </tbody>
   </table>
