@@ -4,6 +4,7 @@ import { finalize, Observable } from 'rxjs';
 import { LoaderService } from './loader.service';
 import {saveAs} from "file-saver";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -209,7 +210,15 @@ export class MedicalReportService {
     });
   }
 
-
-
-
+//SERVICIOS PARA EL HISTOGRAMA
+// En tu servicio de MedicalReportService
+  getSurveyData(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/survey-data`, { withCredentials: true });
+  }
+  //
+  getSurveyDataMejoroIA(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/surveymejoro-data`, { withCredentials: true });
+  }
 }
+
+

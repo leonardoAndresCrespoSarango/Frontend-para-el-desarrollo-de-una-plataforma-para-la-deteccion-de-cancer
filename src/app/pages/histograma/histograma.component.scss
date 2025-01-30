@@ -1,0 +1,40 @@
+.histogramas-wrapper {
+  display: flex;
+  justify-content: space-between; /* Espaciado uniforme */
+  gap: 20px; /* Espacio entre los histogramas */
+}
+
+.histograma-container,
+.histograma-container2 {
+  width: 50%; /* Ambos histogramas ocupan la mitad del contenedor */
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  overflow: hidden;
+}
+
+.histograma-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #343a40;
+  margin-bottom: 15px;
+}
+
+apx-chart {
+  display: block;
+  max-width: 100%;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+  .histogramas-wrapper {
+    flex-direction: column; /* Apilar en pantallas pequeñas */
+  }
+
+  .histograma-container,
+  .histograma-container2 {
+    width: 100%;
+  }
+}

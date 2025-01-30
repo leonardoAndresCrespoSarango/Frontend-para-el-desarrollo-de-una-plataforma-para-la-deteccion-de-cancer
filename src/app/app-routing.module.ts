@@ -10,6 +10,7 @@ import {AddDiagnosticDialogComponent} from "./add-diagnostic-dialog/add-diagnost
 import {RefuerzoComponent} from "./pages/refuerzo/refuerzo.component"
 import {SurveyDialogComponent} from "./pages/survey-dialog/survey-dialog.component";
 import {ComparisonComponent} from "./comparison/comparison.component";
+import {HistogramaComponent} from "./pages/histograma/histograma.component";
 const routes: Routes = [
   {
 
@@ -26,6 +27,10 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),
       },
+      {
+        path: 'histograma', component: HistogramaComponent,
+      },
+
 
       {
         path: 'ui-components',
@@ -34,10 +39,8 @@ const routes: Routes = [
             (m) => m.UicomponentsModule
           ),
       },
-      {
-        path: 'refuerzo', component: RefuerzoComponent
-      },
-      {
+
+  {
         path: 'extra',
         loadChildren: () =>
           import('./pages/extra/extra.module').then((m) => m.ExtraModule),

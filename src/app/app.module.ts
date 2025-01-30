@@ -31,7 +31,9 @@ import {SafePipe} from "./safe.pipe";
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
-import {RefuerzoComponent} from "./pages/refuerzo/refuerzo.component"; // Importa CommonModule
+import {RefuerzoComponent} from "./pages/refuerzo/refuerzo.component";
+import {NgApexchartsModule} from "ng-apexcharts";
+import {HistogramaComponent} from "./pages/histograma/histograma.component"; // Importa CommonModule
 
 @NgModule({
   declarations: [
@@ -44,11 +46,13 @@ import {RefuerzoComponent} from "./pages/refuerzo/refuerzo.component"; // Import
     AppNavItemComponent,
     AddPatientDialogComponent,
     AddDiagnosticDialogComponent,
+    HistogramaComponent,
     SafePipe// <-- Asegúrate de declarar el componente aquí
 
   ],
   imports: [
     BrowserModule,
+    NgApexchartsModule,  // Importa el módulo de ApexCharts aquí
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

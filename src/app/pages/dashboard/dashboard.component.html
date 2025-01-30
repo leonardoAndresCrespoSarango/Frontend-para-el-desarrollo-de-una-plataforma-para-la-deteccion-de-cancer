@@ -1,17 +1,29 @@
-<div *ngIf="loggedInUser" class="user-profile-container">
-  <mat-card class="user-card">
-    <mat-card-header>
-      <mat-card-title>Bienvenido, {{ loggedInUser.name }}!</mat-card-title>
-      <mat-card-subtitle>{{ loggedInUser.username }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Esta es tu página de perfil.</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="onLogout()">Cerrar Sesión</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
-<div *ngIf="!loggedInUser">
-  <p>No hay ningún usuario logueado.</p>
+<h2 class="main-title">Histogramas de Distribución de Datos</h2>
+
+<div class="histogramas-wrapper">
+  <div class="histograma-container">
+    <h2 class="histograma-title">Precisión de la IA en la Predicción de Regiones Tumorales</h2>
+    <apx-chart
+      *ngIf="chartOptions"
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [dataLabels]="chartOptions.dataLabels"
+      [tooltip]="chartOptions.tooltip"
+      [plotOptions]="chartOptions.plotOptions">
+    </apx-chart>
+  </div>
+
+  <div class="histograma-containerMIA">
+    <h2 class="histograma-title">Impacto de la IA en la Mejora del Diagnóstico Médico</h2>
+    <apx-chart
+      *ngIf="chartOptionsMIA"
+      [series]="chartOptionsMIA.series"
+      [chart]="chartOptionsMIA.chart"
+      [xaxis]="chartOptionsMIA.xaxis"
+      [dataLabels]="chartOptionsMIA.dataLabels"
+      [tooltip]="chartOptionsMIA.tooltip"
+      [plotOptions]="chartOptionsMIA.plotOptions">
+    </apx-chart>
+  </div>
 </div>
