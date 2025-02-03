@@ -4,7 +4,9 @@ import {UserService} from "../../../services/user-service.service";
 
 @Component({
   selector: 'app-badge',
-  templateUrl: './badge.component.html'
+  templateUrl: './badge.component.html',
+  styleUrls: ['./badge.components.scss'],
+
 })
 export class AppBadgeComponent implements OnInit {
   users: any[] = [];
