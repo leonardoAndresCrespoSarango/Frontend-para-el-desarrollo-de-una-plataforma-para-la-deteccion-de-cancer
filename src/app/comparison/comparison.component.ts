@@ -118,7 +118,7 @@ export class ComparisonComponent implements OnInit{
           this.medicalReport = this.sanitizer.bypassSecurityTrustHtml(
             graphResponse.medical_report
               .replace(/\n/g, '<br>') // Convertir saltos de línea a <br>
-              .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Convertir **texto** en <strong>texto</strong>
+              .replace(/\*(.*?)\*/g, '<strong>$1</strong>') // Convertir **texto** en <strong>texto</strong>
           );
         }
       },
