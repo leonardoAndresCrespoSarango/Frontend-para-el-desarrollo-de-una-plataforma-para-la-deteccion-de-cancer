@@ -6,27 +6,58 @@ import { ToastrService } from "ngx-toastr";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 
+/**
+ * Componente para agregar un diagnóstico médico a un paciente.
+ * Permite subir archivos, generar gráficas y guardar diagnósticos en la base de datos.
+ */
 @Component({
   selector: 'app-add-diagnostic-dialog',
   templateUrl: './add-diagnostic-dialog.component.html',
 })
 export class AddDiagnosticDialogComponent implements OnInit {
+  /** Formulario para agregar diagnóstico */
   addDiagnosticForm: FormGroup;
+
+  /** URL del PDF generado */
   pdfUrl: string | null = null;
+
+  /** Archivos seleccionados para carga */
   selectedFiles: FileList | null = null;
+
+  /** URL segura de la gráfica 6 */
   htmlUrl6: SafeResourceUrl | null = null;
+
+  /** URL segura de la gráfica 3D */
   htmlUrl3D: SafeResourceUrl | null = null;
+
+  /** Estado de colapso del dashboard */
   isCollapsed: boolean = false;
+
+  /** Indica si la gráfica 6 ha sido cargada */
   isGraph6Loaded: boolean = false;
+
+  /** Indica si la gráfica 3D ha sido cargada */
   isGraph3DLoaded: boolean = false;
 
-  // Propiedades para manejar el menú de gráficas
-  selectedGraph: string = ''; // Gráfica seleccionada
+  /** Gráfica seleccionada en el menú */
+  selectedGraph: string = '';
+
+  /** Opciones de gráficas disponibles */
   graphOptions = [
     { value: 'graph6', viewValue: 'Visualización Interactiva de Modalidades' },
     { value: 'graph3D', viewValue: 'Visualización Cerebral 3D' }
   ];
 
+  /**
+   * Constructor del componente
+   * @param toastr Servicio de notificaciones
+   * @param route Servicio para obtener parámetros de la URL
+   * @param http Cliente HTTP para peticiones
+   * @param fb FormBuilder para la gestión de formularios
+   * @param sanitizer Servicio para sanitizar URLs
+   * @param medicalReportService Servicio para manejar reportes médicos
+   * @param router Router para navegación entre páginas
+   */
   constructor(
     private toastr: ToastrService,
     private route: ActivatedRoute,
@@ -43,6 +74,9 @@ export class AddDiagnosticDialogComponent implements OnInit {
     });
   }
 
+  /**
+   * Inicializa el componente y obtiene el ID del paciente desde la URL.
+   */
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       const patientId = params['patient_id'];
@@ -54,6 +88,10 @@ export class AddDiagnosticDialogComponent implements OnInit {
     });
   }
 
+  /**
+   * Maneja la selección de archivos y los sube al servidor.
+   * @param event Evento de cambio en el input de archivos
+   */
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files) {
@@ -87,6 +125,10 @@ export class AddDiagnosticDialogComponent implements OnInit {
     }
   }
 
+  /**
+   * Carga las gráficas de predicción después de subir los archivos.
+   * @param patientId ID del paciente para generar las gráficas
+   */
   loadGraphs(patientId: string): void {
     this.isGraph6Loaded = false;
     this.isGraph3DLoaded = false;
@@ -120,10 +162,14 @@ export class AddDiagnosticDialogComponent implements OnInit {
     );
   }
 
+  /**
+   * Guarda el diagnóstico del paciente en la base de datos.
+   */
   saveDiagnostic(): void {
     if (this.addDiagnosticForm.valid) {
       const diagnosticData = this.addDiagnosticForm.value;
       const validStatuses = ['cancer detectado', 'no se detecta cancer', 'diagnostico incierto'];
+
       if (!validStatuses.includes(diagnosticData.cancer_status)) {
         this.toastr.error('Estado inválido para el diagnóstico presuntivo', 'Error');
         return;
@@ -142,10 +188,16 @@ export class AddDiagnosticDialogComponent implements OnInit {
     }
   }
 
+  /**
+   * Alterna el estado de visibilidad del dashboard.
+   */
   toggleDashboard(): void {
     this.isCollapsed = !this.isCollapsed;
   }
 
+  /**
+   * Navega a la sección de UI Components - Chips.
+   */
   navigateToChips(): void {
     this.router.navigate(['ui-components/chips']);
   }

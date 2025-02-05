@@ -1,0 +1,1304 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>modernize documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">modernize documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ComparisonComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/comparison/comparison.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente para la comparación de segmentaciones de imágenes médicas.
+Permite subir archivos, generar gráficas de segmentación y visualizar métricas de evaluación.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-comparison</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>FormsModule</code>
+                            <code>NgIf</code>
+                            <code>MatButton</code>
+                            <code>MatDialogActions</code>
+                            <code>MatFormField</code>
+                            <code>MatInput</code>
+                            <code>MatLabel</code>
+                            <code>MatOption</code>
+                            <code>MatSelect</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>MatTooltip</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./comparison.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./comparison.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#diceCoefficient" >diceCoefficient</a>
+                            </li>
+                            <li>
+                                <a href="#hausdorffDistance" >hausdorffDistance</a>
+                            </li>
+                            <li>
+                                <a href="#htmlUrlS" >htmlUrlS</a>
+                            </li>
+                            <li>
+                                <a href="#isGraphSLoaded" >isGraphSLoaded</a>
+                            </li>
+                            <li>
+                                <a href="#meanIoU" >meanIoU</a>
+                            </li>
+                            <li>
+                                <a href="#medicalReport" >medicalReport</a>
+                            </li>
+                            <li>
+                                <a href="#selectedFiles" >selectedFiles</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#loadGraphs" >loadGraphs</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToChips" >navigateToChips</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onFileChange" >onFileChange</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(toastr: ToastrService, route: ActivatedRoute, sanitizer: DomSanitizer, medicalReportService: <a href="../injectables/MedicalReportService.html" target="_self">MedicalReportService</a>, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/comparison/comparison.component.ts:61</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del componente.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>toastr</td>
+                                                  
+                                                        <td>
+                                                                    <code>ToastrService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio de notificaciones.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio para obtener parámetros de la URL.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>sanitizer</td>
+                                                  
+                                                        <td>
+                                                                    <code>DomSanitizer</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio para sanitizar contenido HTML y URLs.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>medicalReportService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MedicalReportService.html" target="_self" >MedicalReportService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio para manejar reportes médicos.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Router para navegación entre páginas.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadGraphs"></a>
+                    <span class="name">
+                        <span ><b>loadGraphs</b></span>
+                        <a href="#loadGraphs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadGraphs(patientId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/comparison/comparison.component.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Carga las gráficas de segmentación y obtiene las métricas de evaluación.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>patientId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>ID del paciente para generar las gráficas.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToChips"></a>
+                    <span class="name">
+                        <span ><b>navigateToChips</b></span>
+                        <a href="#navigateToChips"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToChips()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="174"
+                                    class="link-to-prism">src/app/comparison/comparison.component.ts:174</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Navega a la sección de UI Components - Chips.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/comparison/comparison.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Inicializa el componente obteniendo los parámetros de la URL.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFileChange"></a>
+                    <span class="name">
+                        <span ><b>onFileChange</b></span>
+                        <a href="#onFileChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFileChange(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/comparison/comparison.component.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Maneja la selección de archivos y los envía para su procesamiento.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Evento de cambio en el input de archivos.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="diceCoefficient"></a>
+                    <span class="name">
+                        <span ><b>diceCoefficient</b></span>
+                        <a href="#diceCoefficient"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/comparison/comparison.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Coeficiente Dice de la segmentación</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hausdorffDistance"></a>
+                    <span class="name">
+                        <span ><b>hausdorffDistance</b></span>
+                        <a href="#hausdorffDistance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/comparison/comparison.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Distancia de Hausdorff</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="htmlUrlS"></a>
+                    <span class="name">
+                        <span ><b>htmlUrlS</b></span>
+                        <a href="#htmlUrlS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>SafeResourceUrl | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/comparison/comparison.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>URL segura de la gráfica de segmentación</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isGraphSLoaded"></a>
+                    <span class="name">
+                        <span ><b>isGraphSLoaded</b></span>
+                        <a href="#isGraphSLoaded"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/comparison/comparison.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indica si la gráfica de segmentación ha sido cargada</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="meanIoU"></a>
+                    <span class="name">
+                        <span ><b>meanIoU</b></span>
+                        <a href="#meanIoU"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/comparison/comparison.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Media del IoU (Intersection over Union)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="medicalReport"></a>
+                    <span class="name">
+                        <span ><b>medicalReport</b></span>
+                        <a href="#medicalReport"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>SafeHtml | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/comparison/comparison.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Informe médico generado</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedFiles"></a>
+                    <span class="name">
+                        <span ><b>selectedFiles</b></span>
+                        <a href="#selectedFiles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FileList | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/comparison/comparison.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Archivos seleccionados para subir</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
+import {MedicalReportService} from &quot;../services/medical-resport-service.service&quot;;
+import {ToastrService} from &quot;ngx-toastr&quot;;
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from &quot;@angular/forms&quot;;
+import {DomSanitizer, SafeHtml, SafeResourceUrl} from &quot;@angular/platform-browser&quot;;
+import {ActivatedRoute, Router} from &quot;@angular/router&quot;;
+import {HttpClient} from &quot;@angular/common/http&quot;;
+import {NgIf} from &quot;@angular/common&quot;;
+import {MatButton} from &quot;@angular/material/button&quot;;
+import {MatDialogActions} from &quot;@angular/material/dialog&quot;;
+import {MatFormField, MatLabel} from &quot;@angular/material/form-field&quot;;
+import {MatInput} from &quot;@angular/material/input&quot;;
+import {MatOption} from &quot;@angular/material/autocomplete&quot;;
+import {MatSelect} from &quot;@angular/material/select&quot;;
+import {MatTooltip} from &quot;@angular/material/tooltip&quot;;
+
+/**
+ * Componente para la comparación de segmentaciones de imágenes médicas.
+ * Permite subir archivos, generar gráficas de segmentación y visualizar métricas de evaluación.
+ */
+@Component({
+  selector: &#x27;app-comparison&#x27;,
+  standalone: true,
+  imports: [
+    FormsModule,
+    NgIf,
+    MatButton,
+    MatDialogActions,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    MatOption,
+    MatSelect,
+    ReactiveFormsModule,
+    MatTooltip
+  ],
+  templateUrl: &#x27;./comparison.component.html&#x27;,
+  styleUrl: &#x27;./comparison.component.scss&#x27;
+})
+export class ComparisonComponent implements OnInit {
+  /** Archivos seleccionados para subir */
+  selectedFiles: FileList | null &#x3D; null;
+
+  /** URL segura de la gráfica de segmentación */
+  htmlUrlS: SafeResourceUrl | null &#x3D; null;
+
+  /** Indica si la gráfica de segmentación ha sido cargada */
+  isGraphSLoaded: boolean &#x3D; false;
+
+  // Variables para almacenar métricas de segmentación
+  /** Coeficiente Dice de la segmentación */
+  diceCoefficient: number | null &#x3D; null;
+
+  /** Media del IoU (Intersection over Union) */
+  meanIoU: number | null &#x3D; null;
+
+  /** Distancia de Hausdorff */
+  hausdorffDistance: number | null &#x3D; null;
+
+  /** Informe médico generado */
+  medicalReport: SafeHtml | null &#x3D; null;
+
+  /**
+   * Constructor del componente.
+   * @param toastr Servicio de notificaciones.
+   * @param route Servicio para obtener parámetros de la URL.
+   * @param sanitizer Servicio para sanitizar contenido HTML y URLs.
+   * @param medicalReportService Servicio para manejar reportes médicos.
+   * @param router Router para navegación entre páginas.
+   */
+  constructor(
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    private medicalReportService: MedicalReportService,
+    private router: Router
+  ) {}
+
+  /**
+   * Inicializa el componente obteniendo los parámetros de la URL.
+   */
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) &#x3D;&gt; {
+      console.log(&#x27;Parámetros recibidos:&#x27;, params);
+      const patientId &#x3D; params[&#x27;patient_id&#x27;];
+      console.log(patientId);
+    });
+  }
+
+  /**
+   * Maneja la selección de archivos y los envía para su procesamiento.
+   * @param event Evento de cambio en el input de archivos.
+   */
+  onFileChange(event: Event): void {
+    const input &#x3D; event.target as HTMLInputElement;
+    if (input.files) {
+      this.selectedFiles &#x3D; input.files;
+    }
+
+    // Obtener patientId de los parámetros de la URL
+    const patientId &#x3D; this.route.snapshot.queryParams[&#x27;patient_id&#x27;];
+    if (!patientId) {
+      this.toastr.error(&#x27;El ID del paciente no está disponible.&#x27;, &#x27;Error&#x27;);
+      return;
+    }
+
+    if (this.selectedFiles) {
+      const formData &#x3D; new FormData();
+      formData.append(&#x27;patient_id&#x27;, patientId); // Añadir el patient_id al formulario
+      for (let i &#x3D; 0; i &lt; this.selectedFiles.length; i++) {
+        formData.append(&#x27;files&#x27;, this.selectedFiles[i]);
+      }
+
+      this.medicalReportService.uploadFilesSegmentacion(formData).subscribe(
+        (response) &#x3D;&gt; {
+          this.toastr.success(&#x27;Archivos subidos correctamente&#x27;, &#x27;Éxito&#x27;);
+          this.loadGraphs(patientId);
+          console.log(&#x27;Respuesta del servidor:&#x27;, response);
+        },
+        (error) &#x3D;&gt; {
+          this.toastr.error(&#x27;Error subiendo los archivos&#x27;, &#x27;Error&#x27;);
+          console.error(&#x27;Error del servidor:&#x27;, error);
+        }
+      );
+    }
+  }
+
+  /**
+   * Carga las gráficas de segmentación y obtiene las métricas de evaluación.
+   * @param patientId ID del paciente para generar las gráficas.
+   */
+  loadGraphs(patientId: string): void {
+    this.isGraphSLoaded &#x3D; false;
+
+    this.medicalReportService.predictSeg(patientId).subscribe(
+      (graphResponse) &#x3D;&gt; {
+        console.log(&#x27;Respuesta de la API:&#x27;, graphResponse);
+
+        // Cargar la gráfica de segmentación
+        if (graphResponse.htmlUrlS) {
+          this.htmlUrlS &#x3D; this.sanitizer.bypassSecurityTrustResourceUrl(graphResponse.htmlUrlS);
+          this.isGraphSLoaded &#x3D; true;
+          this.toastr.success(&#x27;Gráfica de segmentación generada exitosamente&#x27;, &#x27;Éxito&#x27;);
+        } else {
+          this.toastr.warning(&#x27;No se recibió la URL de la gráfica.&#x27;, &#x27;Advertencia&#x27;);
+        }
+
+        // Guardar métricas de segmentación
+        if (graphResponse.metrics) {
+          this.diceCoefficient &#x3D; graphResponse.metrics[&quot;Dice Coefficient&quot;];
+          this.meanIoU &#x3D; graphResponse.metrics[&quot;Mean IoU&quot;];
+          this.hausdorffDistance &#x3D; graphResponse.metrics[&quot;Hausdorff Distance&quot;];
+        }
+
+        // Guardar el informe médico generado
+        if (graphResponse.medical_report) {
+          this.medicalReport &#x3D; this.sanitizer.bypassSecurityTrustHtml(
+            graphResponse.medical_report
+              .replace(/\n/g, &#x27;&lt;br&gt;&#x27;) // Convertir saltos de línea a &lt;br&gt;
+              .replace(/\*(.*?)\*/g, &#x27;&lt;strong&gt;$1&lt;/strong&gt;&#x27;) // Convertir **texto** en &lt;strong&gt;texto&lt;/strong&gt;
+          );
+        }
+      },
+      (error) &#x3D;&gt; {
+        console.error(&#x27;Error cargando la gráfica:&#x27;, error);
+        this.toastr.error(&#x27;Error generando la gráfica de segmentación&#x27;, &#x27;Error&#x27;);
+      }
+    );
+  }
+
+  /**
+   * Navega a la sección de UI Components - Chips.
+   */
+  navigateToChips(): void {
+    this.router.navigate([&#x27;ui-components/chips&#x27;]);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;h2 class&#x3D;&quot;tituloCMP&quot;&gt;Contraste de las Regiones Tumorales entre la Mascara Real y la Predicha por la IA&lt;/h2&gt;
+&lt;div class&#x3D;&quot;comparison-container&quot;&gt;
+  &lt;div class&#x3D;&quot;file-upload-section&quot;&gt;
+    &lt;div class&#x3D;&quot;file-input-wrapper&quot;&gt;
+      &lt;input type&#x3D;&quot;file&quot; id&#x3D;&quot;uploadFiles&quot; name&#x3D;&quot;files&quot; multiple class&#x3D;&quot;file-input&quot; (change)&#x3D;&quot;onFileChange($event)&quot;&gt;
+      &lt;label for&#x3D;&quot;uploadFiles&quot; class&#x3D;&quot;upload-label&quot; matTooltip&#x3D;&quot;Suba el archivo de segmentación manual del paciente para compararlo con la predicción de la IA.&quot;
+             matTooltipPosition&#x3D;&quot;above&quot;&gt;Cargar Segmentación Manual&lt;/label&gt;
+      &lt;button class&#x3D;&quot;action-button&quot; (click)&#x3D;&quot;navigateToChips()&quot;&gt;Regresar&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Separador estilizado --&gt;
+  &lt;hr class&#x3D;&quot;section-divider&quot; /&gt;
+
+  &lt;!-- Mostrar la gráfica si está disponible --&gt;
+  &lt;div class&#x3D;&quot;graph-display-section&quot; *ngIf&#x3D;&quot;htmlUrlS&quot;&gt;
+    &lt;iframe [src]&#x3D;&quot;htmlUrlS&quot; class&#x3D;&quot;graph-viewer&quot; sandbox&#x3D;&quot;allow-same-origin allow-scripts&quot;&gt;&lt;/iframe&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Separador estilizado --&gt;
+  &lt;hr class&#x3D;&quot;section-divider&quot; /&gt;
+
+  &lt;!-- Sección de métricas, tabla de rangos e informe médico --&gt;
+  &lt;div class&#x3D;&quot;metrics-section&quot;&gt;
+    &lt;h3&gt;Métricas de Evaluación&lt;/h3&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Dice Coefficient:&lt;/strong&gt; {{ diceCoefficient?.toFixed(4) }}&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Mean IoU:&lt;/strong&gt; {{ meanIoU?.toFixed(4) }}&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Hausdorff Distance:&lt;/strong&gt; {{ hausdorffDistance?.toFixed(4) }}&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;h3&gt;Rangos e Interpretación de las Métricas&lt;/h3&gt;
+    &lt;table class&#x3D;&quot;metrics-table&quot;&gt;
+      &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Métrica&lt;/th&gt;
+        &lt;th&gt;Rango&lt;/th&gt;
+        &lt;th&gt;Interpretación&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Dice Coefficient&lt;/td&gt;
+        &lt;td&gt;
+          &lt;ul&gt;
+            &lt;li&gt;Bajo: &amp;lt; 0.5&lt;/li&gt;
+            &lt;li&gt;Moderado: 0.5 - 0.8&lt;/li&gt;
+            &lt;li&gt;Alto: ≥ 0.8&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/td&gt;
+        &lt;td&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;strong&gt;Bajo:&lt;/strong&gt; Delimitación poco precisa de la zona afectada.&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Moderado:&lt;/strong&gt; Delimitación aceptable, pero se recomiendan revisiones adicionales.&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Alto:&lt;/strong&gt; Delimitación precisa y consistente.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Mean IoU&lt;/td&gt;
+        &lt;td&gt;
+          &lt;ul&gt;
+            &lt;li&gt;Bajo: &amp;lt; 0.5&lt;/li&gt;
+            &lt;li&gt;Moderado: 0.5 - 0.8&lt;/li&gt;
+            &lt;li&gt;Alto: ≥ 0.8&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/td&gt;
+        &lt;td&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;strong&gt;Bajo:&lt;/strong&gt; Poca correspondencia entre la segmentación y la estructura real.&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Moderado:&lt;/strong&gt; Correspondencia aceptable, aunque puede haber discrepancias.&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Alto:&lt;/strong&gt; Excelente coincidencia, lo que respalda la fiabilidad del análisis.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Hausdorff Distance&lt;/td&gt;
+        &lt;td&gt;
+          &lt;ul&gt;
+            &lt;li&gt;Bajo: ≤ 50&lt;/li&gt;
+            &lt;li&gt;Moderado: 50 - 100&lt;/li&gt;
+            &lt;li&gt;Alto: &amp;gt; 100&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/td&gt;
+        &lt;td&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;strong&gt;Bajo:&lt;/strong&gt; La forma de la zona segmentada es muy consistente con la real.&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Moderado:&lt;/strong&gt; Se observan algunas discrepancias en la forma.&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Alto:&lt;/strong&gt; Gran variabilidad en la forma, lo que puede afectar la interpretación.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;h3&gt;Informe Médico&lt;/h3&gt;
+    &lt;p *ngIf&#x3D;&quot;medicalReport&quot; [innerHTML]&#x3D;&quot;medicalReport&quot;&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><h2 class="tituloCMP">Contraste de las Regiones Tumorales entre la Mascara Real y la Predicha por la IA</h2><div class="comparison-container">  <div class="file-upload-section">    <div class="file-input-wrapper">      <input type="file" id="uploadFiles" name="files" multiple class="file-input" (change)="onFileChange($event)">      <label for="uploadFiles" class="upload-label" matTooltip="Suba el archivo de segmentación manual del paciente para compararlo con la predicción de la IA."             matTooltipPosition="above">Cargar Segmentación Manual</label>      <button class="action-button" (click)="navigateToChips()">Regresar</button>    </div>  </div>  <!-- Separador estilizado -->  <hr class="section-divider" />  <!-- Mostrar la gráfica si está disponible -->  <div class="graph-display-section" *ngIf="htmlUrlS">    <iframe [src]="htmlUrlS" class="graph-viewer" sandbox="allow-same-origin allow-scripts"></iframe>  </div>  <!-- Separador estilizado -->  <hr class="section-divider" />  <!-- Sección de métricas, tabla de rangos e informe médico -->  <div class="metrics-section">    <h3>Métricas de Evaluación</h3>    <ul>      <li><strong>Dice Coefficient:</strong> {{ diceCoefficient?.toFixed(4) }}</li>      <li><strong>Mean IoU:</strong> {{ meanIoU?.toFixed(4) }}</li>      <li><strong>Hausdorff Distance:</strong> {{ hausdorffDistance?.toFixed(4) }}</li>    </ul>    <h3>Rangos e Interpretación de las Métricas</h3>    <table class="metrics-table">      <thead>      <tr>        <th>Métrica</th>        <th>Rango</th>        <th>Interpretación</th>      </tr>      </thead>      <tbody>      <tr>        <td>Dice Coefficient</td>        <td>          <ul>            <li>Bajo: &lt; 0.5</li>            <li>Moderado: 0.5 - 0.8</li>            <li>Alto: ≥ 0.8</li>          </ul>        </td>        <td>          <ul>            <li><strong>Bajo:</strong> Delimitación poco precisa de la zona afectada.</li>            <li><strong>Moderado:</strong> Delimitación aceptable, pero se recomiendan revisiones adicionales.</li>            <li><strong>Alto:</strong> Delimitación precisa y consistente.</li>          </ul>        </td>      </tr>      <tr>        <td>Mean IoU</td>        <td>          <ul>            <li>Bajo: &lt; 0.5</li>            <li>Moderado: 0.5 - 0.8</li>            <li>Alto: ≥ 0.8</li>          </ul>        </td>        <td>          <ul>            <li><strong>Bajo:</strong> Poca correspondencia entre la segmentación y la estructura real.</li>            <li><strong>Moderado:</strong> Correspondencia aceptable, aunque puede haber discrepancias.</li>            <li><strong>Alto:</strong> Excelente coincidencia, lo que respalda la fiabilidad del análisis.</li>          </ul>        </td>      </tr>      <tr>        <td>Hausdorff Distance</td>        <td>          <ul>            <li>Bajo: ≤ 50</li>            <li>Moderado: 50 - 100</li>            <li>Alto: &gt; 100</li>          </ul>        </td>        <td>          <ul>            <li><strong>Bajo:</strong> La forma de la zona segmentada es muy consistente con la real.</li>            <li><strong>Moderado:</strong> Se observan algunas discrepancias en la forma.</li>            <li><strong>Alto:</strong> Gran variabilidad en la forma, lo que puede afectar la interpretación.</li>          </ul>        </td>      </tr>      </tbody>    </table>    <h3>Informe Médico</h3>    <p *ngIf="medicalReport" [innerHTML]="medicalReport"></p>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddDiagnosticDialogComponent', 'selector': 'app-add-diagnostic-dialog'},{'name': 'AddPatientDialogComponent', 'selector': 'app-add-patient-dialog'},{'name': 'AppBadgeComponent', 'selector': 'app-badge'},{'name': 'AppChipsComponent', 'selector': 'app-chips'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppDashboardComponent', 'selector': 'app-dashboard'},{'name': 'AppIconsComponent', 'selector': 'app-icons'},{'name': 'AppListsComponent', 'selector': 'app-lists'},{'name': 'AppMenuComponent', 'selector': 'app-menu'},{'name': 'AppNavItemComponent', 'selector': 'app-nav-item'},{'name': 'AppSamplePageComponent', 'selector': 'app-sample-page'},{'name': 'AppSideLoginComponent', 'selector': 'app-login'},{'name': 'AppSideRegisterComponent', 'selector': 'app-register'},{'name': 'AppTooltipsComponent', 'selector': 'app-tooltips'},{'name': 'BlankComponent', 'selector': 'app-blank'},{'name': 'BrandingComponent', 'selector': 'app-branding'},{'name': 'ComparisonComponent', 'selector': 'app-comparison'},{'name': 'ConfirmDeleteDialogComponent', 'selector': 'app-confirm-delete-dialog'},{'name': 'ConfirmDeleteDialogComponentComponent', 'selector': 'app-confirm-delete-dialog-component'},{'name': 'ConfirmDeleteDialogComponentComponent', 'selector': 'app-confirm-delete-dialog-component'},{'name': 'DiagnosticIaComponent', 'selector': 'app-diagnostic-ia'},{'name': 'FullComponent', 'selector': 'app-full'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HistogramaComponent', 'selector': 'app-histograma'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'RefuerzoComponent', 'selector': 'app-refuerzo'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SurveyDialogComponent', 'selector': 'app-survey-dialog'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ComparisonComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ComparisonComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

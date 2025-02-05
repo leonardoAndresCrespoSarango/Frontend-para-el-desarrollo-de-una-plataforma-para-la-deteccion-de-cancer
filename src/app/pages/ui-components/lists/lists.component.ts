@@ -1,41 +1,65 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { MedicalReportService } from '../../../services/medical-resport-service.service';
 import { ToastrService } from 'ngx-toastr';
-import {ActivatedRoute, Router} from "@angular/router";
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import { ActivatedRoute, Router } from "@angular/router";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import html2canvas from 'html2canvas';
-import { saveAs } from 'file-saver';
+
+/**
+ * Componente para la visualización y gestión de reportes médicos.
+ * Permite ver imágenes y reportes médicos, editar diagnósticos, enviar retroalimentación y generar reportes en PDF.
+ */
 @Component({
   selector: 'app-lists',
   templateUrl: './lists.component.html',
 })
 export class AppListsComponent implements OnInit {
+  /** URLs de las visualizaciones médicas seguras */
   htmlUrl1: SafeResourceUrl | null = null;
   htmlUrl2: SafeResourceUrl | null = null;
   htmlUrl3: SafeResourceUrl | null = null;
   htmlUrl4: SafeResourceUrl | null = null;
   htmlUrl5: SafeResourceUrl | null = null;
   htmlUrl6: SafeResourceUrl | null = null;
+
+  /** Texto del reporte médico */
   reportText2: string | null = null;
   reportText5: string | null = null;
+
+  /** Identificadores del paciente */
   patientId: string | null = null;
   numeroHistoriaClinica: string | null = null;
+
+  /** Formularios para diagnóstico y retroalimentación */
   diagnosticForm: FormGroup;
   feedbackForm: FormGroup;
+
+  /** Estado del diagnóstico */
   diagnosticLoaded = false;
+
+  /** Gráfica seleccionada */
   selectedGraph: string | null = 'graph1';
+
+  /** URL del PDF */
   pdfUrl: string | null = null;
 
-
+  /** Opciones de visualización de gráficas */
   graphOptions = [
     { value: 'graph1', viewValue: 'Visualización Cerebral 3D' },
-    //{ value: 'graph3', viewValue: 'Visualización Interactiva de Rebanadas' },
-    //{ value: 'graph4', viewValue: 'Clasificación de Rebanadas' },
     { value: 'graph6', viewValue: 'Visualización Interactiva de Modalidades' }
   ];
 
+  /**
+   * Constructor del componente.
+   * @param route Servicio para obtener los parámetros de la URL.
+   * @param router Servicio de navegación.
+   * @param userService Servicio para manejar reportes médicos.
+   * @param fb FormBuilder para la creación de formularios.
+   * @param toastr Servicio para mostrar notificaciones.
+   * @param sanitizer Servicio para sanitizar URLs.
+   */
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -60,42 +84,39 @@ export class AppListsComponent implements OnInit {
     });
   }
 
+  /**
+   * Inicializa el componente cargando datos de la URL y del paciente.
+   */
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const htmlUrl1 = params.get('html_url1');
-      const htmlUrl2 = params.get('html_url2');
-      //const htmlUrl3 = params.get('html_url3');
-      //const htmlUrl4 = params.get('html_url4');
-      //const htmlUrl5 = params.get('html_url5');
-      const htmlUrl6 = params.get('html_url6');
+      this.htmlUrl1 = this.sanitizeUrl(params.get('html_url1'));
+      this.htmlUrl2 = this.sanitizeUrl(params.get('html_url2'));
+      this.htmlUrl6 = this.sanitizeUrl(params.get('html_url6'));
+
       this.reportText2 = params.get('report_text2');
       this.reportText5 = params.get('report_text5');
-      if (htmlUrl1) {
-        this.htmlUrl1 = this.sanitizer.bypassSecurityTrustResourceUrl(htmlUrl1);
-      }
-      if (htmlUrl2) {
-        this.htmlUrl2 = this.sanitizer.bypassSecurityTrustResourceUrl(htmlUrl2);
-      }
-      /*if (htmlUrl3) {
-        this.htmlUrl3 = this.sanitizer.bypassSecurityTrustResourceUrl(htmlUrl3);
-      }
-      if (htmlUrl4) {
-        this.htmlUrl4 = this.sanitizer.bypassSecurityTrustResourceUrl(htmlUrl4);
-      }
-      if (htmlUrl5) {
-        this.htmlUrl5 = this.sanitizer.bypassSecurityTrustResourceUrl(htmlUrl5);
-      }*/
-      if (htmlUrl6) {
-        this.htmlUrl6 = this.sanitizer.bypassSecurityTrustResourceUrl(htmlUrl6);
-      }
       this.patientId = params.get('patient_id');
       this.numeroHistoriaClinica = params.get('numero_historia_clinica');
+
       if (this.patientId) {
-        //this.loadDiagnostic(this.patientId);
+        // this.loadDiagnostic(this.patientId);
       }
     });
   }
 
+  /**
+   * Sanitiza una URL antes de ser utilizada en la vista.
+   * @param url URL a sanitizar.
+   * @returns URL segura o null si no es válida.
+   */
+  private sanitizeUrl(url: string | null): SafeResourceUrl | null {
+    return url ? this.sanitizer.bypassSecurityTrustResourceUrl(url) : null;
+  }
+
+  /**
+   * Carga el diagnóstico del paciente.
+   * @param patientId ID del paciente.
+   */
   loadDiagnostic(patientId: string): void {
     this.userService.getDiagnostic(patientId).subscribe((response: any) => {
       this.diagnosticForm.patchValue({
@@ -109,6 +130,9 @@ export class AppListsComponent implements OnInit {
     });
   }
 
+  /**
+   * Guarda el diagnóstico editado del paciente.
+   */
   saveDiagnostic(): void {
     if (this.diagnosticForm.valid && this.patientId) {
       const body = {
@@ -126,6 +150,9 @@ export class AppListsComponent implements OnInit {
     }
   }
 
+  /**
+   * Envía la retroalimentación del usuario sobre la precisión de la IA.
+   */
   submitFeedback(): void {
     if (this.feedbackForm.valid && this.patientId) {
       const feedback = this.feedbackForm.value;
@@ -138,6 +165,9 @@ export class AppListsComponent implements OnInit {
     }
   }
 
+  /**
+   * Envía un reporte médico con imágenes y retroalimentación.
+   */
   sendReport(): void {
     if (this.feedbackForm.valid && this.patientId) {
       const feedback = this.feedbackForm.value;
@@ -147,15 +177,15 @@ export class AppListsComponent implements OnInit {
         report_text5: this.reportText5,
         feedback: feedback,
         modalities_description: feedback.modalitiesDescription,
-        graph2_image: '',  // Inicializa con una cadena vacía
-        graph5_image: ''   // Inicializa con una cadena vacía
+        graph2_image: '',
+        graph5_image: ''
       };
 
-      this.captureGraphAsImage('graph2', 'graph2Image').then(graph2Image => {
-        report.graph2_image = graph2Image;  // Asigna la imagen capturada
+      this.captureGraphAsImage('graph2').then(graph2Image => {
+        report.graph2_image = graph2Image;
 
-        this.captureGraphAsImage('graph5', 'graph5Image').then(graph5Image => {
-          report.graph5_image = graph5Image;  // Asigna la imagen capturada
+        this.captureGraphAsImage('graph5').then(graph5Image => {
+          report.graph5_image = graph5Image;
 
           this.userService.sendReport(report).subscribe(() => {
             this.toastr.success('Reporte enviado exitosamente', 'Éxito');
@@ -164,26 +194,32 @@ export class AppListsComponent implements OnInit {
             this.toastr.error('Error al enviar el reporte', 'Error');
           });
         }).catch(error => {
-          console.error('Error capturing graph5:', error);
-          this.toastr.error('Error capturing graph5', 'Error');
+          console.error('Error capturando graph5:', error);
+          this.toastr.error('Error capturando graph5', 'Error');
         });
       }).catch(error => {
-        console.error('Error capturing graph2:', error);
-        this.toastr.error('Error capturing graph2', 'Error');
+        console.error('Error capturando graph2:', error);
+        this.toastr.error('Error capturando graph2', 'Error');
       });
     }
   }
 
-  captureGraphAsImage(graphId: string, imageName: string): Promise<string> {
+  /**
+   * Captura una gráfica en formato de imagen.
+   * @param graphId ID del elemento HTML de la gráfica.
+   * @returns Promesa con la imagen en formato Base64.
+   */
+  captureGraphAsImage(graphId: string): Promise<string> {
     const element = document.getElementById(graphId);
     if (!element) {
       return Promise.reject(`Element with id ${graphId} not found`);
     }
-    return html2canvas(element).then(canvas => {
-      return canvas.toDataURL('image/png');
-    });
-
+    return html2canvas(element).then(canvas => canvas.toDataURL('image/png'));
   }
+
+  /**
+   * Descarga el reporte en formato PDF.
+   */
   downloadPDF(): void {
     if (this.patientId) {
       this.userService.saveReportToFile(this.patientId);
@@ -191,6 +227,4 @@ export class AppListsComponent implements OnInit {
       console.error('Patient ID not available');
     }
   }
-
 }
-

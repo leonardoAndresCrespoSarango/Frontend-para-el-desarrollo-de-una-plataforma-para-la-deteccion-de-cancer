@@ -1,0 +1,1948 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>modernize documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">modernize documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  AppChipsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/ui-components/chips/chips.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente para la gestión de pacientes y diagnósticos en el sistema.
+Permite visualizar pacientes, realizar predicciones de IA, agregar diagnósticos y encuestas.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-chips</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./chips.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./chips.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#filteredPatients" >filteredPatients</a>
+                            </li>
+                            <li>
+                                <a href="#patients" >patients</a>
+                            </li>
+                            <li>
+                                <a href="#predictions" >predictions</a>
+                            </li>
+                            <li>
+                                <a href="#searchTerm" >searchTerm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addDiagnostic" >addDiagnostic</a>
+                            </li>
+                            <li>
+                                <a href="#addPatient" >addPatient</a>
+                            </li>
+                            <li>
+                                <a href="#addSegmentacion" >addSegmentacion</a>
+                            </li>
+                            <li>
+                                <a href="#applyFilter" >applyFilter</a>
+                            </li>
+                            <li>
+                                <a href="#deletePatient" >deletePatient</a>
+                            </li>
+                            <li>
+                                <a href="#fetchPatients" >fetchPatients</a>
+                            </li>
+                            <li>
+                                <a href="#fetchPredictions" >fetchPredictions</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openSurveyDialog" >openSurveyDialog</a>
+                            </li>
+                            <li>
+                                <a href="#viewReport" >viewReport</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(userService: <a href="../injectables/MedicalReportService.html" target="_self">MedicalReportService</a>, toastr: ToastrService, dialog: MatDialog, medicalReportService: <a href="../injectables/MedicalReportService.html" target="_self">MedicalReportService</a>, router: Router, medService: <a href="../injectables/MedicalReportService.html" target="_self">MedicalReportService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del componente.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MedicalReportService.html" target="_self" >MedicalReportService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio para obtener predicciones de IA.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>toastr</td>
+                                                  
+                                                        <td>
+                                                                    <code>ToastrService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio para mostrar notificaciones en la interfaz.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio de Angular Material para manejar diálogos.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>medicalReportService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MedicalReportService.html" target="_self" >MedicalReportService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio de reportes médicos.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio de enrutamiento.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>medService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MedicalReportService.html" target="_self" >MedicalReportService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio para gestionar pacientes.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addDiagnostic"></a>
+                    <span class="name">
+                        <span ><b>addDiagnostic</b></span>
+                        <a href="#addDiagnostic"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addDiagnostic(patient: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Redirige al usuario a la página de diagnóstico para un paciente seleccionado.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>patient</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Datos del paciente.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addPatient"></a>
+                    <span class="name">
+                        <span ><b>addPatient</b></span>
+                        <a href="#addPatient"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addPatient()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Agrega un nuevo paciente a la base de datos.
+Abre un diálogo para ingresar los datos del paciente.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addSegmentacion"></a>
+                    <span class="name">
+                        <span ><b>addSegmentacion</b></span>
+                        <a href="#addSegmentacion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addSegmentacion(patient: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:191</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Redirige al usuario a la sección de segmentación de imágenes para un paciente.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>patient</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Datos del paciente.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="applyFilter"></a>
+                    <span class="name">
+                        <span ><b>applyFilter</b></span>
+                        <a href="#applyFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>applyFilter()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:136</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Aplica un filtro a la lista de pacientes basado en el término de búsqueda.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deletePatient"></a>
+                    <span class="name">
+                        <span ><b>deletePatient</b></span>
+                        <a href="#deletePatient"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deletePatient(patientId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:203</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Elimina un paciente del sistema después de una confirmación en diálogo.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>patientId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>ID del paciente a eliminar.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchPatients"></a>
+                    <span class="name">
+                        <span ><b>fetchPatients</b></span>
+                        <a href="#fetchPatients"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fetchPatients()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene la lista de pacientes registrados y sus estados diagnósticos.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchPredictions"></a>
+                    <span class="name">
+                        <span ><b>fetchPredictions</b></span>
+                        <a href="#fetchPredictions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fetchPredictions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene la lista de predicciones de IA desde el servidor.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método de inicialización del componente.
+Se ejecuta cuando el componente es cargado y obtiene la lista de pacientes y predicciones.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openSurveyDialog"></a>
+                    <span class="name">
+                        <span ><b>openSurveyDialog</b></span>
+                        <a href="#openSurveyDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openSurveyDialog(patient: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:148</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Abre un diálogo para completar una encuesta sobre la IA.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>patient</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Datos del paciente que realiza la encuesta.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewReport"></a>
+                    <span class="name">
+                        <span ><b>viewReport</b></span>
+                        <a href="#viewReport"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>viewReport(reportPath: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Muestra el reporte médico de un paciente en formato PDF.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>reportPath</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Ruta del reporte en el servidor.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredPatients"></a>
+                    <span class="name">
+                        <span ><b>filteredPatients</b></span>
+                        <a href="#filteredPatients"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista filtrada de pacientes basada en el término de búsqueda</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="patients"></a>
+                    <span class="name">
+                        <span ><b>patients</b></span>
+                        <a href="#patients"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista completa de pacientes</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="predictions"></a>
+                    <span class="name">
+                        <span ><b>predictions</b></span>
+                        <a href="#predictions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista de predicciones de IA</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchTerm"></a>
+                    <span class="name">
+                        <span ><b>searchTerm</b></span>
+                        <a href="#searchTerm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/ui-components/chips/chips.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Término de búsqueda para filtrar pacientes</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { MedicalReportService } from &quot;../../../services/medical-resport-service.service&quot;;
+import { ToastrService } from &#x27;ngx-toastr&#x27;;
+import { AddPatientDialogComponent } from &quot;../../../add-patient-dialog/add-patient-dialog.component&quot;;
+import { MatDialog } from &quot;@angular/material/dialog&quot;;
+import { AddDiagnosticDialogComponent } from &quot;../../../add-diagnostic-dialog/add-diagnostic-dialog.component&quot;;
+import { Router } from &quot;@angular/router&quot;;
+import { HttpClient, HttpHeaders } from &quot;@angular/common/http&quot;;
+import { SurveyDialogComponent } from &quot;../../survey-dialog/survey-dialog.component&quot;;
+import { ConfirmDeleteDialogComponent } from &quot;../confirm-delete-dialog/confirm-delete-dialog.component&quot;;
+
+/**
+ * Componente para la gestión de pacientes y diagnósticos en el sistema.
+ * Permite visualizar pacientes, realizar predicciones de IA, agregar diagnósticos y encuestas.
+ */
+@Component({
+  selector: &#x27;app-chips&#x27;,
+  templateUrl: &#x27;./chips.component.html&#x27;,
+  styleUrls: [&#x27;./chips.component.scss&#x27;],
+})
+export class AppChipsComponent implements OnInit {
+  /** Lista de predicciones de IA */
+  predictions: any[] &#x3D; [];
+
+  /** Lista completa de pacientes */
+  patients: any[] &#x3D; [];
+
+  /** Lista filtrada de pacientes basada en el término de búsqueda */
+  filteredPatients: any[] &#x3D; [];
+
+  /** Término de búsqueda para filtrar pacientes */
+  searchTerm: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * Constructor del componente.
+   * @param userService Servicio para obtener predicciones de IA.
+   * @param toastr Servicio para mostrar notificaciones en la interfaz.
+   * @param dialog Servicio de Angular Material para manejar diálogos.
+   * @param medicalReportService Servicio de reportes médicos.
+   * @param router Servicio de enrutamiento.
+   * @param medService Servicio para gestionar pacientes.
+   */
+  constructor(
+    private userService: MedicalReportService,
+    private toastr: ToastrService,
+    private dialog: MatDialog,
+    private medicalReportService: MedicalReportService,
+    private router: Router,
+    private medService: MedicalReportService
+  ) {}
+
+  /**
+   * Método de inicialización del componente.
+   * Se ejecuta cuando el componente es cargado y obtiene la lista de pacientes y predicciones.
+   */
+  ngOnInit(): void {
+    this.fetchPredictions();
+    this.fetchPatients();
+  }
+
+  /**
+   * Obtiene la lista de predicciones de IA desde el servidor.
+   */
+  fetchPredictions(): void {
+    this.userService.getPredictions().subscribe(
+      (data) &#x3D;&gt; {
+        this.predictions &#x3D; data;
+      },
+      (error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching predictions:&#x27;, error);
+      }
+    );
+  }
+
+  /**
+   * Obtiene la lista de pacientes registrados y sus estados diagnósticos.
+   */
+  fetchPatients(): void {
+    this.medService.getPatients().subscribe(
+      (patients: any[]) &#x3D;&gt; {
+        this.patients &#x3D; patients.map(patient &#x3D;&gt; ({
+          ...patient,
+          diagnosticStatus: patient.is_generated ? &#x27;Generado&#x27; : &#x27;No generado&#x27;,
+          cancer_status: patient.cancer_status,
+          survey_completed: !!patient.survey_completed
+        }));
+        this.filteredPatients &#x3D; [...this.patients];
+      },
+      (error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching patients:&#x27;, error);
+        this.toastr.error(&#x27;Error al cargar los pacientes&#x27;, &#x27;Error&#x27;);
+      }
+    );
+  }
+
+  /**
+   * Agrega un nuevo paciente a la base de datos.
+   * Abre un diálogo para ingresar los datos del paciente.
+   */
+  addPatient(): void {
+    const dialogRef &#x3D; this.dialog.open(AddPatientDialogComponent, {
+      width: &#x27;400px&#x27;,
+    });
+
+    dialogRef.afterClosed().subscribe(result &#x3D;&gt; {
+      if (result) {
+        this.medService.addPatient(result).subscribe(
+          () &#x3D;&gt; {
+            this.toastr.success(&#x27;Paciente agregado exitosamente&#x27;, &#x27;Éxito&#x27;);
+            this.fetchPatients();
+          },
+          (error) &#x3D;&gt; {
+            console.error(&#x27;Error adding patient:&#x27;, error);
+            this.toastr.error(&#x27;Error al agregar el paciente&#x27;, &#x27;Error&#x27;);
+          }
+        );
+      }
+    });
+  }
+
+  /**
+   * Redirige al usuario a la página de diagnóstico para un paciente seleccionado.
+   * @param patient Datos del paciente.
+   */
+  addDiagnostic(patient: any): void {
+    this.router.navigate([&#x27;/diagnostico&#x27;], {
+      queryParams: {
+        patient_id: patient.patient_id,
+      },
+    });
+  }
+
+  /**
+   * Aplica un filtro a la lista de pacientes basado en el término de búsqueda.
+   */
+  applyFilter(): void {
+    const term &#x3D; this.searchTerm.toLowerCase();
+    this.filteredPatients &#x3D; this.patients.filter(patient &#x3D;&gt;
+      patient.patient_id.toLowerCase().includes(term) ||
+      patient.numero_historia_clinica.toLowerCase().includes(term)
+    );
+  }
+
+  /**
+   * Abre un diálogo para completar una encuesta sobre la IA.
+   * @param patient Datos del paciente que realiza la encuesta.
+   */
+  openSurveyDialog(patient: any): void {
+    const dialogRef &#x3D; this.dialog.open(SurveyDialogComponent, {
+      width: &#x27;600px&#x27;,
+      data: { patientId: patient.patient_id }
+    });
+
+    dialogRef.afterClosed().subscribe(result &#x3D;&gt; {
+      if (result?.success) {
+        patient.survey_completed &#x3D; true;
+        this.medService.updateSurveyStatus(patient.patient_id, true).subscribe(
+          () &#x3D;&gt; {
+            this.toastr.success(&#x27;Encuesta completada exitosamente&#x27;, &#x27;Éxito&#x27;);
+          },
+          (error) &#x3D;&gt; {
+            console.error(&#x27;Error updating survey status:&#x27;, error);
+            this.toastr.error(&#x27;Error al actualizar estado de encuesta&#x27;, &#x27;Error&#x27;);
+          }
+        );
+      } else {
+        this.toastr.info(&#x27;Encuesta cancelada&#x27;, &#x27;Info&#x27;);
+      }
+    });
+  }
+
+  /**
+   * Muestra el reporte médico de un paciente en formato PDF.
+   * @param reportPath Ruta del reporte en el servidor.
+   */
+  viewReport(reportPath: string): void {
+    if (!reportPath) {
+      this.toastr.error(&#x27;El reporte no está disponible.&#x27;, &#x27;Error&#x27;);
+      return;
+    }
+
+    const baseUrl &#x3D; &#x27;http://localhost:5000&#x27;;
+    const reportUrl &#x3D; &#x60;${baseUrl}/${reportPath}.pdf&#x60;;
+    window.open(reportUrl, &#x27;_blank&#x27;);
+  }
+
+  /**
+   * Redirige al usuario a la sección de segmentación de imágenes para un paciente.
+   * @param patient Datos del paciente.
+   */
+  addSegmentacion(patient: any): void {
+    this.router.navigate([&#x27;/comparison&#x27;], {
+      queryParams: {
+        patient_id: patient.patient_id,
+      },
+    });
+  }
+
+  /**
+   * Elimina un paciente del sistema después de una confirmación en diálogo.
+   * @param patientId ID del paciente a eliminar.
+   */
+  deletePatient(patientId: string): void {
+    const dialogRef &#x3D; this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: &#x27;400px&#x27;,
+      height: &#x27;170px&#x27;,
+    });
+
+    dialogRef.afterClosed().subscribe(result &#x3D;&gt; {
+      if (result) {
+        this.medService.deletePatient(patientId).subscribe(
+          () &#x3D;&gt; {
+            this.toastr.success(&#x27;Paciente eliminado exitosamente&#x27;, &#x27;Éxito&#x27;);
+            this.fetchPatients();
+          },
+          (error) &#x3D;&gt; {
+            console.error(&#x27;Error eliminando paciente:&#x27;, error);
+            this.toastr.error(&#x27;Error al eliminar el paciente&#x27;, &#x27;Error&#x27;);
+          }
+        );
+      }
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;h2 class&#x3D;&quot;tituloRP&quot;&gt;Registro de Pacientes&lt;/h2&gt;
+&lt;div&gt;
+  &lt;button mat-button (click)&#x3D;&quot;addPatient()&quot;&gt;Agregar Paciente&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;mat-form-field appearance&#x3D;&quot;outline&quot; style&#x3D;&quot;width: 100%; margin-bottom: 20px;&quot;&gt;
+  &lt;mat-label&gt;Buscar paciente&lt;/mat-label&gt;
+  &lt;input
+    matInput
+    placeholder&#x3D;&quot;Ingresa un término de búsqueda&quot;
+    [(ngModel)]&#x3D;&quot;searchTerm&quot;
+    (ngModelChange)&#x3D;&quot;applyFilter()&quot;
+  /&gt;
+  &lt;mat-icon matSuffix color&#x3D;&quot;accent&quot;&gt;search&lt;/mat-icon&gt;
+  &lt;mat-icon matSuffix (click)&#x3D;&quot;searchTerm &#x3D; &#x27;&#x27;; applyFilter()&quot;&gt;clear&lt;/mat-icon&gt;
+&lt;/mat-form-field&gt;
+
+&lt;div *ngIf&#x3D;&quot;patients.length &#x3D;&#x3D;&#x3D; 0&quot; class&#x3D;&quot;no-patients&quot;&gt;
+  &lt;p&gt;No se encontraron pacientes.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div *ngIf&#x3D;&quot;patients.length &gt; 0&quot;&gt;
+  &lt;table class&#x3D;&quot;styled-table&quot;&gt;
+    &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style&#x3D;&quot;text-align: center&quot;&gt;Cédula del Paciente&lt;/th&gt;
+      &lt;th style&#x3D;&quot;text-align: center&quot;&gt;Nro. Historia Clínica&lt;/th&gt;
+      &lt;th style&#x3D;&quot;text-align: center&quot;&gt;Diagnóstico del Médico&lt;/th&gt;
+      &lt;th style&#x3D;&quot;text-align: center&quot;&gt;Evaluación IA&lt;/th&gt;
+      &lt;th style&#x3D;&quot;text-align: center&quot;&gt;Coincidencia Médico-IA&lt;/th&gt;
+      &lt;th style&#x3D;&quot;text-align: center&quot;&gt;Comparación de Regiones Tumorales&lt;/th&gt;
+      &lt;th style&#x3D;&quot;text-align: center&quot;&gt;Encuesta&lt;/th&gt;
+      &lt;th&gt;Delete&lt;/th&gt;
+
+    &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+    &lt;tr *ngFor&#x3D;&quot;let patient of filteredPatients&quot;&gt;
+      &lt;td&gt;{{ patient.patient_id }}&lt;/td&gt;
+      &lt;td&gt;{{ patient.numero_historia_clinica }}&lt;/td&gt;
+      &lt;td&gt;
+        &lt;div style&#x3D;&quot;display: flex; align-items: center;&quot;&gt;
+          &lt;div style&#x3D;&quot;text-align: center; margin-right: 10px;&quot;&gt;
+            &lt;!--[disabled]&#x3D;&quot;patient.diagnosticStatus &#x3D;&#x3D;&#x3D; &#x27;Generado&#x27;&quot;--&gt;
+            &lt;button mat-button (click)&#x3D;&quot;addDiagnostic(patient)&quot;&gt;Generar Diagnóstico&lt;/button&gt;
+            &lt;small
+              [ngClass]&#x3D;&quot;{
+                  &#x27;status-generated&#x27;: patient.diagnosticStatus &#x3D;&#x3D;&#x3D; &#x27;Generado&#x27;,
+                  &#x27;status-not-generated&#x27;: patient.diagnosticStatus &#x3D;&#x3D;&#x3D; &#x27;No generado&#x27;
+                }&quot;
+              style&#x3D;&quot;display: block; font-size: 10px;&quot;
+            &gt;
+              {{ patient.diagnosticStatus }}
+            &lt;/small&gt;
+          &lt;/div&gt;
+          &lt;!-- Botón para visualizar reporte --&gt;
+          &lt;div style&#x3D;&quot;text-align: center;&quot;&gt;
+            &lt;img
+              src&#x3D;&quot;assets/images/logos/lookPDF.png&quot;
+              alt&#x3D;&quot;Ver Reporte&quot;
+              class&#x3D;&quot;report-icon&quot;
+              [ngClass]&#x3D;&quot;{ &#x27;disabled&#x27;: !patient.report_path }&quot;
+              (click)&#x3D;&quot;viewReport(patient.report_path)&quot;
+              [title]&#x3D;&quot;!patient.report_path ? &#x27;Reporte no disponible&#x27; : &#x27;Ver Reporte PDF&#x27;&quot;
+            /&gt;
+          &lt;/div&gt;
+
+        &lt;/div&gt;
+      &lt;/td&gt;
+      &lt;td&gt;
+        &lt;div style&#x3D;&quot;text-align: center;&quot;&gt;
+          &lt;button mat-button class&#x3D;&quot;btn-diagnostico-ia&quot; (click)&#x3D;&quot;onGenerateIA(patient.patient_id)&quot; matTooltip&#x3D;&quot;Ejecute el análisis automático de la IA para obtener un prediagnóstico basado en las imágenes médicas del paciente.&quot;
+                  matTooltipPosition&#x3D;&quot;above&quot;&gt;Prediagnóstico IA&lt;/button&gt;
+          &lt;small style&#x3D;&quot;display: block; font-size: 10px;&quot;&gt;{{ patient.iaStatus || &#x27;No generado&#x27; }}&lt;/small&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+      &lt;td&gt;
+        &lt;div class&#x3D;&quot;traffic-light small&quot;&gt;
+          &lt;div class&#x3D;&quot;protector&quot;&gt;&lt;/div&gt;
+          &lt;div class&#x3D;&quot;protector&quot;&gt;&lt;/div&gt;
+          &lt;div class&#x3D;&quot;protector&quot;&gt;&lt;/div&gt;
+
+          &lt;!-- Luz roja con tooltip --&gt;
+          &lt;div
+            class&#x3D;&quot;light-red&quot;
+            matTooltip&#x3D;&quot;falta evaluación del médico o de la IA.&quot;
+            matTooltipPosition&#x3D;&quot;above&quot;
+            [ngClass]&#x3D;&quot;{ &#x27;active&#x27;: !patient.is_generated }&quot;&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Luz amarilla con tooltip --&gt;
+          &lt;div
+            class&#x3D;&quot;light-yellow&quot;
+            matTooltip&#x3D;&quot;Hay discrepancia entre el médico y la IA.&quot;
+            matTooltipPosition&#x3D;&quot;above&quot;
+            [ngClass]&#x3D;&quot;{ &#x27;active&#x27;: patient.is_generated &amp;&amp; (patient.cancer_status &#x3D;&#x3D;&#x3D; &#x27;no se detecta cancer&#x27; || patient.cancer_status &#x3D;&#x3D;&#x3D; &#x27;diagnostico incierto&#x27;) }&quot;&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Luz verde con tooltip --&gt;
+          &lt;div
+            class&#x3D;&quot;light-green&quot;
+            matTooltip&#x3D;&quot;La IA y el médico coinciden.&quot;
+            matTooltipPosition&#x3D;&quot;above&quot;
+            [ngClass]&#x3D;&quot;{ &#x27;active&#x27;: patient.is_generated &amp;&amp; patient.cancer_status &#x3D;&#x3D;&#x3D; &#x27;cancer detectado&#x27; }&quot;&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;traffic-description&quot;&gt;
+          &lt;strong&gt;{{ getStatusDescription(patient) }}&lt;/strong&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+
+      &lt;td&gt;
+        &lt;div style&#x3D;&quot;text-align: center;&quot;&gt;
+          &lt;button
+            mat-button
+            class&#x3D;&quot;btn-diagnostico-ia&quot;
+            (click)&#x3D;&quot;addSegmentacion(patient)&quot;
+            matTooltip&#x3D;&quot;Visualiza la segmentación manual y la predicción de la IA para comparar las regiones tumorales.&quot;
+            matTooltipPosition&#x3D;&quot;above&quot;&gt;
+            Cargar y Comparar Segmentación Tumoral
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+
+
+
+
+      &lt;td&gt;
+        &lt;button
+          mat-button
+          class&#x3D;&quot;btnSurvey&quot;
+          (click)&#x3D;&quot;openSurveyDialog(patient)&quot;
+          style&#x3D;&quot;display: flex; justify-content: center; align-items: center; padding: 0;&quot;&gt;
+          &lt;img class&#x3D;&quot;imgbtn&quot; src&#x3D;&quot;assets/images/logos/encuesta1.png&quot; alt&#x3D;&quot;Encuesta&quot; /&gt;
+        &lt;/button&gt;
+
+        &lt;!-- Mostrar mensaje según el estado de la encuesta --&gt;
+        &lt;small
+          *ngIf&#x3D;&quot;!patient.survey_completed&quot;
+          class&#x3D;&quot;survey-completedF-message&quot;
+          style&#x3D;&quot;display: block; font-size: 10px;&quot;&gt;
+          Pendiente
+        &lt;/small&gt;
+        &lt;small
+          *ngIf&#x3D;&quot;patient.survey_completed&quot;
+          class&#x3D;&quot;survey-completedT-message&quot;
+          style&#x3D;&quot; display: block; font-size: 10px;&quot;&gt;
+          Realizada
+        &lt;/small&gt;
+      &lt;/td&gt;
+      &lt;td&gt;
+        &lt;button mat-icon-button color&#x3D;&quot;warn&quot; (click)&#x3D;&quot;deletePatient(patient.patient_id)&quot;&gt;
+          &lt;mat-icon&gt;delete&lt;/mat-icon&gt;
+        &lt;/button&gt;
+      &lt;/td&gt;
+
+
+    &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./chips.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">
+.tituloRP{
+  font-size: 28px;
+  font-weight: 400;
+  color: #444;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+.no-predictions {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: #555;
+}
+
+
+.styled-table {
+  width: 100%;
+  margin: 20px auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  font-family: &#x27;Arial&#x27;, sans-serif;
+}
+.tituloRP {
+  font-size: 28px;
+  font-weight: 400;
+  color: #444;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom:10px;
+}
+
+.styled-table thead tr {
+  background-color: #007bff;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #66afe9;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.styled-table th {
+  font-size: 1.2em;
+}
+
+.styled-table td {
+  font-size: 1em;
+}
+
+.btn-action {
+  background-color: #009879;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.btn-action:hover {
+  background-color: #ffffff;
+  color: #009879;
+  border: 2px solid #009879;
+}
+
+//paciente:
+.btn-add-patient {
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 0;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.btn-add-patient:hover {
+  background-color: #ffffff;
+  color: #28a745;
+  border: 2px solid #28a745;
+}
+
+.status-generated {
+  color: green;
+  font-weight: bold;
+}
+
+.status-not-generated {
+  color: red;
+  font-weight: bold;
+}
+
+.btnSurvey {
+  border: 2px solid transparent; /* Borde transparente por defecto */
+  background: transparent; /* Fondo transparente */
+  color: inherit; /* Hereda el color del texto */
+  font-size: 1rem; /* Ajusta el tamaño de la fuente */
+  padding: 8px 16px; /* Relleno opcional */
+  cursor: pointer; /* Cambia el cursor al estilo de clic */
+  outline: none; /* Elimina el contorno predeterminado */
+  border-radius: 12px; /* Bordes redondeados por defecto */
+  transition: all 0.3s ease; /* Transición suave */
+  display: flex; /* Asegura que el contenido se alinee bien */
+  justify-content: center; /* Centra el contenido dentro del botón */
+  align-items: center; /* Centra el contenido verticalmente */
+}
+
+.btnSurvey img.button-icon {
+  width: 24px; /* Ajusta el tamaño de la imagen */
+  height: 24px; /* Ajusta la altura de la imagen */
+  object-fit: contain; /* Asegura que la imagen se ajuste sin deformarse */
+}
+
+.btnSurvey:hover {
+  background: rgba(0, 0, 0, 0.1); /* Efecto de fondo suave al pasar el cursor */
+  color: #000; /* Cambia el color del texto */
+  border-color: #000; /* Cambia el color del borde al hacer hover */
+}
+
+.survey-completed-message {
+  display: block;
+  font-size: 12px;
+  color: green;  /* Cambia el color si lo prefieres */
+  margin-top: 5px;
+}
+.imgbtn {
+  max-width: 30px;
+  max-height: 30px;
+  margin-left: 37%;
+}
+
+.survey-completedT-message {
+  display: block;
+  font-size: 12px;
+  color: green;  /* Cambia el color si lo prefieres */
+  margin-top: 5px;
+  text-align: center;
+}
+.survey-completedF-message {
+  display: block;
+  font-size: 12px;
+  color: red;  /* Cambia el color si lo prefieres */
+  margin-top: 5px;
+  text-align:center;
+}
+
+
+
+
+
+
+
+
+
+.traffic-light {
+  position: relative;
+  background: #222;
+  border-radius: 5px;
+  padding: 2px;
+  box-shadow: inset 0 0 0px 1px #2a2a2a;
+  width: 25px; /* Tamaño compacto */
+  height: 70px; /* Altura del semáforo */
+  margin: 0 auto; /* Centrar en la celda */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.light-red,
+.light-yellow,
+.light-green {
+  position: relative;
+  margin: 2px auto;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: repeating-linear-gradient(#333, #443 5px);
+  transition: all 0.3s ease;
+  box-shadow: none;
+  z-index: 11;
+}
+
+.light-red.active {
+  background: repeating-linear-gradient(#f00, #e00 5px);
+  box-shadow: 0 0 6px #f00;
+}
+
+.light-yellow.active {
+  background: repeating-linear-gradient(#fd0, #ec0 5px);
+  box-shadow: 0 0 6px #fd0;
+}
+
+.light-green.active {
+  background: repeating-linear-gradient(#0d0, #0c0 5px);
+  box-shadow: 0 0 6px #0d0;
+}
+
+.protector {
+  width: 150%;
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-right: solid 5px transparent;
+  border-left: solid 5px transparent;
+  border-top: solid 15px #191919;
+  border-radius: 2px;
+  z-index: 1;
+}
+
+.protector:nth-child(2) {
+  top: 25px;
+}
+
+.protector:nth-child(3) {
+  top: 45px;
+}
+
+/* Texto completamente debajo del semáforo */
+.traffic-description {
+  margin-top: 10px; /* Espacio entre el semáforo y el texto */
+  text-align: center;
+  font-size: 12px; /* Tamaño reducido */
+  color: #000; /* Texto en negro */
+}
+
+/*boton para ver el reporte en pdf*/
+.report-icon {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+  animation: pulse 1s infinite alternate;
+
+  &amp;:hover {
+    transform: scale(1.2); /* Aumenta el tamaño */
+    box-shadow: 0 8px 15px rgb(17, 121, 223); /* Sombra tipo alerta */
+  }
+
+  &amp;.disabled {
+    cursor: not-allowed;
+    filter: grayscale(100%);
+    animation: none; /* Desactiva animación si está deshabilitado */
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><h2 class="tituloRP">Registro de Pacientes</h2><div>  <button mat-button (click)="addPatient()">Agregar Paciente</button></div><mat-form-field appearance="outline" style="width: 100%; margin-bottom: 20px;">  <mat-label>Buscar paciente</mat-label>  <input    matInput    placeholder="Ingresa un término de búsqueda"    [(ngModel)]="searchTerm"    (ngModelChange)="applyFilter()"  />  <mat-icon matSuffix color="accent">search</mat-icon>  <mat-icon matSuffix (click)="searchTerm = \'\'; applyFilter()">clear</mat-icon></mat-form-field><div *ngIf="patients.length === 0" class="no-patients">  <p>No se encontraron pacientes.</p></div><div *ngIf="patients.length > 0">  <table class="styled-table">    <thead>    <tr>      <th style="text-align: center">Cédula del Paciente</th>      <th style="text-align: center">Nro. Historia Clínica</th>      <th style="text-align: center">Diagnóstico del Médico</th>      <th style="text-align: center">Evaluación IA</th>      <th style="text-align: center">Coincidencia Médico-IA</th>      <th style="text-align: center">Comparación de Regiones Tumorales</th>      <th style="text-align: center">Encuesta</th>      <th>Delete</th>    </tr>    </thead>    <tbody>    <tr *ngFor="let patient of filteredPatients">      <td>{{ patient.patient_id }}</td>      <td>{{ patient.numero_historia_clinica }}</td>      <td>        <div style="display: flex; align-items: center;">          <div style="text-align: center; margin-right: 10px;">            <!--[disabled]="patient.diagnosticStatus === \'Generado\'"-->            <button mat-button (click)="addDiagnostic(patient)">Generar Diagnóstico</button>            <small              [ngClass]="{                  \'status-generated\': patient.diagnosticStatus === \'Generado\',                  \'status-not-generated\': patient.diagnosticStatus === \'No generado\'                }"              style="display: block; font-size: 10px;"            >              {{ patient.diagnosticStatus }}            </small>          </div>          <!-- Botón para visualizar reporte -->          <div style="text-align: center;">            <img              src="assets/images/logos/lookPDF.png"              alt="Ver Reporte"              class="report-icon"              [ngClass]="{ \'disabled\': !patient.report_path }"              (click)="viewReport(patient.report_path)"              [title]="!patient.report_path ? \'Reporte no disponible\' : \'Ver Reporte PDF\'"            />          </div>        </div>      </td>      <td>        <div style="text-align: center;">          <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)" matTooltip="Ejecute el análisis automático de la IA para obtener un prediagnóstico basado en las imágenes médicas del paciente."                  matTooltipPosition="above">Prediagnóstico IA</button>          <small style="display: block; font-size: 10px;">{{ patient.iaStatus || \'No generado\' }}</small>        </div>      </td>      <td>        <div class="traffic-light small">          <div class="protector"></div>          <div class="protector"></div>          <div class="protector"></div>          <!-- Luz roja con tooltip -->          <div            class="light-red"            matTooltip="falta evaluación del médico o de la IA."            matTooltipPosition="above"            [ngClass]="{ \'active\': !patient.is_generated }">          </div>          <!-- Luz amarilla con tooltip -->          <div            class="light-yellow"            matTooltip="Hay discrepancia entre el médico y la IA."            matTooltipPosition="above"            [ngClass]="{ \'active\': patient.is_generated && (patient.cancer_status === \'no se detecta cancer\' || patient.cancer_status === \'diagnostico incierto\') }">          </div>          <!-- Luz verde con tooltip -->          <div            class="light-green"            matTooltip="La IA y el médico coinciden."            matTooltipPosition="above"            [ngClass]="{ \'active\': patient.is_generated && patient.cancer_status === \'cancer detectado\' }">          </div>        </div>        <div class="traffic-description">          <strong>{{ getStatusDescription(patient) }}</strong>        </div>      </td>      <td>        <div style="text-align: center;">          <button            mat-button            class="btn-diagnostico-ia"            (click)="addSegmentacion(patient)"            matTooltip="Visualiza la segmentación manual y la predicción de la IA para comparar las regiones tumorales."            matTooltipPosition="above">            Cargar y Comparar Segmentación Tumoral          </button>        </div>      </td>      <td>        <button          mat-button          class="btnSurvey"          (click)="openSurveyDialog(patient)"          style="display: flex; justify-content: center; align-items: center; padding: 0;">          <img class="imgbtn" src="assets/images/logos/encuesta1.png" alt="Encuesta" />        </button>        <!-- Mostrar mensaje según el estado de la encuesta -->        <small          *ngIf="!patient.survey_completed"          class="survey-completedF-message"          style="display: block; font-size: 10px;">          Pendiente        </small>        <small          *ngIf="patient.survey_completed"          class="survey-completedT-message"          style=" display: block; font-size: 10px;">          Realizada        </small>      </td>      <td>        <button mat-icon-button color="warn" (click)="deletePatient(patient.patient_id)">          <mat-icon>delete</mat-icon>        </button>      </td>    </tr>    </tbody>  </table></div></div>'
+    var COMPONENTS = [{'name': 'AddDiagnosticDialogComponent', 'selector': 'app-add-diagnostic-dialog'},{'name': 'AddPatientDialogComponent', 'selector': 'app-add-patient-dialog'},{'name': 'AppBadgeComponent', 'selector': 'app-badge'},{'name': 'AppChipsComponent', 'selector': 'app-chips'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppDashboardComponent', 'selector': 'app-dashboard'},{'name': 'AppIconsComponent', 'selector': 'app-icons'},{'name': 'AppListsComponent', 'selector': 'app-lists'},{'name': 'AppMenuComponent', 'selector': 'app-menu'},{'name': 'AppNavItemComponent', 'selector': 'app-nav-item'},{'name': 'AppSamplePageComponent', 'selector': 'app-sample-page'},{'name': 'AppSideLoginComponent', 'selector': 'app-login'},{'name': 'AppSideRegisterComponent', 'selector': 'app-register'},{'name': 'AppTooltipsComponent', 'selector': 'app-tooltips'},{'name': 'BlankComponent', 'selector': 'app-blank'},{'name': 'BrandingComponent', 'selector': 'app-branding'},{'name': 'ComparisonComponent', 'selector': 'app-comparison'},{'name': 'ConfirmDeleteDialogComponent', 'selector': 'app-confirm-delete-dialog'},{'name': 'ConfirmDeleteDialogComponentComponent', 'selector': 'app-confirm-delete-dialog-component'},{'name': 'ConfirmDeleteDialogComponentComponent', 'selector': 'app-confirm-delete-dialog-component'},{'name': 'DiagnosticIaComponent', 'selector': 'app-diagnostic-ia'},{'name': 'FullComponent', 'selector': 'app-full'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HistogramaComponent', 'selector': 'app-histograma'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'RefuerzoComponent', 'selector': 'app-refuerzo'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SurveyDialogComponent', 'selector': 'app-survey-dialog'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'AppChipsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'AppChipsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
