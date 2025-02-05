@@ -125,8 +125,3 @@ Compodoc analiza los comentarios **JSDoc** y genera documentación visual en for
 
 
 ---
-
-
-## 📝 **Licencia**
-Este proyecto está bajo la **Licencia MIT**, lo que significa que puedes modificarlo y distribuirlo libremente.
-
