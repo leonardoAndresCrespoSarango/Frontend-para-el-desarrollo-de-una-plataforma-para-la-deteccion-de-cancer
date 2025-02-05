@@ -1,55 +1,66 @@
 import { Component, OnInit } from '@angular/core';
 import { MedicalReportService } from "../../../services/medical-resport-service.service";
 import { ToastrService } from 'ngx-toastr';
-import {AddPatientDialogComponent} from "../../../add-patient-dialog/add-patient-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
-import {AddDiagnosticDialogComponent} from "../../../add-diagnostic-dialog/add-diagnostic-dialog.component";
-import {Router} from "@angular/router";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {SurveyDialogComponent} from "../../survey-dialog/survey-dialog.component";
-import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
+import { AddPatientDialogComponent } from "../../../add-patient-dialog/add-patient-dialog.component";
+import { MatDialog } from "@angular/material/dialog";
+import { AddDiagnosticDialogComponent } from "../../../add-diagnostic-dialog/add-diagnostic-dialog.component";
+import { Router } from "@angular/router";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { SurveyDialogComponent } from "../../survey-dialog/survey-dialog.component";
+import { ConfirmDeleteDialogComponent } from "../confirm-delete-dialog/confirm-delete-dialog.component";
 
-
-
-
-
+/**
+ * Componente para la gestión de pacientes y diagnósticos en el sistema.
+ * Permite visualizar pacientes, realizar predicciones de IA, agregar diagnósticos y encuestas.
+ */
 @Component({
   selector: 'app-chips',
   templateUrl: './chips.component.html',
   styleUrls: ['./chips.component.scss'],
 })
 export class AppChipsComponent implements OnInit {
-  getStatusLabel(status: string): string {
-    switch (status) {
-      case 'ok':
-        return 'Estable';
-      case 'pending':
-        return 'Pendiente';
-      case 'critical':
-        return 'Crítico';
-      default:
-        return 'Crítico';
-    }
-  }
-
+  /** Lista de predicciones de IA */
   predictions: any[] = [];
+
+  /** Lista completa de pacientes */
   patients: any[] = [];
+
+  /** Lista filtrada de pacientes basada en el término de búsqueda */
   filteredPatients: any[] = [];
+
+  /** Término de búsqueda para filtrar pacientes */
   searchTerm: string = '';
+
+  /**
+   * Constructor del componente.
+   * @param userService Servicio para obtener predicciones de IA.
+   * @param toastr Servicio para mostrar notificaciones en la interfaz.
+   * @param dialog Servicio de Angular Material para manejar diálogos.
+   * @param medicalReportService Servicio de reportes médicos.
+   * @param router Servicio de enrutamiento.
+   * @param medService Servicio para gestionar pacientes.
+   */
   constructor(
     private userService: MedicalReportService,
     private toastr: ToastrService,
     private dialog: MatDialog,
     private medicalReportService: MedicalReportService,
     private router: Router,
-    private medService: MedicalReportService // Asegúrate de inyectar UserService aquí
+    private medService: MedicalReportService
   ) {}
 
+  /**
+   * Método de inicialización del componente.
+   * Se ejecuta cuando el componente es cargado y obtiene la lista de pacientes y predicciones.
+   */
   ngOnInit(): void {
     this.fetchPredictions();
     this.fetchPatients();
   }
 
+  /**
+   * Obtiene la lista de predicciones de IA desde el servidor.
+   */
   fetchPredictions(): void {
     this.userService.getPredictions().subscribe(
       (data) => {
@@ -61,6 +72,9 @@ export class AppChipsComponent implements OnInit {
     );
   }
 
+  /**
+   * Obtiene la lista de pacientes registrados y sus estados diagnósticos.
+   */
   fetchPatients(): void {
     this.medService.getPatients().subscribe(
       (patients: any[]) => {
@@ -70,8 +84,7 @@ export class AppChipsComponent implements OnInit {
           cancer_status: patient.cancer_status,
           survey_completed: !!patient.survey_completed
         }));
-        this.filteredPatients = [...this.patients]; // Actualiza la lista filtrada
-        console.log(this.filteredPatients)
+        this.filteredPatients = [...this.patients];
       },
       (error) => {
         console.error('Error fetching patients:', error);
@@ -79,18 +92,11 @@ export class AppChipsComponent implements OnInit {
       }
     );
   }
-  getStatusDescription(patient: any): string {
-    if (!patient.is_generated) {
-      return 'Pendiente de evaluación'; // Rojo
-    }
-    if (patient.is_generated && patient.cancer_status === 'no se detecta cancer' || patient.cancer_status === 'diagnostico incierto') {
-      return 'Resultados discrepantes'; // Amarillo
-    }
-    if (patient.is_generated && patient.cancer_status === 'cancer detectado') {
-      return 'Diagnósticos coinciden'; // Verde
-    }
-    return 'Estado desconocido'; // Manejo de errores
-  }
+
+  /**
+   * Agrega un nuevo paciente a la base de datos.
+   * Abre un diálogo para ingresar los datos del paciente.
+   */
   addPatient(): void {
     const dialogRef = this.dialog.open(AddPatientDialogComponent, {
       width: '400px',
@@ -99,9 +105,9 @@ export class AppChipsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.medService.addPatient(result).subscribe(
-          (response) => {
+          () => {
             this.toastr.success('Paciente agregado exitosamente', 'Éxito');
-            this.fetchPatients();  // Actualizar la lista de pacientes después de agregar uno nuevo
+            this.fetchPatients();
           },
           (error) => {
             console.error('Error adding patient:', error);
@@ -112,6 +118,10 @@ export class AppChipsComponent implements OnInit {
     });
   }
 
+  /**
+   * Redirige al usuario a la página de diagnóstico para un paciente seleccionado.
+   * @param patient Datos del paciente.
+   */
   addDiagnostic(patient: any): void {
     this.router.navigate(['/diagnostico'], {
       queryParams: {
@@ -120,27 +130,9 @@ export class AppChipsComponent implements OnInit {
     });
   }
 
-
-
-
-  onGenerateIA(patientId: string): void {
-    this.userService.predictIA(patientId).subscribe((response: any) => {
-      this.router.navigate(['ui-components/lists', {
-        patient_id: patientId,
-        html_url1: response.html_url1,
-        html_url2: response.html_url2,
-        html_url3: response.html_url3,
-        html_url4: response.html_url4,
-        html_url5: response.html_url5,
-        html_url6: response.html_url6,
-        report_text2: response.report_text2,
-        report_text5: response.report_text5
-      }]);
-    }, error => {
-      console.error('Error during prediction:', error);
-      this.toastr.error('Error during prediction', 'Error');
-    });
-  }
+  /**
+   * Aplica un filtro a la lista de pacientes basado en el término de búsqueda.
+   */
   applyFilter(): void {
     const term = this.searchTerm.toLowerCase();
     this.filteredPatients = this.patients.filter(patient =>
@@ -149,68 +141,53 @@ export class AppChipsComponent implements OnInit {
     );
   }
 
+  /**
+   * Abre un diálogo para completar una encuesta sobre la IA.
+   * @param patient Datos del paciente que realiza la encuesta.
+   */
   openSurveyDialog(patient: any): void {
     const dialogRef = this.dialog.open(SurveyDialogComponent, {
       width: '600px',
       data: { patientId: patient.patient_id }
-
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result?.success) {
-        // Si la encuesta ya está completada, actualizamos la encuesta.
-        if (patient.survey_completed) {
-          this.updateSurvey(patient);
-        } else {
-          // Si la encuesta no está completada, la marcamos como completada
-          patient.survey_completed = true;  // Marca la encuesta como completada
-
-          // Actualiza la lista de pacientes
-          const index = this.patients.findIndex(p => p.patient_id === patient.patient_id);
-          if (index !== -1) {
-            this.patients[index].survey_completed = true; // Marca el estado de encuesta como completado
-            this.filteredPatients = [...this.patients];  // Actualiza la lista filtrada
+        patient.survey_completed = true;
+        this.medService.updateSurveyStatus(patient.patient_id, true).subscribe(
+          () => {
+            this.toastr.success('Encuesta completada exitosamente', 'Éxito');
+          },
+          (error) => {
+            console.error('Error updating survey status:', error);
+            this.toastr.error('Error al actualizar estado de encuesta', 'Error');
           }
-
-          // Actualizar estado en el backend
-          this.medService.updateSurveyStatus(patient.patient_id, true).subscribe(
-            (response) => {
-              this.toastr.success('Encuesta completada exitosamente', 'Éxito');
-            },
-            (error) => {
-              console.error('Error updating survey status:', error);
-              this.toastr.error('Error al actualizar estado de encuesta', 'Error');
-            }
-          );
-        }
+        );
       } else {
         this.toastr.info('Encuesta cancelada', 'Info');
       }
     });
   }
 
-  updateSurvey(patient: any): void {
-    this.medService.updateSurveyStatus(patient.patient_id, true).subscribe(
-      (response) => {
-        this.toastr.success('Encuesta actualizada exitosamente', 'Éxito');
-      },
-      (error) => {
-        console.error('Error updating survey:', error);
-        this.toastr.error('Error al actualizar la encuesta', 'Error');
-      }
-    );
-  }
-
+  /**
+   * Muestra el reporte médico de un paciente en formato PDF.
+   * @param reportPath Ruta del reporte en el servidor.
+   */
   viewReport(reportPath: string): void {
     if (!reportPath) {
       this.toastr.error('El reporte no está disponible.', 'Error');
       return;
     }
 
-    const baseUrl = 'http://localhost:5000'; // Ruta base donde están los reportes
+    const baseUrl = 'http://localhost:5000';
     const reportUrl = `${baseUrl}/${reportPath}.pdf`;
-    window.open(reportUrl, '_blank'); // Abre el reporte en una nueva pestaña
+    window.open(reportUrl, '_blank');
   }
+
+  /**
+   * Redirige al usuario a la sección de segmentación de imágenes para un paciente.
+   * @param patient Datos del paciente.
+   */
   addSegmentacion(patient: any): void {
     this.router.navigate(['/comparison'], {
       queryParams: {
@@ -218,7 +195,11 @@ export class AppChipsComponent implements OnInit {
       },
     });
   }
-  // DELETE PATIENT:
+
+  /**
+   * Elimina un paciente del sistema después de una confirmación en diálogo.
+   * @param patientId ID del paciente a eliminar.
+   */
   deletePatient(patientId: string): void {
     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
       width: '400px',
@@ -227,11 +208,10 @@ export class AppChipsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // El usuario ha confirmado la eliminación
         this.medService.deletePatient(patientId).subscribe(
-          (response) => {
+          () => {
             this.toastr.success('Paciente eliminado exitosamente', 'Éxito');
-            this.fetchPatients(); // Actualiza la lista de pacientes tras la eliminación
+            this.fetchPatients();
           },
           (error) => {
             console.error('Error eliminando paciente:', error);
@@ -241,7 +221,4 @@ export class AppChipsComponent implements OnInit {
       }
     });
   }
-
-
-
 }
