@@ -11,6 +11,7 @@ import {RefuerzoComponent} from "./pages/refuerzo/refuerzo.component"
 import {SurveyDialogComponent} from "./pages/survey-dialog/survey-dialog.component";
 import {ComparisonComponent} from "./comparison/comparison.component";
 import {HistogramaComponent} from "./pages/histograma/histograma.component";
+import {DetectionComponent} from "./detection/detection.component";
 const routes: Routes = [
   {
 
@@ -67,6 +68,7 @@ const routes: Routes = [
   { path: 'diagnostico', component: AddDiagnosticDialogComponent },
   { path: 'comparison', component: ComparisonComponent },
 
+  {path: 'deteccion', component: DetectionComponent},
 
 ];
 

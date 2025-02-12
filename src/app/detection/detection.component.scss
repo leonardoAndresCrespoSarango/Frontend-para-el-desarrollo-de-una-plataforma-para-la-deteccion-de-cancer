@@ -1,0 +1,26 @@
+
+.left-container{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.split-container{
+  flex-direction: column;
+
+}
+.button-container{
+  width: 100%;
+  display: flex;
+}
+
+.button-container button{
+  width: 200px;
+  margin: 5px auto;
+
+}
+
+p{
+  text-align: center;
+}
+
