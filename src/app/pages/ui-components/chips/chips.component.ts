@@ -221,4 +221,36 @@ export class AppChipsComponent implements OnInit {
       }
     });
   }
+  onGenerateIA(patientId: string): void {
+    this.userService.predictIA(patientId).subscribe((response: any) => {
+      this.router.navigate(['ui-components/lists', {
+        patient_id: patientId,
+        html_url1: response.html_url1,
+        html_url2: response.html_url2,
+        html_url3: response.html_url3,
+        html_url4: response.html_url4,
+        html_url5: response.html_url5,
+        html_url6: response.html_url6,
+        report_text2: response.report_text2,
+        report_text5: response.report_text5
+      }]);
+    }, error => {
+      console.error('Error during prediction:', error);
+      this.toastr.error('Error during prediction', 'Error');
+    });
+  }
+  getStatusDescription(patient: any): string {
+    if (!patient.is_generated) {
+      return 'Pendiente de evaluación'; // Rojo
+    }
+    if (patient.is_generated && patient.cancer_status === 'no se detecta cancer' || patient.cancer_status === 'diagnostico incierto') {
+      return 'Resultados discrepantes'; // Amarillo
+    }
+    if (patient.is_generated && patient.cancer_status === 'cancer detectado') {
+      return 'Diagnósticos coinciden'; // Verde
+    }
+    return 'Estado desconocido'; // Manejo de errores
+  }
+
+
 }
