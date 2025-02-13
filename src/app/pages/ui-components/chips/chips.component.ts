@@ -8,6 +8,8 @@ import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { SurveyDialogComponent } from "../../survey-dialog/survey-dialog.component";
 import { ConfirmDeleteDialogComponent } from "../confirm-delete-dialog/confirm-delete-dialog.component";
+import {DetectionService} from "../../../services/detection.service";
+import {switchMap} from "rxjs";
 
 /**
  * Componente para la gestión de pacientes y diagnósticos en el sistema.
@@ -46,7 +48,9 @@ export class AppChipsComponent implements OnInit {
     private dialog: MatDialog,
     private medicalReportService: MedicalReportService,
     private router: Router,
-    private medService: MedicalReportService
+    private medService: MedicalReportService,
+    private detectionService: DetectionService,
+    private diagnosticService: DetectionService,
   ) {}
 
   /**
@@ -222,24 +226,96 @@ export class AppChipsComponent implements OnInit {
     });
   }
   onGenerateIA(patientId: string): void {
-    this.userService.predictIA(patientId).subscribe((response: any) => {
-      this.router.navigate(['ui-components/lists', {
-        patient_id: patientId,
-        html_url1: response.html_url1,
-        html_url2: response.html_url2,
-        html_url3: response.html_url3,
-        html_url4: response.html_url4,
-        html_url5: response.html_url5,
-        html_url6: response.html_url6,
-        report_text2: response.report_text2,
-        report_text5: response.report_text5
-      }]);
-    }, error => {
-      console.error('Error during prediction:', error);
-      this.toastr.error('Error during prediction', 'Error');
+
+    this.detectionService.detectionC(patientId).pipe(
+      switchMap((detectionResponse: any) => {
+        // Interpreta la respuesta
+        console.log("Resultado de detectionC:", detectionResponse);
+        // Extraer el valor correcto si detectionResponse es un objeto
+        let detectionResult = 0;  // Valor por defecto
+        if (detectionResponse && typeof detectionResponse === 'object' && 'message' in detectionResponse) {
+          detectionResult = parseFloat(detectionResponse.message);
+        } else {
+          console.error("Error: detectionResponse no contiene la clave 'message'.");
+        }
+
+        console.log("detectionResult convertido:", detectionResult);
+
+        // Comparación final
+        const detectionMessage = detectionResult >= 0.5 ? "Cáncer Detectado" : "No se detectó cáncer";
+        console.log("Mensaje final:", detectionMessage);
+
+        // Luego llama a predictIA y pasa la respuesta de detectionC
+        return this.userService.predictIA(patientId).pipe(
+          switchMap((response: any) => {
+
+
+
+
+            // Redirige a lists con todos los datos
+
+
+
+            return this.router.navigate(['ui-components/lists', {
+              patient_id: patientId,
+              html_url1: response.html_url1,
+              html_url2: response.html_url2,
+              html_url3: response.html_url3,
+              html_url4: response.html_url4,
+              html_url5: response.html_url5,
+              html_url6: response.html_url6,
+              report_text2: response.report_text2,
+              report_text5: response.report_text5,
+              detection_message: detectionMessage ,
+
+            }]);
+          })
+        );
+
+
+
+
+      })
+    ).subscribe({
+      error: (error) => {
+        console.error('Error durante la predicción:', error);
+        this.toastr.error('Error durante la predicción', 'Error');
+      }
     });
+
+
   }
+
+
+
+
   getStatusDescription(patient: any): string {
+
+    //llamar aqui los servicios
+
+    // let estado_diagnostico:string | null =''
+    // let estado_prediccion:number | null =0
+    //
+    // this.diagnosticService.getDiagnostico(patient.patientId).subscribe(response => {
+    //   console.log("DIAGNOSTICO DEL PACIENTE", response);
+    //   estado_diagnostico = response['cancer_status']
+    //   estado_prediccion = response['cancer_prediction']
+    // })
+    //
+    // if (estado_diagnostico === 'no se detecta cancer' && estado_prediccion === 0) {
+    //   return 'Diagnósticos coinciden'; // Verde
+    // }
+    // if (estado_diagnostico === 'no se detecta cancer' && estado_prediccion === 1) {
+    //   return 'Resultados discrepantes'; // amarillo
+    // }
+    // if (estado_diagnostico === 'cancer detectado' && estado_prediccion === 1) {
+    //   return 'Diagnósticos coinciden'; // Verde
+    // }
+    // if (estado_diagnostico === 'cancer detectado' && estado_prediccion === 0) {
+    //   return 'Resultados discrepantes'; // amarillo
+    // }
+
+
     if (!patient.is_generated) {
       return 'Pendiente de evaluación'; // Rojo
     }

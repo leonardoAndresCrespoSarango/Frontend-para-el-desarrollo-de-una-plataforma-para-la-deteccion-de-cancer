@@ -51,6 +51,10 @@ export class AppListsComponent implements OnInit {
     { value: 'graph6', viewValue: 'Visualización Interactiva de Modalidades' }
   ];
 
+  // mensaje del modelo de clasificacion
+
+  detectionMessage: string | null = null;
+
   /**
    * Constructor del componente.
    * @param route Servicio para obtener los parámetros de la URL.
@@ -98,9 +102,13 @@ export class AppListsComponent implements OnInit {
       this.patientId = params.get('patient_id');
       this.numeroHistoriaClinica = params.get('numero_historia_clinica');
 
+      this.detectionMessage = params.get('detection_message');
+
       if (this.patientId) {
         // this.loadDiagnostic(this.patientId);
       }
+
+      console.log("MENSAJE: ", this.detectionMessage);
     });
   }
 
@@ -226,5 +234,9 @@ export class AppListsComponent implements OnInit {
     } else {
       console.error('Patient ID not available');
     }
+  }
+
+  navigateToChips(): void {
+    this.router.navigate(['ui-components/chips']);
   }
 }

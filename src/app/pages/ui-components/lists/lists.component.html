@@ -1,6 +1,25 @@
-<h1>Predicción de IA</h1>
+
+<div >
+  <button
+    mat-raised-button
+    color="accent"
+  (click)="navigateToChips()">
+    Regresar
+  </button>
+</div>
+
+<br>
+
+
+<h1>Predicción con Inteligencia Artificial (IA)</h1>
+
+<h2  style="color: #0c63e4"  *ngIf="detectionMessage" >{{ detectionMessage }}</h2>
+
+<br>
+<br>
 
 <h2>Seleccionar Gráfica</h2>
+
 <mat-form-field appearance="fill">
   <mat-label>Gráfica</mat-label>
   <mat-select [(value)]="selectedGraph">
