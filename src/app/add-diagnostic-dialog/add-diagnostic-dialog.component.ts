@@ -82,12 +82,22 @@ export class AddDiagnosticDialogComponent implements OnInit {
       const patientId = params['patient_id'];
       if (patientId) {
         this.addDiagnosticForm.patchValue({ patient_id: patientId });
+        this.medicalReportService.checkFiles(patientId)
+          .subscribe(response => {
+            if (response.files_uploaded) {
+              this.toastr.success('Los archivos ya están subidos. Cargando gráficas...');
+              this.loadGraphs(patientId);  // Ejecuta la función para cargar gráficas
+            } else {
+              this.toastr.success('Los archivos aún no están disponibles.');
+            }
+          }, error => {
+            this.toastr.error('Error al verificar archivos:', error);
+          });
       } else {
         this.toastr.error('El ID del paciente no está disponible.', 'Error');
       }
     });
   }
-
   /**
    * Maneja la selección de archivos y los sube al servidor.
    * @param event Evento de cambio en el input de archivos

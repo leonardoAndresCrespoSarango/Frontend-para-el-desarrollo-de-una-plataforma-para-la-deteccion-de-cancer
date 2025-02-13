@@ -39,6 +39,16 @@ export class MedicalReportService {
     );
   }
 
+  // Metodo para verificar si los archivos del paciente están en la base de datos
+  checkFiles(patientId: string): Observable<{ files_uploaded: boolean }> {
+    return this.http.post<{ files_uploaded: boolean }>(
+      `${this.apiUrl}/check-patient-files`,  // ⬅ Ahora usa POST
+      { patient_id: patientId },  // ⬅ Enviamos el ID en el cuerpo
+      { withCredentials: true }  // ⬅ Enviar cookies de sesión
+    );
+  }
+
+
   /**
    * Envía datos para realizar una predicción.
    *
