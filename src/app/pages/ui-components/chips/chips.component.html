@@ -71,7 +71,9 @@
         <div style="text-align: center;">
           <button mat-button class="btn-diagnostico-ia" (click)="onGenerateIA(patient.patient_id)" matTooltip="Ejecute el análisis automático de la IA para obtener un prediagnóstico basado en las imágenes médicas del paciente."
                   matTooltipPosition="above">Prediagnóstico IA</button>
-          <small style="display: block; font-size: 10px;">{{ patient.iaStatus || 'No generado' }}</small>
+          <small [ngClass]="{
+            'status-generated': patient.diagnostic_status_by_ia === 'Generado'
+          }"  style="display: block; font-size: 10px;"> {{  patient.diagnostic_status_by_ia  }} </small>
         </div>
       </td>
       <td>

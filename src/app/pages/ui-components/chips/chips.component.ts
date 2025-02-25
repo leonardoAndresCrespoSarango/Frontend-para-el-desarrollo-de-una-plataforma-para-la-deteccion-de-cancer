@@ -84,11 +84,14 @@ export class AppChipsComponent implements OnInit {
       (patients: any[]) => {
         this.patients = patients.map(patient => ({
           ...patient,
-          diagnosticStatus: patient.is_generated ? 'Generado' : 'No generado',
+          diagnosticStatus: patient.is_generated ? 'Generado' : 'No Generado',
           cancer_status: patient.cancer_status,
-          survey_completed: !!patient.survey_completed
+          survey_completed: !!patient.survey_completed,
+          diagnostic_status_by_ia: patient.is_generated_by_ia ? 'Generado' : 'No Generado',
+
         }));
         this.filteredPatients = [...this.patients];
+
       },
       (error) => {
         console.error('Error fetching patients:', error);
@@ -327,6 +330,5 @@ export class AppChipsComponent implements OnInit {
     }
     return 'Estado desconocido'; // Manejo de errores
   }
-
 
 }

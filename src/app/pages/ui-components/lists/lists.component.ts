@@ -40,7 +40,7 @@ export class AppListsComponent implements OnInit {
   diagnosticLoaded = false;
 
   /** Gráfica seleccionada */
-  selectedGraph: string | null = 'graph1';
+  selectedGraph: string | null = 'graph6';
 
   /** URL del PDF */
   pdfUrl: string | null = null;
