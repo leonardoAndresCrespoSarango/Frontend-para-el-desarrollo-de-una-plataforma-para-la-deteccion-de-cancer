@@ -80,17 +80,23 @@ export class AppChipsComponent implements OnInit {
    * Obtiene la lista de pacientes registrados y sus estados diagnósticos.
    */
   fetchPatients(): void {
+    console.log('fetchPatients() llamado');
     this.medService.getPatients().subscribe(
       (patients: any[]) => {
+
         this.patients = patients.map(patient => ({
           ...patient,
           diagnosticStatus: patient.is_generated ? 'Generado' : 'No Generado',
           cancer_status: patient.cancer_status,
           survey_completed: !!patient.survey_completed,
           diagnostic_status_by_ia: patient.is_generated_by_ia ? 'Generado' : 'No Generado',
+          //cancer_prediction_status : patient.cancer_prediction ? 'Tiene Cancer' : 'No tiene Cancer',
 
-        }));
+        })
+        );
         this.filteredPatients = [...this.patients];
+
+        //console.log("COMO VA EL Objeto PATIENT: ", this.filteredPatients[12].cancer_prediction_status);
 
       },
       (error) => {
@@ -294,35 +300,14 @@ export class AppChipsComponent implements OnInit {
 
   getStatusDescription(patient: any): string {
 
-    //llamar aqui los servicios
 
-    // let estado_diagnostico:string | null =''
-    // let estado_prediccion:number | null =0
-    //
-    // this.diagnosticService.getDiagnostico(patient.patientId).subscribe(response => {
-    //   console.log("DIAGNOSTICO DEL PACIENTE", response);
-    //   estado_diagnostico = response['cancer_status']
-    //   estado_prediccion = response['cancer_prediction']
-    // })
-    //
-    // if (estado_diagnostico === 'no se detecta cancer' && estado_prediccion === 0) {
-    //   return 'Diagnósticos coinciden'; // Verde
-    // }
-    // if (estado_diagnostico === 'no se detecta cancer' && estado_prediccion === 1) {
-    //   return 'Resultados discrepantes'; // amarillo
-    // }
-    // if (estado_diagnostico === 'cancer detectado' && estado_prediccion === 1) {
-    //   return 'Diagnósticos coinciden'; // Verde
-    // }
-    // if (estado_diagnostico === 'cancer detectado' && estado_prediccion === 0) {
-    //   return 'Resultados discrepantes'; // amarillo
-    // }
 
 
     if (!patient.is_generated) {
       return 'Pendiente de evaluación'; // Rojo
     }
     if (patient.is_generated && patient.cancer_status === 'no se detecta cancer' || patient.cancer_status === 'diagnostico incierto') {
+      console.log("ESTADO DE LA PREDICCION ; ", patient.cancer_prediction)
       return 'Resultados discrepantes'; // Amarillo
     }
     if (patient.is_generated && patient.cancer_status === 'cancer detectado') {
